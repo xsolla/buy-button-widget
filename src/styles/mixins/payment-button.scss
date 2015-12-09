@@ -1,0 +1,55 @@
+@mixin payment-button () {
+  @include no-select;
+
+  background: #57c69a;
+  background: linear-gradient(#57c69a, #4ea180);
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 18px;
+  border: 0;
+  padding: 0;
+
+  $payment-button-class: extractClassName(&);
+
+  &:hover {
+    background: #57cca0;
+    background: linear-gradient(#57cca0, #4daa89);
+  }
+
+  &-xsolla-logo {
+    height: 100%;
+    width: 58px;
+    border-right: 2px solid rgba(0, 0, 0, .05);
+    text-align: center;
+    background: rgba(0, 0, 0, .03);
+    display: inline-block;
+    vertical-align: middle;
+
+    svg {
+      display: inline-block;
+      height: 66%;
+      position: relative;
+      top: 16%;
+    }
+  }
+
+  &-amount {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    margin-left: -120px;
+  }
+
+  &:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+  }
+
+  &-xsolla-logo + #{$payment-button-class}-amount {
+    margin-left: -60px;
+    padding-left: 60px;
+  }
+}

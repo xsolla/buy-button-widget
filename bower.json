@@ -1,0 +1,28 @@
+{
+  "name": "xsolla-game-delivery-widget",
+  "version": "1.0.0",
+  "authors": [
+    "Andrey Salnikov <a.salnikov@xsolla.com>"
+  ],
+  "description": "Game Delivery Widget",
+  "main": "dist/widget.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "http://xsolla.com",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "lodash": "~3.10.1",
+    "react": "~0.14.3",
+    "xsolla-paystation-widget": "xsolla-paystation-embed#~1.0.3"
+  }
+}

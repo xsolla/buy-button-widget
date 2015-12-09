@@ -1,0 +1,5 @@
+@function extractClassName($selectors) {
+  $firstSelector: nth($selectors, 1);
+  $length: length($firstSelector);
+  @return nth($firstSelector, $length);
+}

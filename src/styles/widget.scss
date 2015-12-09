@@ -1,0 +1,46 @@
+@import "functions/class-name";
+
+@import "mixins/misc";
+@import "mixins/game-logo";
+@import "mixins/payment-button";
+
+$widget-prefix: 'xgamedelivery-widget';
+$widget-class: '.' + $widget-prefix;
+
+#{$widget-class} {
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.3em;
+  color: #9b9b9b;
+
+  div {
+    box-sizing: border-box;
+  }
+
+  a:active,
+  a:hover,
+  button {
+    outline: 0;
+  }
+}
+
+#{$widget-class}#{$widget-class}__tiny {
+  width: 220px;
+  height: 180px;
+
+  #{$widget-class}-game-logo {
+    @include game-logo;
+
+    height: 132px;
+    width: 100%;
+  }
+
+  #{$widget-class}-payment-button {
+    @include payment-button;
+
+    height: 48px;
+    width: 100%;
+  }
+}

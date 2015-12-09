@@ -1,0 +1,28 @@
+{
+  "name": "xsolla-game-delivery-widget",
+  "version": "1.0.0",
+  "description": "Game Delivery Widget",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "1.7.0",
+    "browser-sync": "2.10.0",
+    "browserify": "12.0.1",
+    "fs": "0.0.2",
+    "gulp": "3.9.0",
+    "gulp-if": "2.0.0",
+    "gulp-rename": "1.2.2",
+    "gulp-replace-task": "0.11.0",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-uglify": "1.5.1",
+    "gulp-util": "3.0.7",
+    "reactify": "^1.1.1",
+    "sassify": "0.9.1",
+    "stringify": "3.2.0",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.1.0",
+    "watchify": "3.6.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
