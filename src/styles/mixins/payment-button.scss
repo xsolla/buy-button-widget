@@ -1,6 +1,10 @@
 @mixin payment-button () {
   @include no-select;
 
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  display: block;
   background: #57c69a;
   background: linear-gradient(#57c69a, #4ea180);
   cursor: pointer;
@@ -8,6 +12,7 @@
   font-size: 18px;
   border: 0;
   padding: 0;
+  text-align: left;
 
   $payment-button-class: extractClassName(&);
 
@@ -38,6 +43,7 @@
     vertical-align: middle;
     width: 100%;
     margin-left: -120px;
+    text-align: center;
   }
 
   &:after {

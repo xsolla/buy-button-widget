@@ -4,7 +4,7 @@
   "description": "Game Delivery Widget",
   "dependencies": {},
   "devDependencies": {
-    "bower": "1.7.0",
+    "bower": "1.7.1",
     "browser-sync": "2.10.0",
     "browserify": "12.0.1",
     "fs": "0.0.2",

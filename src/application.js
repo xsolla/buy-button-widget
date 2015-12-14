@@ -1,12 +1,14 @@
 var $ = require('jquery');
 var _ = require('lodash');
 var PaystationEmbedApp = require('paystation-embed-app');
-var GDException = require('gd-exception');
+var Api = require('api');
+var Exception = require('exception');
 var React = require('react');
 var ReactDOM = require('react-dom');
+var Translate = require('translate');
 
 module.exports = (function () {
-    function GDApp() {
+    function App() {
         require('styles/widget.scss');
 
         this.config = _.extend({}, DEFAULT_CONFIG);
@@ -16,15 +18,16 @@ module.exports = (function () {
     }
 
     var DEFAULT_CONFIG = {
-        access_token: null
+        access_token: null,
+        template: 'tiny'
     };
 
     /** Private Members **/
-    GDApp.prototype.config = {};
-    GDApp.prototype.isInitiated = false;
-    GDApp.prototype.eventObject = $({});
+    App.prototype.config = {};
+    App.prototype.isInitiated = false;
+    App.prototype.eventObject = $({});
 
-    GDApp.prototype.checkConfig = function () {
+    App.prototype.checkConfig = function () {
         if (_.isEmpty(this.config.access_token)) {
             this.throwError('No access token given');
         }
@@ -38,17 +41,17 @@ module.exports = (function () {
         }
     };
 
-    GDApp.prototype.checkApp = function () {
+    App.prototype.checkApp = function () {
         if (_.isUndefined(this.isInitiated)) {
             this.throwError('Initialize widget before opening');
         }
     };
 
-    GDApp.prototype.throwError = function (message) {
-        throw new GDException(message);
+    App.prototype.throwError = function (message) {
+        throw new Exception(message);
     };
 
-    GDApp.prototype.triggerEvent = function () {
+    App.prototype.triggerEvent = function () {
         this.eventObject.trigger.apply(this.eventObject, arguments);
     };
 
@@ -56,7 +59,7 @@ module.exports = (function () {
      * Initialize widget with options
      * @param options
      */
-    GDApp.prototype.init = function (options) {
+    App.prototype.init = function (options) {
         this.isInitiated = true;
         this.config = _.extend({}, DEFAULT_CONFIG, options);
         this.checkConfig();
@@ -67,6 +70,10 @@ module.exports = (function () {
 
         this.targetElement = $(options.target_element);
 
+        this.api = new Api({
+            access_token: options.access_token
+        });
+
         this.render();
 
         this.triggerEvent('init');
@@ -75,7 +82,7 @@ module.exports = (function () {
     /**
      * Open payment interface (PayStation)
      */
-    GDApp.prototype.open = function () {
+    App.prototype.open = function () {
         this.checkApp();
 
         PaystationEmbedApp.open();
@@ -86,7 +93,7 @@ module.exports = (function () {
      * @param event One or more space-separated event types (init, open, load, close, status, status-invoice, status-delivering, status-troubled, status-done)
      * @param handler A function to execute when the event is triggered
      */
-    GDApp.prototype.on = function (event, handler) {
+    App.prototype.on = function (event, handler) {
         if (!_.isFunction(handler)) {
             return;
         }
@@ -99,17 +106,54 @@ module.exports = (function () {
      * @param event One or more space-separated event types
      * @param handler A handler function previously attached for the event(s)
      */
-    GDApp.prototype.off = function (event, handler) {
+    App.prototype.off = function (event, handler) {
         this.eventObject.off(event, handler);
     };
 
     /**
      * Render widget template
      */
-    GDApp.prototype.render = function () {
-        var TinyView = require('views/layouts/tiny.jsx');
-        ReactDOM.render(React.createElement(TinyView, null), this.targetElement.get(0));
+    App.prototype.render = function () {
+        var view;
+
+        switch (this.config.template) {
+            case 'tiny':
+            default:
+                view = require('views/layouts/tiny.jsx');
+                break;
+        }
+
+        var props = {
+            data: {},
+            onPaymentOpen: _.bind(function(params) {
+                // params.instance_id
+                this.open();
+            }, this)
+        };
+
+        var updateView = _.bind(function () {
+            ReactDOM.render(React.createElement(view, props), this.targetElement.get(0));
+        }, this);
+
+        updateView();
+
+        this.api.request('gamedelivery/init').done(function (data) {
+            var info = data.digital_content || {};
+
+            props.data = {
+                amount: {
+                    value: (_.first(info.drm) || {}).amount,
+                    currency: (_.first(info.drm) || {}).currency,
+                    hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1
+                },
+                gameLogoUrl: info.image_url
+            };
+
+            Translate.init(data.translates || {});
+
+            updateView();
+        });
     };
 
-    return GDApp;
+    return App;
 })();

@@ -24,13 +24,14 @@ function setupBrowserify(watch) {
         fullPaths: false,
         debug: true
     };
-    var bundler = browserify('./src/gd-main.js', bundleOptions);
+    var bundler = browserify('./src/main.js', bundleOptions);
     bundler.require('./bower_components/xsolla-paystation-widget/src/main.js', {expose: 'paystation-embed-app'});
     bundler.require('./bower_components/lodash/lodash.js', {expose: 'lodash'});
     bundler.require('./bower_components/jquery/dist/jquery.js', {expose: 'jquery'});
     bundler.require('./bower_components/react/react.js', {expose: 'react'});
     bundler.require('./bower_components/react/react-dom.js', {expose: 'react-dom'});
-    bundler.require('./src/gd-main.js', {expose: 'xsolla-game-delivery-widget'});
+    bundler.require('./bower_components/polyglot/index.js', {expose: 'polyglot'});
+    bundler.require('./src/main.js', {expose: 'xsolla-game-delivery-widget'});
     bundler.transform({
         outputStyle: 'compressed',
         base64Encode: false,

@@ -1,13 +1,13 @@
 var _ = require('lodash');
 var $ = require('jquery');
-var GDApp = require('gd-app');
+var App = require('application');
 
 var instance;
 
 module.exports = (function () {
     var getInstance = function () {
         if (!instance) {
-            instance = new GDApp();
+            instance = new App();
         }
         return instance;
     };

@@ -1,28 +1,27 @@
+$widget-prefix: 'xgamedelivery-widget';
+$widget-class: '.' + $widget-prefix;
+
 @import "functions/class-name";
 
 @import "mixins/misc";
 @import "mixins/game-logo";
 @import "mixins/payment-button";
-
-$widget-prefix: 'xgamedelivery-widget';
-$widget-class: '.' + $widget-prefix;
+@import "mixins/spinner";
 
 #{$widget-class} {
+  @include normalize;
+
+  background: #262626;
   border-radius: 5px;
   overflow: hidden;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px;
   line-height: 1.3em;
   color: #9b9b9b;
+  position: relative;
 
-  div {
-    box-sizing: border-box;
-  }
-
-  a:active,
-  a:hover,
-  button {
-    outline: 0;
+  .spinner {
+    @include spinner;
   }
 }
 

@@ -1,3 +1,23 @@
+@mixin normalize {
+  div {
+    box-sizing: border-box;
+  }
+
+  a:active,
+  a:hover,
+  button {
+    outline: 0;
+  }
+
+  button::-moz-focus-inner,
+  input[type="button"]::-moz-focus-inner,
+  input[type="submit"]::-moz-focus-inner,
+  input[type="reset"]::-moz-focus-inner {
+    padding: 0;
+    border: 0 none;
+  }
+}
+
 @mixin no-select() {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

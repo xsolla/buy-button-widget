@@ -1,0 +1,27 @@
+@mixin spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+
+  .spinner-round {
+    margin: {
+      top: -23px;
+      left: -23px;
+    }
+    -webkit-animation: #{$widget-prefix}-spin 3s infinite linear;
+    animation: #{$widget-prefix}-spin 3s infinite linear;
+  }
+}
+
+@-webkit-keyframes #{$widget-prefix}-spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes #{$widget-prefix}-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
