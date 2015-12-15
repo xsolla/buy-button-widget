@@ -2,6 +2,7 @@ var _ = require('lodash');
 var React = require('react');
 var XsollaLogoView = require('../xsolla-logo.jsx');
 var SpinnerView = require('../spinner.jsx');
+var ErrorMessageView = require('../error-message.jsx');
 var TranslateMessage = require('../translate-message.jsx');
 
 var TinyView = React.createClass({
@@ -13,7 +14,8 @@ var TinyView = React.createClass({
             amount: {
                 value: null,
                 currency: null
-            }
+            },
+            errors: null
         };
     },
     componentWillReceiveProps(nextProps) {
@@ -33,6 +35,10 @@ var TinyView = React.createClass({
                 value: (data.amount || {}).value,
                 currency: (data.amount || {}).currency
             }
+        }
+
+        if (data.errors) {
+            newState.errors = data.errors;
         }
 
         this.setState(newState);
@@ -57,11 +63,16 @@ var TinyView = React.createClass({
             <SpinnerView />
         );
 
+        var errorMessage = this.state.errors && (
+            <ErrorMessageView errors={this.state.errors} />
+        );
+
         return (
             <div className={this.className + ' ' + this.className + '__tiny'}>
                 {gameLogo}
                 {paymentButton}
                 {spinner}
+                {errorMessage}
             </div>
         );
     }

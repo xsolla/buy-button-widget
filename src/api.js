@@ -12,12 +12,29 @@ module.exports = (function () {
      * Perform request to PayStation API
      */
     Api.prototype.request = function (route, data) {
-        return $.ajax(PAYSTATION_API_URL + route, {
+        var deferred = $.Deferred();
+
+        $.ajax(PAYSTATION_API_URL + route, {
             cache: false,
             dataType: 'json',
             method: 'POST',
             data: _.extend(this.data, data || {})
+        }).done(function (data) {
+            if ((data.api || {}).ver !== '1.0.1') {
+                // Non PayStation API answer
+                deferred.reject();
+                return;
+            }
+
+            delete data.api;
+
+            deferred.resolve(data);
+        }).fail(function (jqXHR) {
+            // HTTP Error, Fatal PayStation API error
+            deferred.reject(jqXHR.responseJSON && jqXHR.responseJSON.errors);
         });
+
+        return deferred;
     };
 
     return Api;

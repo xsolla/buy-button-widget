@@ -7,6 +7,7 @@ $widget-class: '.' + $widget-prefix;
 @import "mixins/game-logo";
 @import "mixins/payment-button";
 @import "mixins/spinner";
+@import "mixins/error-message";
 
 #{$widget-class} {
   @include normalize;
@@ -22,6 +23,10 @@ $widget-class: '.' + $widget-prefix;
 
   .spinner {
     @include spinner;
+  }
+
+  .error-message {
+    @include error-message;
   }
 }
 

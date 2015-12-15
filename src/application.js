@@ -152,6 +152,12 @@ module.exports = (function () {
             Translate.init(data.translates || {});
 
             updateView();
+        }).fail(function (errors) {
+            props.data = {
+                errors: errors
+            };
+
+            updateView();
         });
     };
 
