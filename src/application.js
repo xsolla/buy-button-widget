@@ -117,6 +117,9 @@ module.exports = (function () {
         var view;
 
         switch (this.config.template) {
+            case 'compact':
+                view = require('views/layouts/compact.jsx');
+                break;
             case 'tiny':
             default:
                 view = require('views/layouts/tiny.jsx');
@@ -146,7 +149,8 @@ module.exports = (function () {
                     currency: (_.first(info.drm) || {}).currency,
                     hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1
                 },
-                gameLogoUrl: info.image_url
+                gameLogoUrl: info.image_url,
+                paymentList: data.payment_instances
             };
 
             Translate.init(data.translates || {});

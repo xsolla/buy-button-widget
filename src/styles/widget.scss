@@ -8,6 +8,7 @@ $widget-class: '.' + $widget-prefix;
 @import "mixins/payment-button";
 @import "mixins/spinner";
 @import "mixins/error-message";
+@import "mixins/payment-method";
 
 #{$widget-class} {
   @include normalize;
@@ -39,6 +40,44 @@ $widget-class: '.' + $widget-prefix;
 
     height: 132px;
     width: 100%;
+  }
+
+  #{$widget-class}-payment-button {
+    @include payment-button;
+
+    height: 48px;
+    width: 100%;
+  }
+}
+
+#{$widget-class}#{$widget-class}__compact {
+  width: 220px;
+  height: 216px;
+
+  #{$widget-class}-game-logo {
+    @include game-logo;
+
+    height: 132px;
+    width: 100%;
+  }
+
+  #{$widget-class}-payment-list {
+    height: 36px;
+    width: 100%;
+    background: #ffffff;
+    padding: 10px;
+    text-align: center;
+
+    &-method {
+      @include payment-method;
+
+      height: 16px;
+      width: 24px;
+      margin: {
+        left: 2px;
+        right: 2px;
+      }
+    }
   }
 
   #{$widget-class}-payment-button {
