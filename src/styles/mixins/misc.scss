@@ -1,5 +1,5 @@
 @mixin normalize {
-  div {
+  div, a, button {
     box-sizing: border-box;
   }
 

@@ -32,11 +32,12 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/react/react-dom.js', {expose: 'react-dom'});
     bundler.require('./bower_components/polyglot/index.js', {expose: 'polyglot'});
     bundler.require('./src/main.js', {expose: 'xsolla-game-delivery-widget'});
-    bundler.transform({
+
+    bundler.transform(sassify, {
         outputStyle: 'compressed',
         base64Encode: false,
         'auto-inject': true
-    }, sassify);
+    });
 
     bundler.transform(stringify({
         extensions: ['.svg'],
@@ -62,6 +63,8 @@ function setupBrowserify(watch) {
     }
 
     runBundle(bundler, watch);
+
+    return bundler;
 }
 
 function runBundle(bundler, watch) {
@@ -95,8 +98,10 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('serve', ['browser-sync'], function () {
-    setupBrowserify(true);
+    var bundler = setupBrowserify(true);
 
     gulp.watch(['example/*.html']).on('change', browserSync.reload); //all the other files are managed by watchify
-    gulp.watch(['src/styles/**/*.scss']).on('change', browserSync.reload);
+    gulp.watch(['src/styles/**/*.scss']).on('change', function () {
+        bundler.emit('update');
+    });
 });

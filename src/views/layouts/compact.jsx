@@ -10,7 +10,7 @@ var CompactView = React.createClass({
     getInitialState: function() {
         return {
             isLoaded: false,
-            gameLogoUrl: null,
+            logoUrl: null,
             paymentList: null,
             amount: {
                 value: null,
@@ -31,8 +31,8 @@ var CompactView = React.createClass({
             newState.paymentList = data.paymentList;
         }
 
-        if (data.gameLogoUrl) {
-            newState.gameLogoUrl = data.gameLogoUrl;
+        if (data.logoUrl) {
+            newState.logoUrl = data.logoUrl;
         }
 
         if (data.amount) {
@@ -49,15 +49,15 @@ var CompactView = React.createClass({
         this.setState(newState);
     },
     render: function () {
-        var gameLogo = this.state.gameLogoUrl && (
-            <div className={this.className + '-game-logo'} style={{backgroundImage: 'url(' + this.state.gameLogoUrl + ')'}}></div>
+        var logo = this.state.logoUrl && (
+            <div className={this.className + '-game-logo'} style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
         );
 
         var paymentList = this.state.paymentList && (
             <div className={this.className + '-payment-list'}>
-                {this.state.paymentList.map(function (instance) {
+                {_.slice(this.state.paymentList, 0, 7).map(function (instance) {
                     return (
-                        <div key={instance.id} className={this.className + '-payment-list-method' + ' ' + this.className + '-payment-list-method__tiny'}>
+                        <div key={instance.id} className={this.className + '-payment-list-method'}>
                             <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + instance.imgUrl + ')'}}></div>
                         </div>
                     );
@@ -86,7 +86,7 @@ var CompactView = React.createClass({
 
         return (
             <div className={this.className + ' ' + this.className + '__compact'}>
-                {gameLogo}
+                {logo}
                 {paymentList}
                 {paymentButton}
                 {spinner}

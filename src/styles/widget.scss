@@ -77,6 +77,11 @@ $widget-class: '.' + $widget-prefix;
         left: 2px;
         right: 2px;
       }
+      border: 1px solid #c1c8d8;
+      border-radius: 2px;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, .7);
+      padding: 1px;
+      background: #f0f2f6;
     }
   }
 
@@ -85,5 +90,181 @@ $widget-class: '.' + $widget-prefix;
 
     height: 48px;
     width: 100%;
+  }
+}
+
+#{$widget-class}#{$widget-class}__full {
+  width: 780px;
+  min-height: 156px;
+  background: #ffffff;
+
+  #{$widget-class}-game {
+    min-height: 96px;
+    padding: {
+      top: 16px;
+      bottom: 16px;
+      left: 20px;
+      right: 20px;
+    }
+    background: #ffffff;
+
+    &-logo {
+      @include game-logo;
+
+      width: 100px;
+      height: 64px;
+      border-radius: 4px;
+    }
+
+    &-logo-column {
+      float: left;
+      width: 100px;
+      margin-right: -100px;
+    }
+
+    &-info-column {
+      margin-left: 120px;
+    }
+
+    &-price {
+      font-size: 20px;
+      line-height: 20px;
+      color: #29a574;
+      float: right;
+    }
+
+    &-name {
+      font-size: 24px;
+      line-height: 20px;
+      color: #4a4a4a;
+      margin-bottom: 5px;
+      max-width: 450px;
+    }
+
+    &-description {
+      font-size: 12px;
+      line-height: 16px;
+      color: #9b9b9b;
+      margin-bottom: 5px;
+      max-width: 450px;
+    }
+
+    &-system-requirements {
+      font-size: 12px;
+      line-height: 18px;
+      color: #bdc3c7;
+      text-transform: uppercase;
+      float: right;
+
+      &-icon, &-label {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      &-icon {
+        margin-right: .5em;
+        width: 14px;
+        height: 14px;
+      }
+
+      &-label {
+        text-decoration: underline;
+        cursor: default;
+      }
+    }
+
+    &-drm {
+      height: 16px;
+      font-size: 12px;
+      line-height: 16px;
+
+      &-item {
+        display: inline-block;
+        height: 16px;
+        margin-right: 7px;
+        vertical-align: top;
+
+        img {
+          width: auto;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  #{$widget-class}-payment {
+    height: 60px;
+    background: #f0f0f0;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, .02);
+    padding: {
+      top: 12px;
+      bottom: 12px;
+      left: 20px;
+      right: 20px;
+    }
+
+    &-list {
+      display: inline-block;
+      vertical-align: top;
+
+      &-title, &-method {
+        margin-right: 12px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      &-title {
+        width: 108px;
+        font-size: 12px;
+        line-height: 16px;
+        text-transform: uppercase;
+
+        &:after {
+          content: '';
+          display: inline-block;
+          vertical-align: middle;
+          width: 0;
+          height: 36px;
+        }
+      }
+
+      &-method {
+        @include payment-method;
+
+        width: 78px;
+        height: 36px;
+        padding: 2px;
+        margin-right: 12px;
+        cursor: pointer;
+        background: #f2f2f2;
+        background: linear-gradient(#f2f2f2, #d4d4d4);
+        border-radius: 3px;
+        box-shadow: inset 0 0 1px rgba(0, 0, 0, .25), inset 0 -1px rgba(0, 0, 0, .25), inset 0 -2px 2px rgba(0, 0, 0, .1);
+
+        &:hover {
+          background: #f6f6f6;
+          background: linear-gradient(#f6f6f6, #dadada);
+        }
+
+        &:active {
+          box-shadow: inset 0 0 1px rgba(0, 0, 0, .25), inset 0 2px 2px rgba(0, 0, 0, .15);
+        }
+      }
+    }
+
+    &-button {
+      @include payment-button;
+
+      display: inline-block;
+      vertical-align: top;
+      height: 36px;
+      width: 168px;
+      border-radius: 3px;
+      box-shadow: inset 0 0 2px rgba(0, 0, 0, .1), inset 0 -2px 1px rgba(0, 0, 0, .15);
+
+      &:active {
+        box-shadow: inset 0 0 2px rgba(0, 0, 0, .1), inset 0 2px 2px rgba(0, 0, 0, .15);
+      }
+    }
   }
 }

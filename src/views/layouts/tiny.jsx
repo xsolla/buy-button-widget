@@ -10,7 +10,7 @@ var TinyView = React.createClass({
     getInitialState: function() {
         return {
             isLoaded: false,
-            gameLogoUrl: null,
+            logoUrl: null,
             amount: {
                 value: null,
                 currency: null
@@ -26,8 +26,8 @@ var TinyView = React.createClass({
             newState.isLoaded = true;
         }
 
-        if (data.gameLogoUrl) {
-            newState.gameLogoUrl = data.gameLogoUrl;
+        if (data.logoUrl) {
+            newState.logoUrl = data.logoUrl;
         }
 
         if (data.amount) {
@@ -44,8 +44,8 @@ var TinyView = React.createClass({
         this.setState(newState);
     },
     render: function () {
-        var gameLogo = this.state.gameLogoUrl && (
-            <div className={this.className + '-game-logo'} style={{backgroundImage: 'url(' + this.state.gameLogoUrl + ')'}}></div>
+        var logo = this.state.logoUrl && (
+            <div className={this.className + '-game-logo'} style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
         );
 
         var paymentButton = this.state.amount.value && (
@@ -69,7 +69,7 @@ var TinyView = React.createClass({
 
         return (
             <div className={this.className + ' ' + this.className + '__tiny'}>
-                {gameLogo}
+                {logo}
                 {paymentButton}
                 {spinner}
                 {errorMessage}

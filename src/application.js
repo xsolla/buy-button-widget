@@ -117,6 +117,9 @@ module.exports = (function () {
         var view;
 
         switch (this.config.template) {
+            case 'full':
+                view = require('views/layouts/full.jsx');
+                break;
             case 'compact':
                 view = require('views/layouts/compact.jsx');
                 break;
@@ -149,7 +152,11 @@ module.exports = (function () {
                     currency: (_.first(info.drm) || {}).currency,
                     hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1
                 },
-                gameLogoUrl: info.image_url,
+                name: info.name,
+                description: info.description,
+                systemRequirements: info.system_requirements,
+                drm: info.drm,
+                logoUrl: info.image_url,
                 paymentList: data.payment_instances
             };
 
