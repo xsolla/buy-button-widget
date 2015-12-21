@@ -14,7 +14,8 @@ var CompactView = React.createClass({
             paymentList: null,
             amount: {
                 value: null,
-                currency: null
+                currency: null,
+                hasDifferent: false
             },
             errors: null
         };
@@ -38,7 +39,8 @@ var CompactView = React.createClass({
         if (data.amount) {
             newState.amount = {
                 value: (data.amount || {}).value,
-                currency: (data.amount || {}).currency
+                currency: (data.amount || {}).currency,
+                hasDifferent: (data.amount || {}).hasDifferent
             }
         }
 
@@ -55,7 +57,7 @@ var CompactView = React.createClass({
 
         var paymentList = this.state.paymentList && (
             <div className={this.className + '-payment-list'}>
-                {_.slice(this.state.paymentList, 0, 7).map(function (instance) {
+                {_.slice(this.state.paymentList, 0, 5).map(function (instance) {
                     return (
                         <div key={instance.id} className={this.className + '-payment-list-method'}>
                             <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + instance.imgUrl + ')'}}></div>
@@ -65,13 +67,24 @@ var CompactView = React.createClass({
             </div>
         );
 
+        var price;
+        if (this.state.amount.hasDifferent) {
+            price = (
+                <TranslateMessage message='payment_button_from_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+            );
+        } else {
+            price = (
+                <TranslateMessage message='payment_button_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+            );
+        }
+
         var paymentButton = this.state.amount.value && (
             <button className={this.className + '-payment-button'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: null})}>
                 <div className={this.className + '-payment-button-xsolla-logo'}>
                     <XsollaLogoView />
                 </div>
                 <div className={this.className + '-payment-button-amount'}>
-                    <TranslateMessage message='payment_button_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+                    {price}
                 </div>
             </button>
         );

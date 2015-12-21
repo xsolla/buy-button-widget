@@ -148,7 +148,7 @@ module.exports = (function () {
 
             props.data = {
                 amount: {
-                    value: (_.first(info.drm) || {}).amount,
+                    value: _(info.drm).pluck('amount').min(),
                     currency: (_.first(info.drm) || {}).currency,
                     hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1
                 },

@@ -5,6 +5,7 @@ var SpinnerView = require('../spinner.jsx');
 var ErrorMessageView = require('../error-message.jsx');
 var TranslateMessage = require('../translate-message.jsx');
 var gearSVG = require('../images/gear.svg');
+var TetherTarget = require('../tether/TetherTarget.jsx');
 
 var FullView = React.createClass({
     className: 'xgamedelivery-widget',
@@ -19,7 +20,8 @@ var FullView = React.createClass({
             drm: null,
             amount: {
                 value: null,
-                currency: null
+                currency: null,
+                hasDifferent: false
             },
             errors: null
         };
@@ -59,7 +61,8 @@ var FullView = React.createClass({
         if (data.amount) {
             newState.amount = {
                 value: (data.amount || {}).value,
-                currency: (data.amount || {}).currency
+                currency: (data.amount || {}).currency,
+                hasDifferent: (data.amount || {}).hasDifferent
             }
         }
 
@@ -77,20 +80,35 @@ var FullView = React.createClass({
         var drmList;
         var drm = this.state.drm || [];
 
+        var drmTetherOptions = {
+            // element and target are set automatically
+            attachment: 'bottom center',
+            targetAttachment: 'top center'
+        };
+
         if (drm.length === 1) {
-            drmList = _.first(drm).platforms.map(function (item) {
+            drmList = _.first(drm).platforms.map(function (item, key) {
                 return (
-                    <div key={item.code} className={this.className + '-game-drm-item'}>
-                        <img title={item.name} src={item.image_src} />
-                    </div>
+                    <TetherTarget className={this.className + '-game-drm-item'}
+                                  tethered={item.name}
+                                  tetherOptions={drmTetherOptions}
+                                  toggleOnMouse={true}
+                                  key={item.code + '_' + key}>
+                        <img alt={item.name} src={item.image_src} />
+                    </TetherTarget>
                 );
             }, this)
         } else if (drm.length > 1) {
-            drmList = drm.map(function (item) {
+            drmList = drm.map(function (item, key) {
+                var platformLabels = _.pluck(item.platforms, 'name').join(', ');
                 return (
-                    <div key={item.sku} className={this.className + '-game-drm-item'}>
-                        <img title={_.pluck(item.platforms, 'name').join(', ')} src={item.image_src} />
-                    </div>
+                    <TetherTarget className={this.className + '-game-drm-item'}
+                                  tethered={platformLabels}
+                                  tetherOptions={drmTetherOptions}
+                                  toggleOnMouse={true}
+                                  key={item.sku + '_' + key}>
+                        <img alt={platformLabels} src={item.image_src} />
+                    </TetherTarget>
                 );
             }, this)
         }
@@ -99,14 +117,29 @@ var FullView = React.createClass({
             <span dangerouslySetInnerHTML={{__html: gearSVG}}></span>
         );
 
-        var gameInfo = this.state.isLoaded && (
+        var price;
+        if (this.state.amount.hasDifferent) {
+            price = (
+                <TranslateMessage message='payment_button_from_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+            );
+        } else {
+            price = this.state.amount.value + ' ' + this.state.amount.currency
+        }
+
+        var systemRequirementsTetherOptions = {
+            // element and target are set automatically
+            attachment: 'bottom right',
+            targetAttachment: 'top right'
+        };
+
+        var gameInfo = this.state.isLoaded && !this.state.errors && (
             <div className={this.className + '-game'}>
                 <div className={this.className + '-game-logo-column'}>
                     {logo}
                 </div>
                 <div className={this.className + '-game-info-column'}>
                     <div className={this.className + '-game-price'}>
-                        {this.state.amount.value} {this.state.amount.currency}
+                        {price}
                     </div>
                     <div className={this.className + '-game-name'}>
                         {this.state.name}
@@ -118,9 +151,12 @@ var FullView = React.createClass({
                         <i className={this.className + '-game-system-requirements-icon'}>
                             {gearIcon}
                         </i>
-                        <a className={this.className + '-game-system-requirements-label'} title={this.state.systemRequirements}>
-                            <TranslateMessage message='system_requirements_label' />
-                        </a>
+                        <TetherTarget className={this.className + '-game-system-requirements-label'}
+                                      tethered={<pre>{this.state.systemRequirements}</pre>}
+                                      tetherOptions={systemRequirementsTetherOptions}
+                                      toggleOnClick={true}>
+                            <TranslateMessage message='system_requirements_label'/>
+                        </TetherTarget>
                     </div>
                     <div className={this.className + '-game-drm'}>
                         {drmList}
@@ -136,7 +172,7 @@ var FullView = React.createClass({
                 </div>
                 {_.slice(this.state.paymentList, 0, 5).map(function (instance) {
                     return (
-                        <a key={instance.id} className={this.className + '-payment-list-method'}>
+                        <a key={instance.id} className={this.className + '-payment-list-method'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: instance.id})}>
                             <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + instance.imgUrl + ')'}}></div>
                         </a>
                     );
@@ -160,7 +196,7 @@ var FullView = React.createClass({
             </button>
         );
 
-        var paymentInfo = this.state.isLoaded && (
+        var paymentInfo = this.state.isLoaded && !this.state.errors && (
             <div className={this.className + '-payment'}>
                 {paymentList}
                 {paymentButton}

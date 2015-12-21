@@ -24,6 +24,8 @@
     "lodash": "~3.10.1",
     "react": "~0.14.3",
     "xsolla-paystation-widget": "xsolla-paystation-embed#~1.0.3",
-    "polyglot": "~1.0.0"
+    "polyglot": "~1.0.0",
+    "tether": "~1.1.1",
+    "react-onclickoutside": "~4.5.0"
   }
 }

@@ -13,7 +13,8 @@ var TinyView = React.createClass({
             logoUrl: null,
             amount: {
                 value: null,
-                currency: null
+                currency: null,
+                hasDifferent: false
             },
             errors: null
         };
@@ -33,7 +34,8 @@ var TinyView = React.createClass({
         if (data.amount) {
             newState.amount = {
                 value: (data.amount || {}).value,
-                currency: (data.amount || {}).currency
+                currency: (data.amount || {}).currency,
+                hasDifferent: (data.amount || {}).hasDifferent
             }
         }
 
@@ -48,13 +50,24 @@ var TinyView = React.createClass({
             <div className={this.className + '-game-logo'} style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
         );
 
+        var price;
+        if (this.state.amount.hasDifferent) {
+            price = (
+                <TranslateMessage message='payment_button_from_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+            );
+        } else {
+            price = (
+                <TranslateMessage message='payment_button_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+            );
+        }
+
         var paymentButton = this.state.amount.value && (
             <button className={this.className + '-payment-button'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: null})}>
                 <div className={this.className + '-payment-button-xsolla-logo'}>
                     <XsollaLogoView />
                 </div>
                 <div className={this.className + '-payment-button-amount'}>
-                    <TranslateMessage message='payment_button_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+                    {price}
                 </div>
             </button>
         );

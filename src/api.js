@@ -6,7 +6,7 @@ module.exports = (function () {
         this.data = data || {};
     }
 
-    var PAYSTATION_API_URL = 'http://ps-a-salnikov.user/paystation2/api/';
+    var PAYSTATION_API_URL = 'https://test2-secure.xsolla.com/paystation2/api/';
 
     /**
      * Perform request to PayStation API
