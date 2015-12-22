@@ -30,6 +30,28 @@ $widget-class: '.' + $widget-prefix;
   .error-message {
     @include error-message;
   }
+
+  .formatted-currency {
+    white-space: nowrap;
+
+    &-ruble {
+      display: inline-block;
+      font-size: .75em;
+      height: 1em;
+      vertical-align: baseline;
+      margin-left: .1em;
+
+      svg {
+        height: 1em;
+        width: 1em;
+        fill: currentColor;
+
+        g {
+          fill: currentColor;
+        }
+      }
+    }
+  }
 }
 
 #{$widget-class}#{$widget-class}__tiny,
@@ -125,6 +147,7 @@ $widget-class: '.' + $widget-prefix;
       line-height: 20px;
       color: #29a574;
       float: right;
+      opacity: .99;   // sets the same color for svg and text
     }
 
     &-name {

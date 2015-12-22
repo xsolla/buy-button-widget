@@ -41,19 +41,19 @@ var TetherTarget = React.createClass({
         var divProps = _.omit(this.props, ['tethered', 'tetherOptions']);
 
         if (this.props.toggleOnClick) {
-            divProps.onClick = () => {
+            divProps.onClick = _.bind(function () {
                 this.tethered.toggle();
-            };
+            }, this);
         }
 
         if (this.props.toggleOnMouse) {
-            divProps.onMouseEnter = () => {
+            divProps.onMouseEnter = _.bind(function () {
                 this.tethered.show();
-            };
+            }, this);
 
-            divProps.onMouseOut = () => {
+            divProps.onMouseOut = _.bind(function () {
                 this.tethered.hide();
-            };
+            }, this);
         }
 
         return <div {... divProps }>

@@ -31,6 +31,7 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/jquery/dist/jquery.js', {expose: 'jquery'});
     bundler.require('./bower_components/react/react.js', {expose: 'react'});
     bundler.require('./bower_components/react/react-dom.js', {expose: 'react-dom'});
+    bundler.require('./bower_components/react/react-dom-server.js', {expose: 'react-dom-server'});
     bundler.require('./bower_components/polyglot/index.js', {expose: 'polyglot'});
     bundler.require('./bower_components/tether/dist/js/tether.js', {expose: 'tether'});
     bundler.require('./bower_components/react-onclickoutside/index.js', {expose: 'react-onclickoutside'});

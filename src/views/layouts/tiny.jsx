@@ -4,6 +4,7 @@ var XsollaLogoView = require('../xsolla-logo.jsx');
 var SpinnerView = require('../spinner.jsx');
 var ErrorMessageView = require('../error-message.jsx');
 var TranslateMessage = require('../translate-message.jsx');
+var FormattedCurrency = require('../formatted-currency.jsx');
 
 var TinyView = React.createClass({
     className: 'xgamedelivery-widget',
@@ -50,16 +51,10 @@ var TinyView = React.createClass({
             <div className={this.className + '-game-logo'} style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
         );
 
-        var price;
-        if (this.state.amount.hasDifferent) {
-            price = (
-                <TranslateMessage message='payment_button_from_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
-            );
-        } else {
-            price = (
-                <TranslateMessage message='payment_button_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
-            );
-        }
+        var price = (
+            <TranslateMessage message={this.state.amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label'}
+                              values={{amount: <FormattedCurrency amount={this.state.amount.value} currency={this.state.amount.currency} />}} />
+        );
 
         var paymentButton = this.state.amount.value && (
             <button className={this.className + '-payment-button'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: null})}>

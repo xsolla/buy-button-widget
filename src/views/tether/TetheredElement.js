@@ -42,7 +42,9 @@ TetheredElement.prototype.update = function () {
     ReactDOM.render(
         React.createElement('div', {className: this.classPrefix + '-content'}, this.reactComponent),
         this.domNode,
-        () => this.tether.position()
+        _.bind(function () {
+            this.tether.position()
+        }, this)
     );
 };
 

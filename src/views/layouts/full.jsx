@@ -6,6 +6,7 @@ var ErrorMessageView = require('../error-message.jsx');
 var TranslateMessage = require('../translate-message.jsx');
 var gearSVG = require('../images/gear.svg');
 var TetherTarget = require('../tether/TetherTarget.jsx');
+var FormattedCurrency = require('../formatted-currency.jsx');
 
 var FullView = React.createClass({
     className: 'xgamedelivery-widget',
@@ -117,13 +118,13 @@ var FullView = React.createClass({
             <span dangerouslySetInnerHTML={{__html: gearSVG}}></span>
         );
 
-        var price;
+        var price = (
+            <FormattedCurrency amount={this.state.amount.value} currency={this.state.amount.currency} />
+        );
         if (this.state.amount.hasDifferent) {
             price = (
-                <TranslateMessage message='payment_button_from_label' values={{amount: this.state.amount.value + ' ' + this.state.amount.currency}} />
+                <TranslateMessage message='payment_button_from_label' values={{amount: price}} />
             );
-        } else {
-            price = this.state.amount.value + ' ' + this.state.amount.currency
         }
 
         var systemRequirementsTetherOptions = {
