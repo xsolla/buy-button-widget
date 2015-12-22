@@ -27,7 +27,7 @@ var FullView = React.createClass({
             errors: null
         };
     },
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps: function(nextProps) {
         var newState = {};
         var data = nextProps.data || {};
 

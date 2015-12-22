@@ -40,7 +40,9 @@ function setupBrowserify(watch) {
     bundler.transform(sassify, {
         outputStyle: 'compressed',
         base64Encode: false,
-        'auto-inject': true
+        'auto-inject': true,
+        sourceMap: false,
+        sourceMapEmbed: false
     });
 
     bundler.transform(stringify({

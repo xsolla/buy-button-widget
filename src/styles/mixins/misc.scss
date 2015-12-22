@@ -1,4 +1,6 @@
 @mixin normalize {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   div, a, button {
     box-sizing: border-box;
   }

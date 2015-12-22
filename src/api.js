@@ -6,7 +6,7 @@ module.exports = (function () {
         this.data = data || {};
     }
 
-    var PAYSTATION_API_URL = 'https://demo1-secure.srv.local/paystation2/api/';
+    var PAYSTATION_API_URL = 'http://demo1-secure.srv.local/paystation2/api/';
 
     /**
      * Perform request to PayStation API
@@ -31,7 +31,7 @@ module.exports = (function () {
             deferred.resolve(data);
         }).fail(function (jqXHR) {
             // HTTP Error, Fatal PayStation API error
-            deferred.reject(jqXHR.responseJSON && jqXHR.responseJSON.errors);
+            deferred.reject(jqXHR.responseJSON && jqXHR.responseJSON.errors || [{support_code: '20000001'}]);
         });
 
         return deferred;
