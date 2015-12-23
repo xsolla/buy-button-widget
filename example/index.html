@@ -3,19 +3,29 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>PayStation 3 Integration Example</title>
+    <style>
+        .xgamedelivery-widget {
+            box-shadow: 0 0 0 5px rgba(0, 0, 0, .1);
+        }
+    </style>
 </head>
-<style>
-    .xgamedelivery-widget {
-        box-shadow: 0 0 0 5px rgba(0, 0, 0, .1);
-    }
-</style>
 <body>
     <div class="box">
         <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
         <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
     </div>
 
-    <div id="widget-example">
+    <div id="widget-example-tiny">
+    </div>
+
+    <br />
+
+    <div id="widget-example-compact">
+    </div>
+
+    <br />
+
+    <div id="widget-example-full">
     </div>
 
     <div class="box">
@@ -31,19 +41,33 @@
 
     <script>
         var options = {
-            access_token: 'NSNYpiI1LP3DTZ2LDwC4eLsa4AlqOODu',
-            target_element: '#widget-example',
-            template: 'full'
+            lightbox: {
+                height: '650px'
+            }
         };
         var s = document.createElement('script');
         s.type = "text/javascript";
         s.async = true;
         s.src = "widget.js";
         s.addEventListener('load', function (e) {
-//            XGameDeliveryWidget.on('init', function () {
-//                console.log('init event', arguments);
-//            });
-            XGameDeliveryWidget.init(options);
+            var _ = XGameDeliveryWidget._;
+            var fullWidget = XGameDeliveryWidget.create(_.extend({
+                template: 'full',
+                target_element: '#widget-example-full',
+                access_token: 'Rx6ToQ8Losb5A2NouXyufVBa4qqnGEbl'
+            }, options));
+
+            var compactWidget = XGameDeliveryWidget.create(_.extend({
+                template: 'compact',
+                target_element: '#widget-example-compact',
+                access_token: '874qmNyB4Q193zRsZDOvUfMMiPeKodow'
+            }, options));
+
+            var tinyWidget = XGameDeliveryWidget.create(_.extend({
+                template: 'tiny',
+                target_element: '#widget-example-tiny',
+                access_token: '874qmNyB4Q193zRsZDOvUfMMiPeKodow'
+            }, options));
         }, false);
         var head = document.getElementsByTagName('head')[0];
         head.appendChild(s);

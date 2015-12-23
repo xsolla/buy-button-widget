@@ -4,11 +4,17 @@ var App = require('application');
 
 module.exports = (function () {
     return {
-        init: function () {
+        create: function () {
             var app = new App();
             app.init.apply(app, arguments);
-            return app;
+
+            return _.object(_.map(['open', 'on', 'off'], function (methodName) {
+                return [methodName, function () {
+                    return app[methodName].apply(app, arguments);
+                }];
+            }));
         },
-        $: $
+        $: $,
+        _: _
     };
 })();

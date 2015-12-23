@@ -64,14 +64,12 @@ module.exports = (function () {
         this.config = _.extend({}, DEFAULT_CONFIG, options);
         this.checkConfig();
 
-        PaystationEmbedApp.init({
-            access_token: options.access_token
-        });
-
         this.targetElement = $(options.target_element);
 
         this.api = new Api({
             access_token: options.access_token
+        }, {
+            sandbox: options.sandbox
         });
 
         this.render();
@@ -84,6 +82,13 @@ module.exports = (function () {
      */
     App.prototype.open = function () {
         this.checkApp();
+
+        PaystationEmbedApp.init({
+            access_token: this.config.access_token,
+            sandbox: this.config.sandbox,
+            lightbox: this.config.lightbox,
+            childWindow: this.config.childWindow
+        });
 
         PaystationEmbedApp.open();
     };
