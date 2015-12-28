@@ -22,6 +22,18 @@ module.exports = (function () {
         template: 'tiny'
     };
 
+    App.eventTypes = {
+        INIT: 'init',
+        OPEN: 'open',
+        LOAD: 'load',
+        CLOSE: 'close',
+        STATUS: 'status',
+        STATUS_INVOICE: 'status-invoice',
+        STATUS_DELIVERING: 'status-delivering',
+        STATUS_TROUBLED: 'status-troubled',
+        STATUS_DONE: 'status-done'
+    };
+
     /** Private Members **/
     App.prototype.config = {};
     App.prototype.isInitiated = false;
@@ -80,7 +92,7 @@ module.exports = (function () {
     /**
      * Open payment interface (PayStation)
      */
-    App.prototype.open = function () {
+    App.prototype.open = function (params) {
         this.checkApp();
 
         PaystationEmbedApp.init({
@@ -89,6 +101,32 @@ module.exports = (function () {
             lightbox: this.config.lightbox,
             childWindow: this.config.childWindow
         });
+
+        // Register events (forwarding)
+        var events = _.values(App.eventTypes).join(' ');
+        var eventHandler = _.bind(function () {
+            this.triggerEvent.apply(this, arguments);
+        }, this);
+        PaystationEmbedApp.on(events, eventHandler);
+
+        var openHandler = _.bind(function (event) {
+            var instanceId = (params || {}).instance_id;
+            if (instanceId) {
+                PaystationEmbedApp.sendMessage('set-data', {
+                    settings: {
+                        payment_method: instanceId
+                    }
+                });
+            }
+        }, this);
+        PaystationEmbedApp.on('load', openHandler);
+
+        // Unregister events
+        PaystationEmbedApp.on('close', _.bind(function (event) {
+            PaystationEmbedApp.off(event);
+            PaystationEmbedApp.off('load', openHandler);
+            PaystationEmbedApp.off(events, eventHandler);
+        }, this));
 
         PaystationEmbedApp.open();
     };
@@ -137,8 +175,7 @@ module.exports = (function () {
         var props = {
             data: {},
             onPaymentOpen: _.bind(function(params) {
-                // params.instance_id
-                this.open();
+                this.open(params);
             }, this)
         };
 

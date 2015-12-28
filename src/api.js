@@ -9,7 +9,7 @@ module.exports = (function () {
         }, options);
     }
 
-    var PAYSTATION_API_URL = 'https://test2-secure.xsolla.com/paystation2/api/';
+    var PAYSTATION_API_URL = 'https://secure.xsolla.com/paystation2/api/';
     var SANDBOX_PAYSTATION_API_URL = 'https://sandbox-secure.xsolla.com/paystation2/api/';
 
     /**

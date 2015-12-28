@@ -14,6 +14,7 @@ module.exports = (function () {
                 }];
             }));
         },
+        eventTypes: App.eventTypes,
         $: $,
         _: _
     };

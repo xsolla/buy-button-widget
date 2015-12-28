@@ -1,8 +1,14 @@
+$font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 @mixin normalize {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: $font-family;
 
   div, a, button {
     box-sizing: border-box;
+  }
+
+  button {
+    font-family: $font-family;
   }
 
   a:active,
