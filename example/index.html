@@ -68,6 +68,12 @@
                 target_element: '#widget-example-tiny',
                 access_token: '874qmNyB4Q193zRsZDOvUfMMiPeKodow'
             }, options));
+
+            _.each([fullWidget, compactWidget, tinyWidget], function (widgetInstance) {
+                widgetInstance.on(_.values(XGameDeliveryWidget.eventTypes).join(' '), function (event) {
+                    console.log(event.type);
+                });
+            });
         }, false);
         var head = document.getElementsByTagName('head')[0];
         head.appendChild(s);

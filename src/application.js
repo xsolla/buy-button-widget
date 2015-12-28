@@ -22,17 +22,7 @@ module.exports = (function () {
         template: 'tiny'
     };
 
-    App.eventTypes = {
-        INIT: 'init',
-        OPEN: 'open',
-        LOAD: 'load',
-        CLOSE: 'close',
-        STATUS: 'status',
-        STATUS_INVOICE: 'status-invoice',
-        STATUS_DELIVERING: 'status-delivering',
-        STATUS_TROUBLED: 'status-troubled',
-        STATUS_DONE: 'status-done'
-    };
+    App.eventTypes = _.extend({}, PaystationEmbedApp.eventTypes);
 
     /** Private Members **/
     App.prototype.config = {};
