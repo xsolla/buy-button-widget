@@ -180,9 +180,9 @@ module.exports = (function () {
 
             props.data = {
                 amount: {
-                    value: _(info.drm).pluck('amount').min(),
-                    currency: (_.first(info.drm) || {}).currency,
-                    hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1
+                    value: info.min_amount,
+                    currency: info.min_currency,
+                    hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1 || _.uniq(_.pluck(info.drm, 'currency')).length > 1
                 },
                 name: info.name,
                 description: info.description,
