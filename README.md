@@ -37,7 +37,8 @@ $ bower install xsolla-game-delivery-widget
 ``` javascript
 <script>
     var options = {
-        access_token: 'abcdef1234567890abcdef1234567890'
+        access_token: 'abcdef1234567890abcdef1234567890',
+        target_element: '#widget-example-element'
     };
     var s = document.createElement('script');
     s.type = "text/javascript";
@@ -61,7 +62,8 @@ $ bower install xsolla-game-delivery-widget
 <script src="//static.xsolla.com/embed/game-delivery/1.0.0rc2/widget.min.js"></script>
 <script>
     var widgetInstance = XGameDeliveryWidget.create({
-        access_token: 'abcdef1234567890abcdef1234567890'
+        access_token: 'abcdef1234567890abcdef1234567890',
+        target_element: '#widget-example-element'
     });
 </script>
 ```
@@ -73,7 +75,8 @@ If your project uses CommonJS module format, you can access the widget by requir
 ``` javascript
 var XGameDeliveryWidget = require('PATH_TO_WIDGET/embed');
 var widgetInstance = XGameDeliveryWidget.create({
-   access_token: 'abcdef1234567890abcdef1234567890'
+    access_token: 'abcdef1234567890abcdef1234567890',
+    target_element: '#widget-example-element'
 });
 ```
 
@@ -84,17 +87,18 @@ Also you can use widget with RequireJS loader
 ``` javascript
 define(['PATH_TO_WIDGET/embed'], function (XGameDeliveryWidget) {
     var widgetInstance = XGameDeliveryWidget.create({
-       access_token: 'abcdef1234567890abcdef1234567890'
+        access_token: 'abcdef1234567890abcdef1234567890',
+        target_element: '#widget-example-element'
     });
 });
 ```
 
 ### Widget Options
 
-* **access_token** — Access token
+* **access_token** (обязательный) — Access token
 * **sandbox** — Set **true** to test the payment process, sandbox-secure.xsolla.com will be used instead secure.xsolla.com
 * **template** — <span style="background: yellow">шаблон для отображения, определяющий внешний вид ('tiny', 'compact', 'full')</span>
-* **target_element** — <span style="background: yellow">элемент на странице, куда будет отрендерен виджет (в формате селектора jQuery, например, '#widget-example')</span>
+* **target_element** (обязательный) — <span style="background: yellow">элемент на странице, куда будет отрендерен виджет (в формате селектора jQuery, например, '#widget-example')</span>
 
 <span style="background: yellow">Следующие параметры определяют отображение платежного интерфейса, совпадают с [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/)</span>
 
