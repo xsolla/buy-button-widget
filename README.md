@@ -2,21 +2,21 @@
 
 ## Integration Guide
 
-Xsolla team created a script to simplify the integration of PayStation into your website. Please note: for the proper work of widget please make sure that you pass the ‘access_token’. More information about getting ‘access_token’ parameter is available [here](http://developers.xsolla.com/api.html#token).
+Xsolla team created a script to simplify the integration of PayStation into your website. Please note: for the proper work of widget please make sure that you pass the 'access_token'. More information about getting 'access_token' parameter is available [here](http://developers.xsolla.com/api.html#token).
 
 [See Demo](http://livedemo.xsolla.com/pincodes/)
 
 Features:
-* <span style="background: yellow">Встраивание готового шаблона на страницу сайта, показ информации о продаваемом контенте, список DRM и платформ, выбор способа оплаты</span>
-* <span style="background: yellow">Открытие интерфейса оплаты</span>
-* the most appropriate interface depending on the type of device
-* compliant with the AMD and CommonJS specification for defining modules
+* Widget can be easily embed on your page, and will provide user the details about selling content, the list of available DRM and platforms, the choice of payment methods
+* Payment Interface opening
+* The most appropriate interface depending on the type of device
+* Compliant with the AMD and CommonJS specification for defining modules
 
 ### Getting the code
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://static.xsolla.com/embed/game-delivery/1.0.0rc2/widget.min.js](https://static.xsolla.com/embed/game-delivery/1.0.0rc2/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://static.xsolla.com/embed/game-delivery/1.0.0/widget.min.js](https://static.xsolla.com/embed/game-delivery/1.0.0/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -43,7 +43,7 @@ $ bower install xsolla-game-delivery-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//static.xsolla.com/embed/game-delivery/1.0.0rc2/widget.min.js";
+    s.src = "//static.xsolla.com/embed/game-delivery/1.0.0/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XGameDeliveryWidget.create(options);
     }, false);
@@ -52,14 +52,12 @@ $ bower install xsolla-game-delivery-widget
 </script>
 ```
 
-<span style="background: yellow">
-    Выполнять XGameDeliveryWidget.create() после загрузки DOM. Для этого можно воспользоваться соответствующим событием или добавить скрипт после элемента, в который происходит рендеринг
-</span>
+It is necessary to perform XGameDeliveryWidget.create() when the DOM is fully loaded. You can track the appropriate event, or add the script after the element, where widget should be rendered.
 
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//static.xsolla.com/embed/game-delivery/1.0.0rc2/widget.min.js"></script>
+<script src="//static.xsolla.com/embed/game-delivery/1.0.0/widget.min.js"></script>
 <script>
     var widgetInstance = XGameDeliveryWidget.create({
         access_token: 'abcdef1234567890abcdef1234567890',
@@ -95,12 +93,12 @@ define(['PATH_TO_WIDGET/embed'], function (XGameDeliveryWidget) {
 
 ### Widget Options
 
-* **access_token** (обязательный) — Access token
+* **access_token** (required) — Access token
 * **sandbox** — Set **true** to test the payment process, sandbox-secure.xsolla.com will be used instead secure.xsolla.com
-* **template** — <span style="background: yellow">шаблон для отображения, определяющий внешний вид ('tiny', 'compact', 'full')</span>
-* **target_element** (обязательный) — <span style="background: yellow">элемент на странице, куда будет отрендерен виджет (в формате селектора jQuery, например, '#widget-example')</span>
+* **template** — Type of widget, defining its appearance. Can be 'tiny', 'compact' or 'full'
+* **target_element** (required) — Element of the page, where the widget should be rendered (jQuery selector should be used, for example '#widget-example')
 
-<span style="background: yellow">Следующие параметры определяют отображение платежного интерфейса, совпадают с [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/)</span>
+The following parameters define the payment interface appearance, and coincide with [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/) parameters.
 
 * **lightbox** — Options for modal dialog that contains frame of PayStation
     * **width** — Width of lightbox frame. If null, depends on paystation width. Default is null
@@ -124,4 +122,4 @@ define(['PATH_TO_WIDGET/embed'], function (XGameDeliveryWidget) {
 
 You can refer to the widget object, using the following methods:
 
-* **XGameDeliveryWidget.create(options)** — <span style="background: yellow">Создание экземпляра виджета и рендеринг его на странице сайта</span>
+* **XGameDeliveryWidget.create(options)** — Create the widget instance and render it on the page
