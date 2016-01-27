@@ -215,8 +215,8 @@ $widget-class: '.' + $widget-prefix;
     background: #f0f0f0;
     box-shadow: inset 0 2px 2px rgba(0, 0, 0, .02);
     padding: {
-      top: 12px;
-      bottom: 12px;
+      top: 11px;
+      bottom: 9px;
       left: 20px;
       right: 20px;
     }
@@ -242,7 +242,7 @@ $widget-class: '.' + $widget-prefix;
           display: inline-block;
           vertical-align: middle;
           width: 0;
-          height: 36px;
+          height: 40px;
         }
       }
 
@@ -250,8 +250,8 @@ $widget-class: '.' + $widget-prefix;
         @include payment-method;
 
         width: 78px;
-        height: 36px;
-        padding: 2px;
+        height: 40px;
+        padding: 4px;
         margin-right: 12px;
         cursor: pointer;
         background: #f2f2f2;
@@ -275,7 +275,7 @@ $widget-class: '.' + $widget-prefix;
 
       display: inline-block;
       vertical-align: top;
-      height: 36px;
+      height: 40px;
       width: 168px;
       border-radius: 3px;
       box-shadow: inset 0 0 2px rgba(0, 0, 0, .1), inset 0 -2px 1px rgba(0, 0, 0, .15);

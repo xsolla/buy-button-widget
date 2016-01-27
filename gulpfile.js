@@ -79,8 +79,6 @@ function runBundle(bundler, watch) {
         // log errors if they happen
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source('widget.js'))
-        //.pipe(replace('https://secure.xsolla.com/paystation2/?', 'http://localhost:3004/#/?')) // Staging server, temporarily
-        .pipe(replace('https://secure.xsolla.com', 'https://demo1-secure.srv.local')) // Staging server, temporarily
         .pipe(gulp.dest('./dist'))
         .pipe(gulpif(!devMode, buffer()))
         .pipe(gulpif(!devMode, rename('widget.min.js')))

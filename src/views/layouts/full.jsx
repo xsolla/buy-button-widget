@@ -101,7 +101,7 @@ var FullView = React.createClass({
             }, this)
         } else if (drm.length > 1) {
             drmList = drm.map(function (item, key) {
-                var platformLabels = _.pluck(item.platforms, 'name').join(', ');
+                var platformLabels = !_.isEmpty(item.platforms) ? _.pluck(item.platforms, 'name').join(', ') : item.name;
                 return (
                     <TetherTarget className={this.className + '-game-drm-item'}
                                   tethered={platformLabels}
