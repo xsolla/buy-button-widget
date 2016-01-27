@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var React = require('react');
+var checkRetina = require('is-retina-js');
 var XsollaLogoView = require('../xsolla-logo.jsx');
 var SpinnerView = require('../spinner.jsx');
 var ErrorMessageView = require('../error-message.jsx');
@@ -166,6 +167,7 @@ var FullView = React.createClass({
             </div>
         );
 
+        var isRetina = checkRetina();
         var paymentList = this.state.paymentList && (
             <div className={this.className + '-payment-list'}>
                 <div className={this.className + '-payment-list-title'}>
@@ -174,7 +176,7 @@ var FullView = React.createClass({
                 {_.slice(this.state.paymentList, 0, 5).map(function (instance) {
                     return (
                         <a key={instance.id} className={this.className + '-payment-list-method'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: instance.id})}>
-                            <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + instance.imgUrl + ')'}}></div>
+                            <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + (isRetina ? instance.imgRetinaUrl : instance.imgUrl) + ')'}}></div>
                         </a>
                     );
                 }, this)}

@@ -26,6 +26,8 @@
     "polyglot": "~1.0.0",
     "tether": "~1.1.1",
     "react-onclickoutside": "~4.5.0",
-    "xsolla-paystation-widget": "master"
+    "xsolla-paystation-widget": "master",
+    "retina.js": "retinajs#~1.3.0",
+    "isRetina.js": "*"
   }
 }

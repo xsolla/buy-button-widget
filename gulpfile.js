@@ -36,6 +36,7 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/polyglot/index.js', {expose: 'polyglot'});
     bundler.require('./bower_components/tether/dist/js/tether.js', {expose: 'tether'});
     bundler.require('./bower_components/react-onclickoutside/index.js', {expose: 'react-onclickoutside'});
+    bundler.require('./bower_components/isRetina.js/isRetina.js', {expose: 'is-retina-js'});
     bundler.require('./src/main.js', {expose: 'xsolla-game-delivery-widget'});
 
     bundler.transform(sassify, {
