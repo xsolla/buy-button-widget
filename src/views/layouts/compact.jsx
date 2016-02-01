@@ -61,7 +61,7 @@ var CompactView = React.createClass({
                 {_.slice(this.state.paymentList, 0, 5).map(function (instance) {
                     return (
                         <div key={instance.id} className={this.className + '-payment-list-method'}>
-                            <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + instance.imgUrl + ')'}}></div>
+                            <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + instance.image_url + ')'}}></div>
                         </div>
                     );
                 }, this)}
