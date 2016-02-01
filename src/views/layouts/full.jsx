@@ -176,7 +176,7 @@ var FullView = React.createClass({
                 {_.slice(this.state.paymentList, 0, 5).map(function (instance) {
                     return (
                         <a key={instance.id} className={this.className + '-payment-list-method'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: instance.id})}>
-                            <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + (isRetina ? instance.imgRetinaUrl : instance.imgUrl) + ')'}}></div>
+                            <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + (isRetina ? instance.image_2x_url : instance.image_url) + ')'}}></div>
                         </a>
                     );
                 }, this)}
