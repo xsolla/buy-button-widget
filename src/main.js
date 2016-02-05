@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var $ = require('jquery');
 var App = require('application');
+var version = require('version');
 
 module.exports = (function () {
     return {
@@ -14,6 +15,7 @@ module.exports = (function () {
                 }];
             }));
         },
+        version: version,
         eventTypes: App.eventTypes,
         $: $,
         _: _
