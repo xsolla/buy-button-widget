@@ -14,7 +14,7 @@ $widget-class: '.' + $widget-prefix;
 #{$widget-class} {
   @include normalize;
 
-  background: #262626;
+  background: #ffffff;
   border-radius: 5px;
   overflow: hidden;
   font-size: 18px;
@@ -111,7 +111,6 @@ $widget-class: '.' + $widget-prefix;
 #{$widget-class}#{$widget-class}__full {
   width: 780px;
   min-height: 156px;
-  background: #ffffff;
 
   #{$widget-class}-game {
     min-height: 96px;

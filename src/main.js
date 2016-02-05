@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var $ = require('jquery');
-var App = require('application');
-var version = require('version');
+var App = require('./application');
+var version = require('./version');
 
 module.exports = (function () {
     return {

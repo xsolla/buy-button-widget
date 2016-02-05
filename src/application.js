@@ -1,15 +1,15 @@
 var $ = require('jquery');
 var _ = require('lodash');
 var PaystationEmbedApp = require('paystation-embed-app');
-var Api = require('api');
+var Api = require('./api');
 var Exception = require('exception');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Translate = require('translate');
+var Translate = require('./translate');
 
 module.exports = (function () {
     function App() {
-        require('styles/widget.scss');
+        require('./styles/widget.scss');
 
         this.config = _.extend({}, DEFAULT_CONFIG);
         this.eventObject = $({});
@@ -151,14 +151,14 @@ module.exports = (function () {
 
         switch (this.config.template) {
             case 'full':
-                view = require('views/layouts/full.jsx');
+                view = require('./views/layouts/full.jsx');
                 break;
             case 'compact':
-                view = require('views/layouts/compact.jsx');
+                view = require('./views/layouts/compact.jsx');
                 break;
             case 'tiny':
             default:
-                view = require('views/layouts/tiny.jsx');
+                view = require('./views/layouts/tiny.jsx');
                 break;
         }
 
