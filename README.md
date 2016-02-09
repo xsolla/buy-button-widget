@@ -20,10 +20,6 @@ Script is located on our CDN and is available here: [https://static.xsolla.com/
 
 #### Installing with Bower
 
-<span style="color: red">
-    TODO: зарегистрировать в bower после открытия публичного репозитория в github (bower register xsolla-game-delivery-widget git://github.com/xsolla/game-delivery-widget.git)
-</span>
-
 If you want to include the source code of widget as a part of your project, you can install the package using [Bower](http://bower.io/).
 
 ``` bash
