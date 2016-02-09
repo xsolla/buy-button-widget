@@ -13,6 +13,7 @@ var watchify = require('watchify');
 var gulpif = require('gulp-if');
 var reactify = require('reactify');
 var replace = require('gulp-replace');
+var fs = require('fs');
 
 var devMode = process.argv.slice(2).indexOf('--dev') !== -1;
 
@@ -91,6 +92,21 @@ function runBundle(bundler, watch) {
 }
 
 gulp.task('build', function () {
+    // Stamp current version
+    var version = require('./src/version.js');
+
+    var readme = fs.readFileSync('./README.md', 'utf8');
+    readme = readme.replace(/(static\.xsolla\.com\/embed\/game-delivery\/)(\d+\.\d+\.[\w\-]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
+    fs.writeFile('./README.md', readme);
+
+    var packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+    packageJSON.version = version;
+    fs.writeFile('./package.json', JSON.stringify(packageJSON, null, 2));
+
+    var bowerJSON = JSON.parse(fs.readFileSync('./bower.json', 'utf8'));
+    bowerJSON.version = version;
+    fs.writeFile('./bower.json', JSON.stringify(bowerJSON, null, 2));
+
     setupBrowserify(false);
 });
 
