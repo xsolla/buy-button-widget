@@ -43,6 +43,36 @@
         var options = {
             lightbox: {
                 height: '650px'
+            },
+            access_data: {
+                "user": {
+                    "id": {
+                        "value": "john_carter",
+                        "hidden": true
+                    },
+                    "name": {
+                        "value": "John Carter"
+                    },
+                    "country": {
+                        "value": "US",
+                        "allow_modify": true
+                    }
+                },
+                "settings": {
+                    "project_id": 16878,
+                    "language": "en",
+                    "currency": "USD",
+                    "ui": {
+                        "size": "medium"
+                    }
+                },
+                "purchase": {
+                    "pin_codes": [
+                        {
+                            "digital_content": "demofarmfresh"
+                        }
+                    ]
+                }
             }
         };
         var s = document.createElement('script');
@@ -53,20 +83,17 @@
             var _ = XGameDeliveryWidget._;
             var fullWidget = XGameDeliveryWidget.create(_.extend({
                 template: 'full',
-                target_element: '#widget-example-full',
-                access_token: '7KM4WryqX0OvEYIU0xNIjXyP9KswjmeN'
+                target_element: '#widget-example-full'
             }, options));
 
             var compactWidget = XGameDeliveryWidget.create(_.extend({
                 template: 'compact',
-                target_element: '#widget-example-compact',
-                access_token: 'rUEmA7xwzmAD1orPO2aqFpIzogn2Rgb4'
+                target_element: '#widget-example-compact'
             }, options));
 
             var tinyWidget = XGameDeliveryWidget.create(_.extend({
                 template: 'tiny',
-                target_element: '#widget-example-tiny',
-                access_token: 'rUEmA7xwzmAD1orPO2aqFpIzogn2Rgb4'
+                target_element: '#widget-example-tiny'
             }, options));
 
             _.each([fullWidget, compactWidget, tinyWidget], function (widgetInstance) {

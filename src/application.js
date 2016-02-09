@@ -19,6 +19,7 @@ module.exports = (function () {
 
     var DEFAULT_CONFIG = {
         access_token: null,
+        access_data: null,
         template: 'tiny'
     };
 
@@ -30,8 +31,12 @@ module.exports = (function () {
     App.prototype.eventObject = $({});
 
     App.prototype.checkConfig = function () {
-        if (_.isEmpty(this.config.access_token)) {
-            this.throwError('No access token given');
+        if (_.isEmpty(this.config.access_token) && _.isEmpty(this.config.access_data)) {
+            this.throwError('No access token or access data given');
+        }
+
+        if (!_.isEmpty(this.config.access_data) && !_.isPlainObject(this.config.access_data)) {
+            this.throwError('Invalid access data format');
         }
 
         if (_.isEmpty(this.config.target_element)) {
@@ -68,9 +73,17 @@ module.exports = (function () {
 
         this.targetElement = $(options.target_element);
 
-        this.api = new Api({
-            access_token: options.access_token
-        }, {
+        var request = {
+            fail_locale: 'en'
+        };
+
+        if (options.access_token) {
+            request.access_token = options.access_token;
+        } else {
+            request.access_data = JSON.stringify(options.access_data);
+        }
+
+        this.api = new Api(request, {
             sandbox: options.sandbox
         });
 
@@ -87,6 +100,7 @@ module.exports = (function () {
 
         PaystationEmbedApp.init({
             access_token: this.config.access_token,
+            access_data: this.config.access_data,
             sandbox: this.config.sandbox,
             lightbox: this.config.lightbox,
             childWindow: this.config.childWindow
@@ -195,13 +209,19 @@ module.exports = (function () {
             Translate.init(data.translates || {});
 
             updateView();
-        }).fail(function (errors) {
+        }).fail(_.bind(function (errors) {
             props.data = {
                 errors: errors
             };
 
+            _.each(errors, function (error) {
+                if (error.message) {
+                    console.warn('XsollaGameDeliveryWidget', error.support_code, error.message);
+                }
+            });
+
             updateView();
-        });
+        }, this));
     };
 
     return App;
