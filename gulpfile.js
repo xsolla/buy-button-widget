@@ -96,7 +96,7 @@ gulp.task('build', function () {
     var version = require('./src/version.js');
 
     var readme = fs.readFileSync('./README.md', 'utf8');
-    readme = readme.replace(/(static\.xsolla\.com\/embed\/game-delivery\/)(\d+\.\d+\.[\w\-]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
+    readme = readme.replace(/(static\.xsolla\.com\/embed\/game-delivery\/)(\d+\.\d+\.[\w\-\.]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
     fs.writeFile('./README.md', readme);
 
     var packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));

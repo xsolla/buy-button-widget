@@ -16,7 +16,7 @@ Features:
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://static.xsolla.com/embed/game-delivery/1.0.0rc5/widget.min.js](https://static.xsolla.com/embed/game-delivery/1.0.0rc5/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js](https://static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -39,7 +39,7 @@ $ bower install xsolla-game-delivery-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//static.xsolla.com/embed/game-delivery/1.0.0rc5/widget.min.js";
+    s.src = "//static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XGameDeliveryWidget.create(options);
     }, false);
@@ -53,7 +53,7 @@ It is necessary to perform XGameDeliveryWidget.create() when the DOM is fully lo
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//static.xsolla.com/embed/game-delivery/1.0.0rc5/widget.min.js"></script>
+<script src="//static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js"></script>
 <script>
     var widgetInstance = XGameDeliveryWidget.create({
         access_token: 'abcdef1234567890abcdef1234567890',
