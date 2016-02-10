@@ -103,10 +103,6 @@ gulp.task('build', function () {
     packageJSON.version = version;
     fs.writeFile('./package.json', JSON.stringify(packageJSON, null, 2));
 
-    var bowerJSON = JSON.parse(fs.readFileSync('./bower.json', 'utf8'));
-    bowerJSON.version = version;
-    fs.writeFile('./bower.json', JSON.stringify(bowerJSON, null, 2));
-
     setupBrowserify(false);
 });
 
