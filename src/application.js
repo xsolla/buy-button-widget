@@ -189,7 +189,7 @@ module.exports = (function () {
 
         updateView();
 
-        this.api.request('pay2Play/init').done(function (data) {
+        this.api.request('pay2play/init').done(function (data) {
             var info = data.digital_content || {};
 
             props.data = {
