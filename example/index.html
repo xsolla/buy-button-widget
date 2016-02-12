@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>PayStation 3 Integration Example</title>
     <style>
-        .xgamedelivery-widget {
+        .xpay2Play-widget {
             box-shadow: 0 0 0 5px rgba(0, 0, 0, .1);
         }
     </style>
@@ -80,24 +80,24 @@
         s.async = true;
         s.src = "widget.js";
         s.addEventListener('load', function (e) {
-            var _ = XGameDeliveryWidget._;
-            var fullWidget = XGameDeliveryWidget.create(_.extend({
+            var _ = XPay2PlayWidget._;
+            var fullWidget = XPay2PlayWidget.create(_.extend({
                 template: 'full',
                 target_element: '#widget-example-full'
             }, options));
 
-            var compactWidget = XGameDeliveryWidget.create(_.extend({
+            var compactWidget = XPay2PlayWidget.create(_.extend({
                 template: 'compact',
                 target_element: '#widget-example-compact'
             }, options));
 
-            var tinyWidget = XGameDeliveryWidget.create(_.extend({
+            var tinyWidget = XPay2PlayWidget.create(_.extend({
                 template: 'tiny',
                 target_element: '#widget-example-tiny'
             }, options));
 
             _.each([fullWidget, compactWidget, tinyWidget], function (widgetInstance) {
-                widgetInstance.on(_.values(XGameDeliveryWidget.eventTypes).join(' '), function (event) {
+                widgetInstance.on(_.values(XPay2PlayWidget.eventTypes).join(' '), function (event) {
                     console.log(event.type);
                 });
             });

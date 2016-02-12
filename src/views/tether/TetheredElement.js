@@ -9,7 +9,7 @@ var Tether = require('tether');
 
 function TetheredElement(reactComponent, tetherOptions) {
     this.reactComponent = reactComponent;
-    this.classPrefix = 'xgamedelivery-widget-tether';
+    this.classPrefix = 'xpay2Play-widget-tether';
 
     this.domNode = document.createElement('div');
     this.domNode.style.position = 'absolute'; // needed for Tether

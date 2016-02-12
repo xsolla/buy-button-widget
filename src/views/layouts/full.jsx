@@ -10,7 +10,7 @@ var TetherTarget = require('../tether/TetherTarget.jsx');
 var FormattedCurrency = require('../formatted-currency.jsx');
 
 var FullView = React.createClass({
-    className: 'xgamedelivery-widget',
+    className: 'xpay2Play-widget',
     getInitialState: function() {
         return {
             isLoaded: false,

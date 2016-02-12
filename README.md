@@ -1,4 +1,4 @@
-# Xsolla Game Delivery Widget
+# Xsolla Pay2Play Widget
 
 ## Integration Guide
 
@@ -16,14 +16,14 @@ Features:
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js](https://static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://static.xsolla.com/embed/pay2play/1.0.0/widget.min.js](https://static.xsolla.com/embed/pay2play/1.0.0/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
 If you want to include the source code of widget as a part of your project, you can install the package using [Bower](http://bower.io/).
 
 ``` bash
-$ bower install xsolla-game-delivery-widget
+$ bower install xsolla-pay2play-widget
 ```
 
 ### Script Loading
@@ -39,23 +39,23 @@ $ bower install xsolla-game-delivery-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js";
+    s.src = "//static.xsolla.com/embed/pay2play/1.0.0/widget.min.js";
     s.addEventListener('load', function (e) {
-        var widgetInstance = XGameDeliveryWidget.create(options);
+        var widgetInstance = XPay2PlayWidget.create(options);
     }, false);
     var head = document.getElementsByTagName('head')[0];
     head.appendChild(s);
 </script>
 ```
 
-It is necessary to perform XGameDeliveryWidget.create() when the DOM is fully loaded. You can track the appropriate event, or add the script after the element, where widget should be rendered.
+It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded. You can track the appropriate event, or add the script after the element, where widget should be rendered.
 
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//static.xsolla.com/embed/game-delivery/1.0.0-rc.5/widget.min.js"></script>
+<script src="//static.xsolla.com/embed/pay2play/1.0.0/widget.min.js"></script>
 <script>
-    var widgetInstance = XGameDeliveryWidget.create({
+    var widgetInstance = XPay2PlayWidget.create({
         access_token: 'abcdef1234567890abcdef1234567890',
         target_element: '#widget-example-element'
     });
@@ -67,8 +67,8 @@ It is necessary to perform XGameDeliveryWidget.create() when the DOM is fully lo
 If your project uses CommonJS module format, you can access the widget by require()
 
 ``` javascript
-var XGameDeliveryWidget = require('PATH_TO_WIDGET/embed');
-var widgetInstance = XGameDeliveryWidget.create({
+var XPay2PlayWidget = require('PATH_TO_WIDGET/embed');
+var widgetInstance = XPay2PlayWidget.create({
     access_token: 'abcdef1234567890abcdef1234567890',
     target_element: '#widget-example-element'
 });
@@ -79,8 +79,8 @@ var widgetInstance = XGameDeliveryWidget.create({
 Also you can use widget with RequireJS loader
 
 ``` javascript
-define(['PATH_TO_WIDGET/embed'], function (XGameDeliveryWidget) {
-    var widgetInstance = XGameDeliveryWidget.create({
+define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
+    var widgetInstance = XPay2PlayWidget.create({
         access_token: 'abcdef1234567890abcdef1234567890',
         target_element: '#widget-example-element'
     });
@@ -118,4 +118,4 @@ The following parameters define the payment interface appearance, and coincide w
 
 You can refer to the widget object, using the following methods:
 
-* **XGameDeliveryWidget.create(options)** — Create the widget instance and render it on the page
+* **XPay2PlayWidget.create(options)** — Create the widget instance and render it on the page

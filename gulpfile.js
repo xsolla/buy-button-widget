@@ -22,7 +22,7 @@ function setupBrowserify(watch) {
         cache: {},
         packageCache: {},
         paths: ['./src', './bower_components/xsolla-paystation-widget/src'],
-        standalone: 'XGameDeliveryWidget',
+        standalone: 'XPay2PlayWidget',
         fullPaths: false,
         debug: true
     };
@@ -38,7 +38,7 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/tether/dist/js/tether.js', {expose: 'tether'});
     bundler.require('./bower_components/react-onclickoutside/index.js', {expose: 'react-onclickoutside'});
     bundler.require('./bower_components/isRetina.js/isRetina.js', {expose: 'is-retina-js'});
-    bundler.require('./src/main.js', {expose: 'xsolla-game-delivery-widget'});
+    bundler.require('./src/main.js', {expose: 'xsolla-pay2play-widget'});
 
     bundler.transform(sassify, {
         outputStyle: 'compressed',
@@ -96,7 +96,7 @@ gulp.task('build', function () {
     var version = require('./src/version.js');
 
     var readme = fs.readFileSync('./README.md', 'utf8');
-    readme = readme.replace(/(static\.xsolla\.com\/embed\/game-delivery\/)(\d+\.\d+\.[\w\-\.]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
+    readme = readme.replace(/(static\.xsolla\.com\/embed\/pay2play\/)(\d+\.\d+\.[\w\-\.]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
     fs.writeFile('./README.md', readme);
 
     var packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));

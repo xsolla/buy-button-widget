@@ -7,7 +7,7 @@ var TranslateMessage = require('../translate-message.jsx');
 var FormattedCurrency = require('../formatted-currency.jsx');
 
 var TinyView = React.createClass({
-    className: 'xgamedelivery-widget',
+    className: 'xpay2Play-widget',
     getInitialState: function() {
         return {
             isLoaded: false,

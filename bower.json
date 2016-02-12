@@ -1,9 +1,9 @@
 {
-  "name": "xsolla-game-delivery-widget",
+  "name": "xsolla-pay2play-widget",
   "authors": [
     "Andrey Salnikov <a.salnikov@xsolla.com>"
   ],
-  "description": "Game Delivery Widget",
+  "description": "Pay2Play Widget",
   "main": "dist/widget.js",
   "moduleType": [
     "node"

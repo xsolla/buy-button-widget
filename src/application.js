@@ -189,7 +189,7 @@ module.exports = (function () {
 
         updateView();
 
-        this.api.request('gamedelivery/init').done(function (data) {
+        this.api.request('pay2Play/init').done(function (data) {
             var info = data.digital_content || {};
 
             props.data = {
@@ -216,7 +216,7 @@ module.exports = (function () {
 
             _.each(errors, function (error) {
                 if (error.message) {
-                    console.warn('XsollaGameDeliveryWidget', error.support_code, error.message);
+                    console.warn('XsollaPay2PlayWidget', error.support_code, error.message);
                 }
             });
 
