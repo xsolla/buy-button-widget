@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 - 2016-02-15
+
+- [fix] Application URL
+
 ## 1.0.0 - 2016-02-12
 
 - [feature] Rendering with 'tiny', 'compact' and 'full' templates
