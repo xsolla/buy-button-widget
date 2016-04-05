@@ -9,8 +9,6 @@ var Translate = require('./translate');
 
 module.exports = (function () {
     function App() {
-        require('./styles/widget.scss');
-
         this.config = _.extend({}, DEFAULT_CONFIG);
         this.eventObject = $({});
         this.isInitiated = false;
@@ -20,6 +18,7 @@ module.exports = (function () {
     var DEFAULT_CONFIG = {
         access_token: null,
         access_data: null,
+        color: 'default',
         template: 'tiny'
     };
 
@@ -46,6 +45,10 @@ module.exports = (function () {
         if (!$(this.config.target_element).length) {
             this.throwError('Target element doesn\'t exist in the DOM');
         }
+
+        if (this.config.color !== 'dark' && this.config.color !== 'default') {
+            this.config.color = 'default';
+        }
     };
 
     App.prototype.checkApp = function () {
@@ -62,6 +65,14 @@ module.exports = (function () {
         this.eventObject.trigger.apply(this.eventObject, arguments);
     };
 
+    App.prototype.setUpTheme = function () {
+        if (this.config.color === 'dark') {
+            require('./styles/widget-dark.scss');
+        } else {
+            require('./styles/widget-default.scss');
+        }
+    };
+
     /**
      * Initialize widget with options
      * @param options
@@ -70,6 +81,7 @@ module.exports = (function () {
         this.isInitiated = true;
         this.config = _.extend({}, DEFAULT_CONFIG, options);
         this.checkConfig();
+        this.setUpTheme();
 
         this.targetElement = $(options.target_element);
 
@@ -178,7 +190,7 @@ module.exports = (function () {
 
         var props = {
             data: {},
-            onPaymentOpen: _.bind(function(params) {
+            onPaymentOpen: _.bind(function (params) {
                 this.open(params);
             }, this)
         };

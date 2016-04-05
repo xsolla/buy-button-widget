@@ -41,13 +41,14 @@
 
     <script>
         var options = {
+            //color: 'dark',
             lightbox: {
                 height: '650px'
             },
             access_data: {
                 "user": {
                     "id": {
-                        "value": "john_carter",
+                        "value": "johncarter",
                         "hidden": true
                     },
                     "name": {
@@ -67,11 +68,13 @@
                     }
                 },
                 "purchase": {
-                    "pin_codes": [
-                        {
-                            "digital_content": "demofarmfresh"
-                        }
-                    ]
+                    "pin_codes": {
+                        "codes": [
+                            {
+                                "digital_content": "demofarmfresh"
+                            }
+                        ]
+                    }
                 }
             }
         };

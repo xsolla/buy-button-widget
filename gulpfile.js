@@ -38,6 +38,7 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/tether/dist/js/tether.js', {expose: 'tether'});
     bundler.require('./bower_components/react-onclickoutside/index.js', {expose: 'react-onclickoutside'});
     bundler.require('./bower_components/isRetina.js/isRetina.js', {expose: 'is-retina-js'});
+    bundler.require('./bower_components/svg-injector/svg-injector.js', {expose: 'svg-injector'});
     bundler.require('./src/main.js', {expose: 'xsolla-pay2play-widget'});
 
     bundler.transform(sassify, {

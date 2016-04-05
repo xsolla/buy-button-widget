@@ -74,7 +74,7 @@ var TinyView = React.createClass({
         var errorMessage = this.state.errors && (
             <ErrorMessageView errors={this.state.errors} />
         );
-
+        
         return (
             <div className={this.className + ' ' + this.className + '__tiny'}>
                 {logo}

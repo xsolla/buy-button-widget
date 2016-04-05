@@ -151,10 +151,10 @@
   }
 }
 
-$themePrefix: "xpay2Play-widget-tether";
-$arrowSize: 8px;
-$backgroundColor: #ffffff;
-$color: #4a4a4a;
+$tether_theme-prefix: "xpay2Play-widget-tether";
+$tether_arrow-size: 8px;
+$tether_background-color: #ffffff;
+$tether_color: #4a4a4a;
 
-@include tether($themePrefix: $themePrefix);
-@include tether-theme-arrows($themePrefix: $themePrefix, $arrowSize: $arrowSize, $backgroundColor: $backgroundColor, $color: $color);
+@include tether($themePrefix: $tether_theme-prefix);
+@include tether-theme-arrows($themePrefix: $tether_theme-prefix, $arrowSize: $tether_arrow-size, $backgroundColor: $tether_background-color, $color: $tether_color);
