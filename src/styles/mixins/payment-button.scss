@@ -1,25 +1,25 @@
-@mixin payment-button () {
+@mixin payment-button() {
   @include no-select;
 
   -moz-appearance: none;
   -webkit-appearance: none;
 
   display: block;
-  background: #57c69a;
-  background: linear-gradient(#57c69a, #4ea180);
   cursor: pointer;
-  color: #ffffff;
   font-size: 18px;
   border: 0;
   padding: 0;
   text-align: left;
-
-  $payment-button-class: extractClassName(&);
+  color: $payment-button_color;
+  background: $payment-button_background-top-color;
+  background: linear-gradient($payment-button_background-top-color, $payment-button_background-bottom-color);
 
   &:hover {
-    background: #57cca0;
-    background: linear-gradient(#57cca0, #4daa89);
+    background: $payment-button_background-top-color__hover;
+    background: linear-gradient($payment-button_background-top-color__hover, $payment-button_background-bottom-color__hover);
   }
+
+  $payment-button-class: extractClassName(&);
 
   &-xsolla-logo {
     height: 100%;

@@ -222,6 +222,11 @@ var FullView = React.createClass({
                 {errorMessage}
             </div>
         );
+    },
+    componentDidUpdate: function () {
+        var $ = require('jquery');
+        var svgInjector = require('svg-injector');
+        svgInjector($('.xpay2Play-widget-game-drm-item > img').toArray(), {evalScripts: false});
     }
 });
 module.exports = FullView;
