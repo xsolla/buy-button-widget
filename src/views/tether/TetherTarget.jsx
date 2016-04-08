@@ -51,7 +51,7 @@ var TetherTarget = React.createClass({
                 this.tethered.show();
             }, this);
 
-            divProps.onMouseOut = _.bind(function () {
+            divProps.onMouseLeave = _.bind(function () {
                 this.tethered.hide();
             }, this);
         }

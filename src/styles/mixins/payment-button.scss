@@ -24,7 +24,7 @@
   &-xsolla-logo {
     height: 100%;
     width: 58px;
-    border-right: 2px solid rgba(0, 0, 0, .05);
+    border-right: 1px solid $payment-button-logo_border-color;
     text-align: center;
     background: rgba(0, 0, 0, .03);
     display: inline-block;
