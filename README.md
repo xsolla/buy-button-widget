@@ -92,6 +92,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 * **access_token** (required) — Access token
 * **sandbox** — Set **true** to test the payment process, sandbox-secure.xsolla.com will be used instead secure.xsolla.com
 * **template** — Type of widget, defining its appearance. Can be 'tiny', 'compact' or 'full'
+* **color** — Widget color theme, defining its appearance. Can be 'default' or 'dark'
 * **target_element** (required) — Element of the page, where the widget should be rendered (jQuery selector should be used, for example '#widget-example')
 
 The following parameters define the payment interface appearance, and coincide with [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/) parameters.
