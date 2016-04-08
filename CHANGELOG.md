@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2 - 2016-04-08
+
+- [feature] Rendering with 'default' and 'dark' color themes
+
 ## 1.0.1 - 2016-02-15
 
 - [fix] Application URL
