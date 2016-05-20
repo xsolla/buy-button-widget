@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 - 2016-05-20
+
+- [feature] Formatting currency
+
 ## 1.0.2 - 2016-04-08
 
 - [feature] Rendering with 'default' and 'dark' color themes
