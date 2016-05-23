@@ -22,12 +22,12 @@ var FormattedCurrencyView = React.createClass({
 
         switch (this.props.currency) {
             case null:
-                formattedAmount = formattedAmount.toFixed(2);
+                formattedAmount = formattedAmount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
                 template.push(formattedAmount);
                 break;
             case 'RUR':
             case 'RUB':
-                formattedAmount = formattedAmount.toFixed(2);
+                formattedAmount = formattedAmount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
                 template.push(formattedAmount);
                 template.push(rubleTemplate);
                 break;
@@ -35,7 +35,7 @@ var FormattedCurrencyView = React.createClass({
                 var uniqSymbol = !!currencyFormat[this.props.currency.toUpperCase()].uniqSymbol ? currencyFormat[this.props.currency.toUpperCase()].uniqSymbol : null;
 
                 if (uniqSymbol && !!uniqSymbol.grapheme && !!uniqSymbol.template && !uniqSymbol.rtl) {
-                    formattedAmount = formattedAmount.toFixed(currencyFormat[this.props.currency.toUpperCase()].fractionSize);
+                    formattedAmount = formattedAmount.toFixed(currencyFormat[this.props.currency.toUpperCase()].fractionSize).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
                     formattedCurrency = uniqSymbol.grapheme;
                     _.forEach(uniqSymbol.template, function(char) {
                         switch (char) {
