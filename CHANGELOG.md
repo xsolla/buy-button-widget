@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.3 - 2016-05-20
+## 1.0.3 - 2016-05-24
 
 - [feature] Formatting currency
 
