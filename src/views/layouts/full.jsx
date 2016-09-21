@@ -1,17 +1,17 @@
 var _ = require('lodash');
 var React = require('react');
 var checkRetina = require('is-retina-js');
-var XsollaLogoView = require('../xsolla-logo.jsx');
 var SpinnerView = require('../spinner.jsx');
 var ErrorMessageView = require('../error-message.jsx');
 var TranslateMessage = require('../translate-message.jsx');
 var gearSVG = require('../images/gear.svg');
 var TetherTarget = require('../tether/TetherTarget.jsx');
 var FormattedCurrency = require('../formatted-currency.jsx');
+var PaymentButton = require('../payment-button.jsx');
 
 var FullView = React.createClass({
     className: 'xpay2Play-widget',
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             isLoaded: false,
             logoUrl: null,
@@ -28,7 +28,7 @@ var FullView = React.createClass({
             errors: null
         };
     },
-    componentWillReceiveProps: function(nextProps) {
+    componentWillReceiveProps: function (nextProps) {
         var newState = {};
         var data = nextProps.data || {};
 
@@ -76,8 +76,9 @@ var FullView = React.createClass({
     },
     render: function () {
         var logo = this.state.logoUrl && (
-            <div className={this.className + '-game-logo'} style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
-        );
+                <div className={this.className + '-game-logo'}
+                     style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
+            );
 
         var drmList;
         var drm = this.state.drm || [];
@@ -96,7 +97,7 @@ var FullView = React.createClass({
                                   tetherOptions={drmTetherOptions}
                                   toggleOnMouse={true}
                                   key={item.code + '_' + key}>
-                        <img alt={item.name} src={item.image_src} />
+                        <img alt={item.name} src={item.image_src}/>
                     </TetherTarget>
                 );
             }, this)
@@ -109,7 +110,7 @@ var FullView = React.createClass({
                                   tetherOptions={drmTetherOptions}
                                   toggleOnMouse={true}
                                   key={item.sku + '_' + key}>
-                        <img alt={platformLabels} src={item.image_src} />
+                        <img alt={platformLabels} src={item.image_src}/>
                     </TetherTarget>
                 );
             }, this)
@@ -120,11 +121,11 @@ var FullView = React.createClass({
         );
 
         var price = (
-            <FormattedCurrency amount={this.state.amount.value} currency={this.state.amount.currency} />
+            <FormattedCurrency amount={this.state.amount.value} currency={this.state.amount.currency}/>
         );
         if (this.state.amount.hasDifferent) {
             price = (
-                <TranslateMessage message='payment_button_from_label' values={{amount: price}} />
+                <TranslateMessage message='payment_button_from_label' values={{amount: price}}/>
             );
         }
 
@@ -135,84 +136,74 @@ var FullView = React.createClass({
         };
 
         var gameInfo = this.state.isLoaded && !this.state.errors && (
-            <div className={this.className + '-game'}>
-                <div className={this.className + '-game-logo-column'}>
-                    {logo}
+                <div className={this.className + '-game'}>
+                    <div className={this.className + '-game-logo-column'}>
+                        {logo}
+                    </div>
+                    <div className={this.className + '-game-info-column'}>
+                        <div className={this.className + '-game-price'}>
+                            {price}
+                        </div>
+                        <div className={this.className + '-game-name'}>
+                            {this.state.name}
+                        </div>
+                        <div className={this.className + '-game-description'}>
+                            {this.state.description}
+                        </div>
+                        <div className={this.className + '-game-system-requirements'}>
+                            <i className={this.className + '-game-system-requirements-icon'}>
+                                {gearIcon}
+                            </i>
+                            <TetherTarget className={this.className + '-game-system-requirements-label'}
+                                          tethered={<pre>{this.state.systemRequirements}</pre>}
+                                          tetherOptions={systemRequirementsTetherOptions}
+                                          toggleOnClick={true}>
+                                <TranslateMessage message='system_requirements_label'/>
+                            </TetherTarget>
+                        </div>
+                        <div className={this.className + '-game-drm'}>
+                            {drmList}
+                        </div>
+                    </div>
                 </div>
-                <div className={this.className + '-game-info-column'}>
-                    <div className={this.className + '-game-price'}>
-                        {price}
-                    </div>
-                    <div className={this.className + '-game-name'}>
-                        {this.state.name}
-                    </div>
-                    <div className={this.className + '-game-description'}>
-                        {this.state.description}
-                    </div>
-                    <div className={this.className + '-game-system-requirements'}>
-                        <i className={this.className + '-game-system-requirements-icon'}>
-                            {gearIcon}
-                        </i>
-                        <TetherTarget className={this.className + '-game-system-requirements-label'}
-                                      tethered={<pre>{this.state.systemRequirements}</pre>}
-                                      tetherOptions={systemRequirementsTetherOptions}
-                                      toggleOnClick={true}>
-                            <TranslateMessage message='system_requirements_label'/>
-                        </TetherTarget>
-                    </div>
-                    <div className={this.className + '-game-drm'}>
-                        {drmList}
-                    </div>
-                </div>
-            </div>
-        );
+            );
 
         var isRetina = checkRetina();
         var paymentList = this.state.paymentList && (
-            <div className={this.className + '-payment-list'}>
-                <div className={this.className + '-payment-list-title'}>
-                    <TranslateMessage message='payment_list_title' />
+                <div className={this.className + '-payment-list'}>
+                    <div className={this.className + '-payment-list-title'}>
+                        <TranslateMessage message='payment_list_title'/>
+                    </div>
+                    {_.slice(this.state.paymentList, 0, 5).map(function (instance) {
+                        return (
+                            <a key={instance.id} className={this.className + '-payment-list-method'}
+                               onClick={this.props.onPaymentOpen.bind(this, {instance_id: instance.id})}>
+                                <div className={this.className + '-payment-list-method-image'}
+                                     style={{backgroundImage: 'url(' + (isRetina ? instance.image_2x_url : instance.image_url) + ')'}}></div>
+                            </a>
+                        );
+                    }, this)}
                 </div>
-                {_.slice(this.state.paymentList, 0, 5).map(function (instance) {
-                    return (
-                        <a key={instance.id} className={this.className + '-payment-list-method'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: instance.id})}>
-                            <div className={this.className + '-payment-list-method-image'} style={{backgroundImage: 'url(' + (isRetina ? instance.image_2x_url : instance.image_url) + ')'}}></div>
-                        </a>
-                    );
-                }, this)}
-            </div>
-        );
-
+            );
         var paymentButton = this.state.amount.value && (
-            <button className={this.className + '-payment-button'} onClick={this.props.onPaymentOpen.bind(this, {instance_id: null})}>
-                <div className={this.className + '-payment-button-xsolla-logo'}>
-                    <XsollaLogoView />
-                </div>
-                <div className={this.className + '-payment-button-methods'}>
-                    <div className={this.className + '-payment-button-methods-count'}>
-                        700+
-                    </div>
-                    <div className={this.className + '-payment-button-methods-label'}>
-                        <TranslateMessage message='payment_button_methods_label' />
-                    </div>
-                </div>
-            </button>
-        );
+                <PaymentButton baseClassName={this.className}
+                               onPaymentOpen={this.props.onPaymentOpen.bind(this, {instance_id: null})}/>
+            );
 
         var paymentInfo = this.state.isLoaded && !this.state.errors && (
-            <div className={this.className + '-payment'}>
-                {paymentList}
-                {paymentButton}
-            </div>
-        );
+                <div className={this.className + '-payment'}>
+                    {paymentList}
+                    {paymentButton}
+                </div>
+            );
 
         var spinner = !this.state.isLoaded && (
-            <SpinnerView />
-        );
+                <SpinnerView />
+            );
 
         var errorMessage = this.state.errors && (
-            <ErrorMessageView errors={this.state.errors} />
-        );
+                <ErrorMessageView errors={this.state.errors}/>
+            );
 
         return (
             <div className={this.className + ' ' + this.className + '__full'}>
