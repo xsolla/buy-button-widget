@@ -14,6 +14,9 @@ var CompactView = React.createClass({
             errors: null
         };
     },
+    onPaymentOpen: function (options) {
+        this.props.onPaymentOpen.call(this, options);
+    },
     componentWillReceiveProps: function (nextProps) {
         var newState = {};
         var data = nextProps.data || {};
@@ -57,7 +60,8 @@ var CompactView = React.createClass({
 
         var paymentButton = this.props.data.amount && this.props.data.amount.value && (
                 <PaymentButton amount={this.props.data.amount} baseClassName={this.className}
-                               onPaymentOpen={this.props.onPaymentOpen.bind(this, {instance_id: null})}/>
+                               tips={this.props.data.tips}
+                               onPaymentOpen={this.onPaymentOpen}/>
             );
 
         var spinner = !this.state.isLoaded && (

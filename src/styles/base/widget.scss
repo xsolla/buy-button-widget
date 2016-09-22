@@ -6,6 +6,7 @@ $widget-class: '.' + $widget-prefix;
 @import "../mixins/misc";
 @import "../mixins/game-logo";
 @import "../mixins/payment-button";
+@import "../mixins/tips-list";
 @import "../mixins/spinner";
 @import "../mixins/error-message";
 @import "../mixins/payment-method";
@@ -68,9 +69,19 @@ $widget-class: '.' + $widget-prefix;
     height: 48px;
     width: 100%;
 
+    #{$widget-class}-tips-list {
+      background-color: #fff;
+      height: 48px;
+      width: 100%;
+    }
+
     &:active {
       box-shadow: inset 0 3px 5px rgba(0, 0, 0, .15);
     }
+  }
+
+  #{$widget-class}-tips-list {
+    @include tips-list;
   }
 }
 

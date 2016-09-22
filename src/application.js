@@ -110,9 +110,15 @@ module.exports = (function () {
     App.prototype.open = function (params) {
         this.checkApp();
 
+        var access_data = {purchase: {tips: undefined}};
+
+        if (params.tips && params.tips.amount && params.tips.currency) {
+            access_data.purchase.tips = params.tips;
+        }
+
         PaystationEmbedApp.init({
             access_token: this.config.access_token,
-            access_data: this.config.access_data,
+            access_data: _.merge(access_data, this.config.access_data),
             sandbox: this.config.sandbox,
             lightbox: this.config.lightbox,
             childWindow: this.config.childWindow
@@ -210,6 +216,7 @@ module.exports = (function () {
                     currency: info.min_currency,
                     hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1 || _.uniq(_.pluck(info.drm, 'currency')).length > 1
                 },
+                tips: info.tips,
                 name: info.name,
                 description: info.description,
                 systemRequirements: info.system_requirements,

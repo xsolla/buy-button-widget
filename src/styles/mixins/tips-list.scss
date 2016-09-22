@@ -1,0 +1,49 @@
+@mixin tips-list() {
+  @include no-select;
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+
+  $tips-list-class: extractClassName(&);
+
+  &-item {
+    display: inline-block;
+    font-size: 19px;
+    width: 21%;
+    padding: 4px 0;
+    margin: 8px 2px;
+    text-align: center;
+    border-radius: 4px;
+    color: $tips-list_color;
+    cursor: pointer;
+
+    &:first-child {
+      margin-left: 8px;
+    }
+
+    &:last-child {
+      margin-right: 8px;
+    }
+
+    &-link {
+      vertical-align: middle;
+    }
+
+    &-icon {
+      margin-top: 2px;
+      fill: $tips-list-close_color;
+    }
+
+    &__amount:hover {
+      background-color: $tips-list_background-color__hover;
+    }
+
+    &__close:hover {
+      #{$tips-list-class}-item-icon {
+        fill: $tips-list-close_color__hover;
+      }
+    }
+  }
+}
