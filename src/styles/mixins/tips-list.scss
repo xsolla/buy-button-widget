@@ -37,6 +37,7 @@
     }
 
     &__amount:hover {
+      color: $tips-list_color__hover;
       background-color: $tips-list_background-color__hover;
     }
 
