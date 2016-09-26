@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 - 2016-09-26
+
+- [feature] Tips support for 'tiny' and 'compact' templates
+
 ## 1.0.3 - 2016-05-24
 
 - [feature] Formatting currency
