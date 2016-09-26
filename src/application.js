@@ -121,7 +121,8 @@ module.exports = (function () {
             access_data: _.merge(access_data, this.config.access_data),
             sandbox: this.config.sandbox,
             lightbox: this.config.lightbox,
-            childWindow: this.config.childWindow
+            childWindow: this.config.childWindow,
+            host: this.config.host
         });
 
         // Register events (forwarding)
