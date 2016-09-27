@@ -5,12 +5,15 @@ module.exports = (function () {
     function Api(data, options) {
         this.data = data || {};
         this.config = _.extend({
-            sandbox: false
+            sandbox: false,
+            host: 'secure.xsolla.com'
         }, options);
     }
 
-    var PAYSTATION_API_URL = 'https://secure.xsolla.com/paystation2/api/';
-    var SANDBOX_PAYSTATION_API_URL = 'https://sandbox-secure.xsolla.com/paystation2/api/';
+    var getPaystationApiUrl = function (sandbox, host) {
+        var SANDBOX_PAYSTATION_API_URL = 'https://sandbox-secure.xsolla.com/paystation2/api/';
+        return sandbox ? SANDBOX_PAYSTATION_API_URL : 'https://' + host + '/paystation2/api/';
+    };
 
     /**
      * Perform request to PayStation API
@@ -18,7 +21,9 @@ module.exports = (function () {
     Api.prototype.request = function (route, data) {
         var deferred = $.Deferred();
 
-        $.ajax((this.config.sandbox ? SANDBOX_PAYSTATION_API_URL : PAYSTATION_API_URL) + route, {
+        var apiUrl = getPaystationApiUrl(this.config.sandbox, this.config.host);
+
+        $.ajax(apiUrl + route, {
             cache: false,
             dataType: 'json',
             method: 'POST',

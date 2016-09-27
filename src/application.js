@@ -19,7 +19,8 @@ module.exports = (function () {
         access_token: null,
         access_data: null,
         color: 'default',
-        template: 'tiny'
+        template: 'tiny',
+        host: 'secure.xsolla.com'
     };
 
     App.eventTypes = _.extend({}, PaystationEmbedApp.eventTypes);
@@ -44,6 +45,10 @@ module.exports = (function () {
 
         if (!$(this.config.target_element).length) {
             this.throwError('Target element doesn\'t exist in the DOM');
+        }
+
+        if (_.isEmpty(this.config.host)) {
+            this.throwError('Invalid host');
         }
 
         if (this.config.color !== 'dark' && this.config.color !== 'default') {
@@ -96,7 +101,8 @@ module.exports = (function () {
         }
 
         this.api = new Api(request, {
-            sandbox: options.sandbox
+            sandbox: options.sandbox,
+            host: this.config.host
         });
 
         this.render();
