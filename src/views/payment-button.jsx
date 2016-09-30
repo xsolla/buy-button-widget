@@ -103,13 +103,13 @@ var PaymentButton = React.createClass({
             );
 
         return (
-            <button className={this.props.baseClassName + '-payment-button'}
+            <div className={this.props.baseClassName + '-payment-button'}
                     onClick={this.onBtnClick}>
                 {logo}
                 {paymentMethodsCaption}
                 {price}
                 {tipsList}
-            </button>
+            </div>
         );
     }
 });
