@@ -100,6 +100,7 @@
     background-image: linear-gradient(180deg, $tip-button_background-top-color, $tip-button_background-bottom-color);
     box-shadow: 0 1px 1px 0 $tip-button_shadow-color;
     vertical-align: top;
+    overflow: hidden;
 
     &:hover {
       background: $tip-button_background-top-color__hover;

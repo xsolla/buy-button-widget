@@ -34,7 +34,7 @@ var TipsList = React.createClass({
                                 <a>
                                     <FormattedCurrency amount={tip.amount}
                                                        currency={tip.currency}
-                                                       truncateIntegers={true}/>
+                                                       truncate={true}/>
                                 </a>
                             </li>
                         );

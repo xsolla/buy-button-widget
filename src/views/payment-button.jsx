@@ -67,7 +67,7 @@ var PaymentButton = React.createClass({
             selectedTips = this.props.tips[this.state.selectedTipIndex];
             tipButtonContent = (<span>+&nbsp;<FormattedCurrency amount={selectedTips.amount}
                                                                 currency={selectedTips.currency}
-                                                                truncateIntegers={true}/></span>
+                                                                truncate={true}/></span>
             );
         } else if (hasTips) {
             tipButtonContent = (<TranslateMessage message='add_tip'/>);

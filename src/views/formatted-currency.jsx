@@ -16,12 +16,13 @@ var FormattedCurrencyView = React.createClass({
         var rubleTemplate = '<span class="formatted-currency-ruble">' + rubleSVG + '</span>';
         var spaceTemplate = ' ';
 
-        var isAmountInteger = formattedAmount % 1 === 0;
-        var truncateIntegers = this.props.truncateIntegers;
+        var truncate = this.props.truncate;
 
         var fractionSize;
-        if (isAmountInteger && truncateIntegers) {
+        if (truncate && formattedAmount % 1 === 0) {
             fractionSize = 0;
+        } else if (truncate && formattedAmount * 10 % 1 === 0) {
+            fractionSize = 1;
         } else if (this.props.currency) {
             fractionSize = currencyFormat[this.props.currency.toUpperCase()].fractionSize;
         } else {
