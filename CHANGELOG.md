@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.4 - 2016-09-27
+## 1.0.4 - 2016-10-04
 
 - [feature] Tips support for 'tiny' and 'compact' templates
 - [feature] Added **host** parameter for custom PayStation hosts
