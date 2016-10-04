@@ -16,18 +16,30 @@ var FormattedCurrencyView = React.createClass({
         var rubleTemplate = '<span class="formatted-currency-ruble">' + rubleSVG + '</span>';
         var spaceTemplate = ' ';
 
-        var template = [];
+        var truncate = this.props.truncate;
 
+        var fractionSize;
+        if (truncate && formattedAmount % 1 === 0) {
+            fractionSize = 0;
+        } else if (truncate && formattedAmount * 10 % 1 === 0) {
+            fractionSize = 1;
+        } else if (this.props.currency) {
+            fractionSize = currencyFormat[this.props.currency.toUpperCase()].fractionSize;
+        } else {
+            fractionSize = 2;
+        }
+
+        var template = [];
         template.push(signAmount);
 
         switch (this.props.currency) {
             case null:
-                formattedAmount = formattedAmount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                formattedAmount = formattedAmount.toFixed(fractionSize).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
                 template.push(formattedAmount);
                 break;
             case 'RUR':
             case 'RUB':
-                formattedAmount = formattedAmount.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                formattedAmount = formattedAmount.toFixed(fractionSize).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
                 template.push(formattedAmount);
                 template.push(rubleTemplate);
                 break;
@@ -35,9 +47,9 @@ var FormattedCurrencyView = React.createClass({
                 var uniqSymbol = !!currencyFormat[this.props.currency.toUpperCase()].uniqSymbol ? currencyFormat[this.props.currency.toUpperCase()].uniqSymbol : null;
 
                 if (uniqSymbol && !!uniqSymbol.grapheme && !!uniqSymbol.template && !uniqSymbol.rtl) {
-                    formattedAmount = formattedAmount.toFixed(currencyFormat[this.props.currency.toUpperCase()].fractionSize).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                    formattedAmount = formattedAmount.toFixed(fractionSize).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
                     formattedCurrency = uniqSymbol.grapheme;
-                    _.forEach(uniqSymbol.template, function(char) {
+                    _.forEach(uniqSymbol.template, function (char) {
                         switch (char) {
                             case '$':
                                 template.push(formattedCurrency);

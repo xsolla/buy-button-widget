@@ -87,4 +87,25 @@
     margin-left: -60px;
     padding-left: 60px;
   }
+
+  &-tip-button {
+    display: inline-block;
+    color: $tip-button_color;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 0 4px;
+    margin-left: 8px;
+    cursor: pointer;
+    background: $tip-button_background-top-color;
+    background-image: linear-gradient(180deg, $tip-button_background-top-color, $tip-button_background-bottom-color);
+    box-shadow: 0 1px 1px 0 $tip-button_shadow-color;
+    vertical-align: top;
+    overflow: hidden;
+
+    &:hover {
+      background: $tip-button_background-top-color__hover;
+      background-image: linear-gradient(180deg, $tip-button_background-top-color__hover, $tip-button_background-bottom-color__hover);
+      color: $tip-button_color__hover;
+    }
+  }
 }

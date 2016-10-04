@@ -16,7 +16,7 @@ Features:
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://static.xsolla.com/embed/pay2play/1.0.3/widget.min.js](https://static.xsolla.com/embed/pay2play/1.0.3/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://static.xsolla.com/embed/pay2play/1.0.4/widget.min.js](https://static.xsolla.com/embed/pay2play/1.0.4/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -39,7 +39,7 @@ $ bower install xsolla-pay2play-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//static.xsolla.com/embed/pay2play/1.0.3/widget.min.js";
+    s.src = "//static.xsolla.com/embed/pay2play/1.0.4/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XPay2PlayWidget.create(options);
     }, false);
@@ -53,7 +53,7 @@ It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//static.xsolla.com/embed/pay2play/1.0.3/widget.min.js"></script>
+<script src="//static.xsolla.com/embed/pay2play/1.0.4/widget.min.js"></script>
 <script>
     var widgetInstance = XPay2PlayWidget.create({
         access_token: 'abcdef1234567890abcdef1234567890',
@@ -90,6 +90,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 ### Widget Options
 
 * **access_token** (required) — Access token
+* **host** - Host for performing requests. The default value is **secure.xsolla.com**
 * **sandbox** — Set **true** to test the payment process, sandbox-secure.xsolla.com will be used instead secure.xsolla.com
 * **template** — Type of widget, defining its appearance. Can be 'tiny', 'compact' or 'full'
 * **color** — Widget color theme, defining its appearance. Can be 'default' or 'dark'
@@ -108,8 +109,10 @@ The following parameters define the payment interface appearance, and coincide w
     * **closeByKeyboard** — Toggle if pressing of ESC key should close lightbox, default true
     * **contentBackground** — Background of the frame, default is '#ffffff'
     * **contentMargin** — margin around frame, default '10px',
-    * **spinner** — Type of animated loading spinner, can be 'xsolla', 'round' or 'none', default is the first one
+    * **spinner** — Type of animated loading spinner, can be 'xsolla', 'round', 'none' or 'custom', default is the first one
     * **spinnerColor** — Color of the spinner, not set by default
+    * **spinnerUrl** — URL of custom spinner, default is null
+    * **spinnerRotationPeriod** — Rotation period of custom spinner, default 0
 * **childWindow** — Options for child window that contains PayStation. Suitable for mobile version
     * **target** — The target option specifies where to open the Paystation window, can be '_blank', '_self', '_parent', default is '_blank'
 

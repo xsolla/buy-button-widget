@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4 - 2016-10-04
+
+- [feature] Tips support for 'tiny' and 'compact' templates
+- [feature] Added **host** parameter for custom PayStation hosts
+- [feature] Custom spinner
+
 ## 1.0.3 - 2016-05-24
 
 - [feature] Formatting currency

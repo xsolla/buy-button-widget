@@ -21,7 +21,7 @@ function setupBrowserify(watch) {
     var bundleOptions = {
         cache: {},
         packageCache: {},
-        paths: ['./src', './bower_components/xsolla-paystation-widget/src'],
+        paths: ['./src', './bower_components', './bower_components/xsolla-paystation-widget/src'],
         standalone: 'XPay2PlayWidget',
         fullPaths: false,
         debug: true
@@ -80,7 +80,7 @@ function setupBrowserify(watch) {
 
 function runBundle(bundler, watch) {
     return bundler.bundle()
-        // log errors if they happen
+    // log errors if they happen
         .on('error', gutil.log.bind(gutil, 'Browserify Error'))
         .pipe(source('widget.js'))
         .pipe(gulp.dest('./dist'))
