@@ -4,7 +4,7 @@
 
 Xsolla team created a script to simplify the integration of PayStation into your website. Please note: for the proper work of widget please make sure that you pass the 'access_token'. More information about getting 'access_token' parameter is available [here](http://developers.xsolla.com/api.html#token).
 
-[See Demo](http://livedemo.xsolla.com/pincodes/)
+[See Demo](https://livedemo.xsolla.com/pay2play/)
 
 Features:
 * Widget can be easily embed on your page, and will provide user the details about selling content, the list of available DRM and platforms, the choice of payment methods
