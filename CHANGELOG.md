@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0 - 2016-10-26
+
+- [feature] New design for widget 
+- [feature] Added **theme** parameter for custom color
+- [feature] Added common size widget, deleted 'full' version
+
 ## 1.0.4 - 2016-10-04
 
 - [feature] Tips support for 'tiny' and 'compact' templates
