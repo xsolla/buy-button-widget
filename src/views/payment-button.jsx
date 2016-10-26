@@ -42,13 +42,13 @@ var PaymentButton = React.createClass({
             );
 
         return (
-            <div className={this.props.baseClassName + '-payment-button ' +
+            <button className={this.props.baseClassName + '-payment-button ' +
             (this.props.isTipsListOpened ? this.props.baseClassName + '-payment-button__moved ' : '') +
             (this.props.paymentButtonColor ? this.props.baseClassName + '-payment-button__' + this.props.paymentButtonColor : '')}
                     onClick={this.onBtnClick}>
                 {logo}
                 {price}
-            </div>
+            </button>
         );
     }
 });

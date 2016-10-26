@@ -200,9 +200,6 @@ module.exports = (function () {
         var view;
 
         switch (this.config.template) {
-            case 'full':
-                view = require('./views/layouts/full.jsx');
-                break;
             case 'compact':
                 view = require('./views/layouts/compact.jsx');
                 break;
