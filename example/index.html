@@ -5,26 +5,29 @@
     <title>PayStation 3 Integration Example</title>
     <style>
         .xpay2Play-widget {
-           box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .55);
+            box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .55);
+            display: inline-block;
+            margin: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h3>The standard Lorem Ipsum passage, used since the 1500s</h3>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+
+    <div id="widget-example-green" >
     </div>
 
-    <div id="widget-example">
+    <div id="widget-example-blue">
     </div>
 
+    <div id="widget-example-red">
+    </div>
+
+    <div id="widget-example-gold">
+    </div>
 
     <script>
+
         var options = {
-            theme: {
-                foreground : 'blue',
-                background : 'light'
-            },
             lightbox: {
                 height: '650px'
             },
@@ -67,11 +70,42 @@
         s.src = "widget.js";
         s.addEventListener('load', function (e) {
             var _ = XPay2PlayWidget._;
-            var tinyWidget = XPay2PlayWidget.create(_.extend({
-                target_element: '#widget-example'
+
+            var greenWidget = XPay2PlayWidget.create(_.extend({
+                theme : {
+                    foreground: 'green',
+                    background: 'light'
+                },
+                target_element: '#widget-example-green'
             }, options));
 
-            _.each([tinyWidget], function (widgetInstance) {
+            var blueWidget = XPay2PlayWidget.create(_.extend({
+                theme : {
+                    foreground: 'blue',
+                    background: 'light'
+                },
+                target_element: '#widget-example-blue'
+            }, options));
+
+            var redWidget = XPay2PlayWidget.create(_.extend({
+                theme : {
+                    foreground: 'red',
+                    background: 'light'
+                },
+                target_element: '#widget-example-red'
+            }, options));
+
+
+            var goldWidget = XPay2PlayWidget.create(_.extend({
+                theme : {
+                    foreground: 'gold',
+                    background: 'light'
+                },
+                target_element: '#widget-example-gold'
+            }, options));
+
+
+            _.each([greenWidget, blueWidget, redWidget, goldWidget], function (widgetInstance) {
                 widgetInstance.on(_.values(XPay2PlayWidget.eventTypes).join(' '), function (event) {
                     console.log(event.type);
                 });
