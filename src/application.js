@@ -19,8 +19,8 @@ module.exports = (function () {
         access_token: null,
         access_data: null,
         theme: {
-            foreground : 'light',
-            background : 'blue'
+            foreground : 'blue',
+            background : 'light'
         },
         template: 'tiny',
         host: 'secure.xsolla.com'
