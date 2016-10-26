@@ -17,7 +17,7 @@ $widget-class: '.' + $widget-prefix;
 
   background: $widget_background-color;
   color: $widget_color;
-  border-radius: 5px;
+  border-radius: 6px;
   overflow: hidden;
   font-size: 18px;
   line-height: 1.3em;
@@ -125,21 +125,20 @@ $widget-class: '.' + $widget-prefix;
       display: inline-block;
     }
 
-  }
+    &-img {
+      color: $tip-button_color;
+      height: 20px;
+      vertical-align: middle;
+      text-align: center;
+      margin-right: 4px;
 
-  #{$widget-class}-tip-img {
-    color: $tip-button_color;
-    height: 18px;
-    display: inline-block;
-    vertical-align: middle;
-    text-align: center;
+      #{$widget-class}-tip-icon {
+        fill: $tip-button_color;
+      }
 
-    #{$widget-class}-tip-icon {
-      fill: $tip-button_color;
-    }
-
-    #{$widget-class}-thank-icon {
-      fill: #e96b6b;
+      #{$widget-class}-thank-icon {
+        fill: #e96b6b;
+      }
     }
   }
 
