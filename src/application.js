@@ -18,7 +18,10 @@ module.exports = (function () {
     var DEFAULT_CONFIG = {
         access_token: null,
         access_data: null,
-        color: 'default',
+        theme: {
+            foreground : 'light',
+            background : 'blue'
+        },
         template: 'tiny',
         host: 'secure.xsolla.com'
     };
@@ -51,8 +54,13 @@ module.exports = (function () {
             this.throwError('Invalid host');
         }
 
-        if (this.config.color !== 'dark' && this.config.color !== 'default') {
-            this.config.color = 'default';
+        if (this.config.theme.background !== 'dark' && this.config.theme.background !== 'light') {
+            this.config.theme.background = 'light';
+        }
+
+        var colorForeground = ["red", "green", "gold", "blue"];
+        if (colorForeground.indexOf(this.config.theme.foreground) === -1 ) {
+            this.config.theme.foreground = "blue";
         }
     };
 
@@ -71,10 +79,10 @@ module.exports = (function () {
     };
 
     App.prototype.setUpTheme = function () {
-        if (this.config.color === 'dark') {
+        if (this.config.theme.background === 'dark') {
             require('./styles/widget-dark.scss');
         } else {
-            require('./styles/widget-default.scss');
+            require('./styles/widget-light.scss');
         }
     };
 
@@ -205,7 +213,8 @@ module.exports = (function () {
             data: {},
             onPaymentOpen: _.bind(function (params) {
                 this.open(params);
-            }, this)
+            }, this),
+            paymentButtonColor : this.config.theme.foreground
         };
 
         var updateView = _.bind(function () {

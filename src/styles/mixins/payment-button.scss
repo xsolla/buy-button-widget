@@ -11,24 +11,51 @@
   padding: 0;
   text-align: left;
   color: $payment-button_color;
-  background: $payment-button_background-top-color;
-  background: linear-gradient($payment-button_background-top-color, $payment-button_background-bottom-color);
+  margin-bottom: 4px;
+
+  background-color: $payment-button_background-top-color;
+
+  &__green {
+    background-color: #00b86e;
+  }
+
+  &__red {
+    background-color: #d80c0c;
+  }
+
+  &__blue {
+    background-color: #0047ff;
+  }
+
+  &__gold {
+    background-color: #b87d00;
+  }
+
+  background-image: linear-gradient(180deg, hsla(0, 0%, 100%, .29), hsla(0, 0%, 100%, 0));
+  border-radius: 3px;
+
+  transition: background-color 0.2s ease 0s, transform 200ms;
+  transform: translateX(0px) translateY(0px) translateZ(0px);
+
+  &__moved {
+    transform: translateX(0px) translateY(-148px) translateZ(0px);
+  }
 
   &:hover {
-    background: $payment-button_background-top-color__hover;
-    background: linear-gradient($payment-button_background-top-color__hover, $payment-button_background-bottom-color__hover);
+      background-image: linear-gradient(180deg, hsla(0, 0%, 100%, .47), hsla(0, 0%, 100%, 0));
   }
 
   $payment-button-class: extractClassName(&);
 
   &-xsolla-logo {
     height: 100%;
-    width: 58px;
-    border-right: 1px solid $payment-button-logo_border-color;
+    width: 40px;
     text-align: center;
-    background: rgba(0, 0, 0, .03);
     display: inline-block;
     vertical-align: middle;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     svg {
       display: inline-block;
@@ -88,24 +115,4 @@
     padding-left: 60px;
   }
 
-  &-tip-button {
-    display: inline-block;
-    color: $tip-button_color;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 0 4px;
-    margin-left: 8px;
-    cursor: pointer;
-    background: $tip-button_background-top-color;
-    background-image: linear-gradient(180deg, $tip-button_background-top-color, $tip-button_background-bottom-color);
-    box-shadow: 0 1px 1px 0 $tip-button_shadow-color;
-    vertical-align: top;
-    overflow: hidden;
-
-    &:hover {
-      background: $tip-button_background-top-color__hover;
-      background-image: linear-gradient(180deg, $tip-button_background-top-color__hover, $tip-button_background-bottom-color__hover);
-      color: $tip-button_color__hover;
-    }
-  }
 }

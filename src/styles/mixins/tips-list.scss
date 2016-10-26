@@ -4,33 +4,40 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
   text-align: center;
+  font-size: 14px;
 
   $tips-list-class: extractClassName(&);
 
+  transition: background-color 0.2s ease 0s, transform 200ms;
+  transform: translateX(0px) translateY(0px) translateZ(0px);
+
+
+
   &-item {
-    display: inline-block;
-    font-size: 19px;
-    width: 21%;
-    padding: 4px 0;
-    margin: 8px 2px;
-    text-align: center;
-    border-radius: 4px;
-    color: $tips-list_color;
+    display: flex;
+    height: 34px;
+    width: 60px;
+    padding-right: 6px;
+    padding-left: 6px;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    overflow: hidden;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: $tips-list_color;
 
-    &:first-child {
-      margin-left: 8px;
-    }
-
-    &:last-child {
-      margin-right: 8px;
-    }
-
-    &-link {
-      vertical-align: middle;
-    }
+    transition: background-color 200ms ease, -webkit-transform 200ms ease;
+    transition: background-color 200ms ease, transform 200ms ease;
+    transition: background-color 200ms ease, transform 200ms ease, -webkit-transform 200ms ease;
 
     &-icon {
       margin-top: 2px;
@@ -38,7 +45,7 @@
     }
 
     &__amount:hover {
-      color: $tips-list_color__hover;
+      transform: scale(1.1);
       background-color: $tips-list_background-color__hover;
     }
 

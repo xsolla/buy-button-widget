@@ -9,7 +9,7 @@ var PaymentButton = React.createClass({
     getInitialState: function () {
         return {
             selectedTipIndex: -1,
-            isTipsListOpened: false
+            isTipsListOpened: false,
         };
     },
     onTipButtonClick: function (e) {
@@ -48,7 +48,6 @@ var PaymentButton = React.createClass({
     },
     render: function () {
         var hasAmount = this.props.amount && this.props.amount.value;
-        var hasTips = _.isArray(this.props.tips) && !_.isEmpty(this.props.tips);
 
         var paymentMethodsCaption = !hasAmount && (
                 <div className={this.props.baseClassName + '-payment-button-methods'}>
@@ -61,24 +60,6 @@ var PaymentButton = React.createClass({
                 </div>
             );
 
-        var tipButtonContent = false;
-        var selectedTips = null;
-        if (hasTips && this.state.selectedTipIndex >= 0 && this.state.selectedTipIndex < this.props.tips.length) {
-            selectedTips = this.props.tips[this.state.selectedTipIndex];
-            tipButtonContent = (<span>+&nbsp;<FormattedCurrency amount={selectedTips.amount}
-                                                                currency={selectedTips.currency}
-                                                                truncate={true}/></span>
-            );
-        } else if (hasTips) {
-            tipButtonContent = (<TranslateMessage message='add_tip'/>);
-        }
-
-        var tipButton = hasTips && !this.state.isTipsListOpened && (
-                <a className={this.props.baseClassName + '-payment-button-tip-button'}
-                   onClick={this.onTipButtonClick}>
-                    {tipButtonContent}
-                </a>
-            );
 
         var price = hasAmount && !this.state.isTipsListOpened && (
                 <div className={this.props.baseClassName + '-payment-button-amount'}>
@@ -88,7 +69,6 @@ var PaymentButton = React.createClass({
                             amount: <FormattedCurrency amount={this.props.amount.value}
                                                        currency={this.props.amount.currency}/>
                         }}/>
-                    {tipButton}
                 </div>
             );
 
@@ -98,17 +78,14 @@ var PaymentButton = React.createClass({
                 </div>
             );
 
-        var tipsList = this.state.isTipsListOpened && (
-                <TipsList baseClassName={this.props.baseClassName} tips={this.props.tips} onSelect={this.onTipSelect}/>
-            );
-
         return (
-            <div className={this.props.baseClassName + '-payment-button'}
+            <div className={this.props.baseClassName + '-payment-button ' +
+            (this.props.isTipsListOpened ? this.props.baseClassName + '-payment-button__moved ' : '') +
+            (this.props.paymentButtonColor ? this.props.baseClassName + '-payment-button__' + this.props.paymentButtonColor : '')}
                     onClick={this.onBtnClick}>
                 {logo}
                 {paymentMethodsCaption}
                 {price}
-                {tipsList}
             </div>
         );
     }

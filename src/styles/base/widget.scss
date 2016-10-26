@@ -31,6 +31,18 @@ $widget-class: '.' + $widget-prefix;
     @include error-message;
   }
 
+  &-button-block{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    padding-right: 4px;
+    padding-left: 4px;
+    flex-direction: column;
+    background-color: $widget_background-color;
+  }
+
   .formatted-currency {
     white-space: nowrap;
 
@@ -58,21 +70,121 @@ $widget-class: '.' + $widget-prefix;
 #{$widget-class}#{$widget-class}__compact {
   #{$widget-class}-game-logo {
     @include game-logo;
+  }
 
-    height: 132px;
+  #{$widget-class}-game-name {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    color: $game-name_color;
+    font-size: 14px;
+    max-width: 450px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 20px;
+    vertical-align: middle;
+    transition: opacity 200ms;
+    opacity: 0.5;
+
+    &__moved {
+      opacity: 0;
+    }
+
+  }
+
+  #{$widget-class}-tip {
+    cursor: pointer;
+    color: $tip-button_color;
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
     width: 100%;
+
+    transition: transform 200ms;
+    transform: translateX(0px) translateY(0px) translateZ(0px);
+
+    &__moved {
+      transform: translateX(0px) translateY(-144px) translateZ(0px);
+    }
+
+    &:hover {
+      color: $tip-button_color__hover;
+      opacity: 1;
+
+      #{$widget-class}-tip-icon {
+        fill: $tip-button_color__hover;
+      }
+    }
+
+    &-button, &-img {
+      display: inline-block;
+    }
+
+  }
+
+  #{$widget-class}-tip-img {
+    color: $tip-button_color;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+
+    #{$widget-class}-tip-icon {
+      fill: $tip-button_color;
+    }
+
+    #{$widget-class}-thank-icon {
+      fill: #e96b6b;
+    }
+  }
+
+  #{$widget-class}-tips-list-block {
+    display: flex;
+    opacity: 1;
+    transition: opacity 200ms;
+
+    &__hide {
+      display: none;
+      opacity: 0;
+      transition: opacity 200ms;
+    }
+  }
+
+
+  #{$widget-class}-thank {
+    cursor: pointer;
+    color: #6f6f6f;
+    font-size: 14px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    width: 100%;
+
+    &:hover {
+      color: $tip-button_color__hover;
+      opacity: 1;
+    }
+    &-text, &-img {
+      display: inline-block;
+    }
   }
 
   #{$widget-class}-payment-button {
     @include payment-button;
-
-    height: 48px;
+    height: 40px;
     width: 100%;
 
     #{$widget-class}-tips-list {
       background-color: #fff;
       height: 48px;
       width: 100%;
+      font-size: 14px;
     }
 
     &:active {
@@ -87,230 +199,7 @@ $widget-class: '.' + $widget-prefix;
 
 #{$widget-class}#{$widget-class}__tiny {
   width: 220px;
-  height: 180px;
+  height: 220px;
 }
 
-#{$widget-class}#{$widget-class}__compact {
-  width: 220px;
-  height: 216px;
 
-  #{$widget-class}-payment-list {
-    background: $payment-list_background-color;
-    height: 36px;
-    width: 100%;
-    padding: 7px;
-    text-align: center;
-
-    &-method {
-      @include payment-method;
-
-      height: 22px;
-      width: 36px;
-      margin: {
-        left: 2px;
-        right: 2px;
-      }
-      border-width: 1px;
-      border-style: solid;
-      border-color: $payment-method_border-color;
-      background: $payment-method_background-color;
-      border-radius: 2px;
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, .7);
-      padding: 1px;
-    }
-  }
-}
-
-#{$widget-class}#{$widget-class}__full {
-  width: 780px;
-  min-height: 156px;
-
-  #{$widget-class}-game {
-    min-height: 96px;
-    padding: {
-      top: 16px;
-      bottom: 16px;
-      left: 20px;
-      right: 20px;
-    }
-    background: $full-widget_background-color;
-
-    &-logo {
-      @include game-logo;
-
-      width: 100px;
-      height: 64px;
-      border-radius: 4px;
-    }
-
-    &-logo-column {
-      float: left;
-      width: 100px;
-      margin-right: -100px;
-    }
-
-    &-info-column {
-      margin-left: 120px;
-    }
-
-    &-price {
-      color: $game-price_color;
-      font-size: 20px;
-      line-height: 20px;
-      float: right;
-      opacity: .99; // sets the same color for svg and text
-    }
-
-    &-name {
-      color: $game-name_color;
-      font-size: 24px;
-      line-height: 20px;
-      margin-bottom: 5px;
-      max-width: 450px;
-    }
-
-    &-description {
-      color: $game-description_color;
-      font-size: 12px;
-      line-height: 16px;
-      margin-bottom: 5px;
-      max-width: 450px;
-    }
-
-    &-system-requirements {
-      color: $game-system-requirements_color;
-      font-size: 12px;
-      line-height: 18px;
-      text-transform: uppercase;
-      float: right;
-
-      &-icon, &-label {
-        display: inline-block;
-        vertical-align: middle;
-      }
-
-      &-icon {
-        margin-right: .3em;
-        width: 14px;
-        height: 14px;
-
-        svg {
-          path {
-            fill: $game-system-requirements_color;
-          }
-        }
-      }
-
-      &-label {
-        @include no-select;
-
-        text-decoration: underline;
-        cursor: pointer;
-      }
-    }
-
-    &-drm {
-      height: 16px;
-      font-size: 12px;
-      line-height: 16px;
-
-      &-item {
-        display: inline-block;
-        height: 16px;
-        margin-right: 7px;
-        vertical-align: top;
-
-        img, svg {
-          width: auto;
-          height: 16px;
-        }
-
-        svg {
-          .background {
-            fill: $drm-item_background-color;
-          }
-
-          .foreground {
-            fill: $drm-item_color;
-          }
-        }
-      }
-    }
-  }
-
-  #{$widget-class}-payment {
-    background: $widget-payment_background-color;
-    height: 60px;
-    box-shadow: inset 0 2px 2px rgba(0, 0, 0, .02);
-    padding: {
-      top: 11px;
-      bottom: 9px;
-      left: 20px;
-      right: 20px;
-    }
-
-    &-list {
-      display: inline-block;
-      vertical-align: top;
-
-      &-title, &-method {
-        margin-right: 12px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-
-      &-title {
-        width: 108px;
-        font-size: 12px;
-        line-height: 16px;
-        text-transform: uppercase;
-
-        &:after {
-          content: '';
-          display: inline-block;
-          vertical-align: middle;
-          width: 0;
-          height: 40px;
-        }
-      }
-
-      &-method {
-        @include payment-method;
-
-        width: 78px;
-        height: 40px;
-        padding: 4px;
-        margin-right: 12px;
-        cursor: pointer;
-        border-radius: 3px;
-        background: $payment-method_background-top-color;
-        background: linear-gradient($payment-method_background-top-color, $payment-method_background-bottom-color);
-        box-shadow: inset 0 0 1px rgba(0, 0, 0, .25), inset 0 -1px rgba(0, 0, 0, .25), inset 0 -2px 2px rgba(0, 0, 0, .1);
-
-        &:hover {
-          background: $payment-method_background-top-color__hover;
-          background: linear-gradient($payment-method_background-top-color__hover, $payment-method_background-bottom-color__hover);
-        }
-
-        &:active {
-          box-shadow: inset 0 0 1px rgba(0, 0, 0, .25), inset 0 2px 2px rgba(0, 0, 0, .15);
-        }
-      }
-    }
-
-    &-button {
-      @include payment-button;
-
-      display: inline-block;
-      vertical-align: top;
-      height: 40px;
-      width: 168px;
-      border-radius: 3px;
-      box-shadow: inset 0 0 2px rgba(0, 0, 0, .1), inset 0 -2px 1px rgba(0, 0, 0, .15);
-
-      &:active {
-        box-shadow: inset 0 0 2px rgba(0, 0, 0, .1), inset 0 2px 2px rgba(0, 0, 0, .15);
-      }
-    }
-  }
-}
