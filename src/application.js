@@ -148,14 +148,17 @@ module.exports = (function () {
 
         var openHandler = _.bind(function (event) {
             var instanceId = (params || {}).instance_id;
-            if (instanceId) {
+            var tips = (params || {}).tips;
+            if (instanceId || tips) {
                 PaystationEmbedApp.sendMessage('set-data', {
                     settings: {
-                        payment_method: instanceId
+                        payment_method: instanceId,
+                        tips: tips
                     }
                 });
             }
         }, this);
+
         PaystationEmbedApp.on('load', openHandler);
 
         // Unregister events

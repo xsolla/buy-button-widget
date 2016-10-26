@@ -100,6 +100,7 @@ var TinyView = React.createClass({
         var paymentButton = this.props.data.amount && this.props.data.amount.value && (
                 <PaymentButton amount={this.props.data.amount} baseClassName={this.className}
                                tips={this.props.data.tips}
+                               selectedTipIndex={this.state.selectedTipIndex}
                                isTipsListOpened={this.state.isTipsListOpened}
                                paymentButtonColor={this.state.paymentButtonColor}
                                onPaymentOpen={this.onPaymentOpen}/>
