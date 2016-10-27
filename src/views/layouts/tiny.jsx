@@ -165,9 +165,13 @@ var TinyView = React.createClass({
                 <ErrorMessageView errors={this.state.errors}/>
             );
 
+        var gradientBlock = (<div className={this.className + '-gradient-block'}>
+            </div>
+        );
         var blockButton = this.state.isLoaded && (<div className={this.className + '-button-block'}>
             {gameInfo}
             {paymentButton}
+            {gradientBlock}
             {tipButton}
             {tips}
         </div>);

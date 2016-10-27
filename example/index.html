@@ -57,7 +57,7 @@
                     "pin_codes": {
                         "codes": [
                             {
-                                "digital_content": "demofarmfresh"
+                                "digital_content": "addon-spice"
                             }
                         ]
                     }
@@ -73,24 +73,24 @@
 
             var greenWidget = XPay2PlayWidget.create(_.extend({
                 theme : {
-                    foreground: 'green',
-                    background: 'light'
+                    foreground: XPay2PlayWidget.foregroundTypes.GREEN,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-green'
             }, options));
 
             var blueWidget = XPay2PlayWidget.create(_.extend({
                 theme : {
-                    foreground: 'blue',
-                    background: 'light'
+                    foreground: XPay2PlayWidget.foregroundTypes.BLUE,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-blue'
             }, options));
 
             var redWidget = XPay2PlayWidget.create(_.extend({
                 theme : {
-                    foreground: 'red',
-                    background: 'light'
+                    foreground: XPay2PlayWidget.foregroundTypes.RED,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-red'
             }, options));
@@ -98,8 +98,8 @@
 
             var goldWidget = XPay2PlayWidget.create(_.extend({
                 theme : {
-                    foreground: 'gold',
-                    background: 'light'
+                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-gold'
             }, options));

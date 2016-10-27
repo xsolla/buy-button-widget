@@ -22,6 +22,7 @@ $widget-class: '.' + $widget-prefix;
   font-size: 18px;
   line-height: 1.3em;
   position: relative;
+  z-index: 1;
 
   .spinner {
     @include spinner;
@@ -31,7 +32,7 @@ $widget-class: '.' + $widget-prefix;
     @include error-message;
   }
 
-  &-button-block{
+  &-button-block {
     position: absolute;
     left: 0px;
     right: 0px;
@@ -41,6 +42,15 @@ $widget-class: '.' + $widget-prefix;
     padding-left: 4px;
     flex-direction: column;
     background-color: $widget_background-color;
+  }
+
+  &-gradient-block {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 130px;
+    margin-top: -30px;
+    background-image: $gradient-block;
   }
 
   .formatted-currency {
@@ -87,7 +97,7 @@ $widget-class: '.' + $widget-prefix;
     line-height: 20px;
     vertical-align: middle;
     transition: opacity 200ms;
-    opacity: 0.5;
+    opacity: 1;
 
     &__moved {
       opacity: 0;
@@ -153,7 +163,6 @@ $widget-class: '.' + $widget-prefix;
       transition: opacity 200ms;
     }
   }
-
 
   #{$widget-class}-thank {
     cursor: pointer;

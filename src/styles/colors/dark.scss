@@ -1,5 +1,4 @@
-$widget_background-color: #292929;
-$full-widget_background-color: #292929;
+$widget_background-color: #000;
 $widget_color: #9b9b9b;
 
 $game-name-color: #ffffff;
@@ -18,3 +17,5 @@ $tips-list_color__hover: #ffffff;
 $tips-list_background-color__hover: #545454;
 $tips-list-close_color: #6f6f6f;
 $tips-list-close_color__hover: #525252;
+
+$gradient-block: linear-gradient(180deg, transparent, #000 25%);

@@ -26,6 +26,18 @@ module.exports = (function () {
         host: 'secure.xsolla.com'
     };
 
+    App.foregroundTypes = {
+        BLUE: 'blue',
+        RED: 'red',
+        GOLD: 'gold',
+        GREEN: 'green'
+    }
+
+    App.backgroundTypes = {
+        LIGHT: 'light',
+        DARK: 'dark'
+    }
+
     App.eventTypes = _.extend({}, PaystationEmbedApp.eventTypes);
 
     /** Private Members **/
@@ -54,14 +66,10 @@ module.exports = (function () {
             this.throwError('Invalid host');
         }
 
-        if (this.config.theme.background !== 'dark' && this.config.theme.background !== 'light') {
-            this.config.theme.background = 'light';
+        if (this.config.theme.background !== App.backgroundTypes.LIGHT && this.config.theme.background !== App.backgroundTypes.DARK) {
+            this.config.theme.background = App.backgroundTypes.LIGHT;
         }
 
-        var colorForeground = ["red", "green", "gold", "blue"];
-        if (colorForeground.indexOf(this.config.theme.foreground) === -1 ) {
-            this.config.theme.foreground = "blue";
-        }
     };
 
     App.prototype.checkApp = function () {
