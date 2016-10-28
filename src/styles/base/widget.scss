@@ -103,7 +103,6 @@ $widget-class: '.' + $widget-prefix;
     &__moved {
       opacity: 0;
     }
-
   }
 
   #{$widget-class}-tip {
@@ -121,35 +120,33 @@ $widget-class: '.' + $widget-prefix;
     transform: translateX(0px) translateY(0px) translateZ(0px);
 
     &:hover {
-      color: $tip-button_color__hover;
-      opacity: 1;
-
-      #{$widget-class}-tip-icon {
-        fill: $tip-button_color__hover;
-      }
+      opacity: 0.65;
     }
 
     &__moved {
-      cursor: default;
       transform: translateX(0px) translateY(-144px) translateZ(0px);
-      &:hover {
-        color: $tip-button_color;
-        opacity: 1;
-
-        #{$widget-class}-tip-icon {
-          fill: $tip-button_color;
-        }
-      }
     }
 
+    &__disable {
+      cursor: default;
+      &:hover {
+        opacity: 1;
+      }
+    }
 
     &-button, &-img {
       display: inline-block;
     }
 
+    &-plus-icon {
+      color: $tip-button_color;
+      margin-bottom: 2px;
+      vertical-align: middle;
+    }
+
     &-img {
       color: $tip-button_color;
-      height: 20px;
+      height: 22px;
       vertical-align: middle;
       text-align: center;
       margin-right: 3px;
