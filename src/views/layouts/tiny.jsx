@@ -80,7 +80,7 @@ var TinyView = React.createClass({
                         selectedTipIndex: index
                     }
                 )
-            }.bind(this), 500);
+            }.bind(this), 1000);
         } else {
             this.setState({
                 isTipsListOpened: false,
@@ -117,7 +117,8 @@ var TinyView = React.createClass({
         if (this.state.selectedTipIndex >= 0 && this.state.selectedTipIndex < this.props.data.tips.length) {
             selectedTips = this.props.data.tips[this.state.selectedTipIndex];
             svgContent = false;
-            tipButtonContent = (<span>+&nbsp;<FormattedCurrency amount={selectedTips.amount}
+
+            tipButtonContent = (<span>+&thinsp;<FormattedCurrency amount={selectedTips.amount}
                                                                 currency={selectedTips.currency}
                                                                 truncate={true}/></span>
             );

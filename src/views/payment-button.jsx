@@ -7,10 +7,6 @@ var TipsList = require('./tips-list.jsx');
 
 var PaymentButton = React.createClass({
     onBtnClick: function (e) {
-        if (this.props.isTipsListOpened) {
-            return;
-        }
-
         var options = {
             instance_id: null,
             tips: null

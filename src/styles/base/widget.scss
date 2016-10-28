@@ -49,7 +49,7 @@ $widget-class: '.' + $widget-prefix;
     left: 0px;
     right: 0px;
     height: 130px;
-    margin-top: -30px;
+    top: -30px;
     background-image: $gradient-block;
   }
 
@@ -88,6 +88,7 @@ $widget-class: '.' + $widget-prefix;
     display: block;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 4px;
     text-align: center;
     color: $game-name_color;
     font-size: 14px;
@@ -118,10 +119,6 @@ $widget-class: '.' + $widget-prefix;
     transition: transform 200ms;
     transform: translateX(0px) translateY(0px) translateZ(0px);
 
-    &__moved {
-      transform: translateX(0px) translateY(-144px) translateZ(0px);
-    }
-
     &:hover {
       color: $tip-button_color__hover;
       opacity: 1;
@@ -130,6 +127,20 @@ $widget-class: '.' + $widget-prefix;
         fill: $tip-button_color__hover;
       }
     }
+
+    &__moved {
+      cursor: none;
+      transform: translateX(0px) translateY(-144px) translateZ(0px);
+      &:hover {
+        color: $tip-button_color;
+        opacity: 1;
+
+        #{$widget-class}-tip-icon {
+          fill: $tip-button_color;
+        }
+      }
+    }
+
 
     &-button, &-img {
       display: inline-block;
@@ -143,10 +154,12 @@ $widget-class: '.' + $widget-prefix;
       margin-right: 3px;
 
       #{$widget-class}-tip-icon {
+        padding-bottom: 1px;
         fill: $tip-button_color;
       }
 
       #{$widget-class}-thank-icon {
+        padding-bottom: 1px;
         fill: #e96b6b;
       }
     }
