@@ -34,9 +34,9 @@ $widget-class: '.' + $widget-prefix;
 
   &-button-block {
     position: absolute;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     padding-right: 4px;
     padding-left: 4px;
@@ -46,8 +46,8 @@ $widget-class: '.' + $widget-prefix;
 
   &-gradient-block {
     position: absolute;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     height: 130px;
     top: -30px;
     background-image: $gradient-block;
@@ -89,7 +89,6 @@ $widget-class: '.' + $widget-prefix;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 4px;
-    text-align: center;
     color: $game-name_color;
     font-size: 14px;
     max-width: 450px;
@@ -105,8 +104,13 @@ $widget-class: '.' + $widget-prefix;
     }
   }
 
+  #{$widget-class}-plus-icon {
+    font-size: 110%;
+    position: relative;
+    top: -0.05em;
+  }
+
   #{$widget-class}-tip {
-    cursor: pointer;
     color: $tip-button_color;
     font-size: 12px;
     display: inline-block;
@@ -174,7 +178,6 @@ $widget-class: '.' + $widget-prefix;
   }
 
   #{$widget-class}-thank {
-    cursor: pointer;
     color: #6f6f6f;
     font-size: 14px;
     display: inline-block;

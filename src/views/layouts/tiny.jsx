@@ -118,9 +118,11 @@ var TinyView = React.createClass({
             selectedTips = this.props.data.tips[this.state.selectedTipIndex];
             svgContent = false;
 
-            tipButtonContent = (<span>+&thinsp;<FormattedCurrency amount={selectedTips.amount}
-                                                                currency={selectedTips.currency}
-                                                                truncate={true}/></span>
+            tipButtonContent = (<span><span className={this.className + '-plus-icon'} >+</span>&thinsp;
+                    <FormattedCurrency amount={selectedTips.amount}
+                                        currency={selectedTips.currency}
+                                        truncate={true}/>
+                                </span>
             );
             this.state.isThankShow = false;
         } else {
