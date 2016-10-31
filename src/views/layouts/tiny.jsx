@@ -17,7 +17,7 @@ var TinyView = React.createClass({
             selectedTipIndex: -1,
             isTipsListOpened: false,
             isThankShow: false,
-            paymentButtonColor : null,
+            paymentButtonColor: null,
         };
     },
 
@@ -31,7 +31,9 @@ var TinyView = React.createClass({
             e.preventDefault();
         }
 
-        this.setState({isTipsListOpened: true});
+        if (!this.state.isThankShow) {
+            this.setState({isTipsListOpened: true});
+        }
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -107,7 +109,8 @@ var TinyView = React.createClass({
             );
 
         var tips = this.props.data.tips && (
-                <TipsList baseClassName={this.className} tips={this.props.data.tips} onSelect={this.onTipSelect} isTipsListOpened = {this.state.isTipsListOpened}/>
+                <TipsList baseClassName={this.className} tips={this.props.data.tips} onSelect={this.onTipSelect}
+                          isTipsListOpened={this.state.isTipsListOpened}/>
             );
 
         var tipButtonContent = false;
@@ -118,10 +121,10 @@ var TinyView = React.createClass({
             selectedTips = this.props.data.tips[this.state.selectedTipIndex];
             svgContent = false;
 
-            tipButtonContent = (<span><span className={this.className + '-plus-icon'} >+</span>&thinsp;
+            tipButtonContent = (<span><span className={this.className + '-plus-icon'}>+</span>&thinsp;
                     <FormattedCurrency amount={selectedTips.amount}
-                                        currency={selectedTips.currency}
-                                        truncate={true}/>
+                                       currency={selectedTips.currency}
+                                       truncate={true}/>
                                 </span>
             );
             this.state.isThankShow = false;
@@ -150,7 +153,7 @@ var TinyView = React.createClass({
         var tipButton = this.props.data.tips && (<div className={this.className + '-tip ' +
             (this.state.isTipsListOpened ? this.className + '-tip__moved ' : '') +
             ((this.state.isThankShow || this.state.isTipsListOpened) ? this.className + '-tip__disable' : '' )
-        }>
+            }><div className={this.className + '-tip-txt'}>
                 <div className={this.className + '-tip-img'}>
                     {svgContent}
                 </div>
@@ -158,9 +161,11 @@ var TinyView = React.createClass({
                      onClick={this.onTipButtonClick}>
                     {tipButtonContent}
                 </div>
+            </div>
             </div>);
 
-        var gameInfo = <div className={this.className + '-game-name ' + (this.state.isTipsListOpened ? this.className + '-game-name__moved' : '')}>
+        var gameInfo = <div
+            className={this.className + '-game-name ' + (this.state.isTipsListOpened ? this.className + '-game-name__moved' : '')}>
             {this.state.name}
         </div>;
 
@@ -176,12 +181,12 @@ var TinyView = React.createClass({
             </div>
         );
         var blockButton = this.state.isLoaded && (<div className={this.className + '-button-block'}>
-            {gameInfo}
-            {paymentButton}
-            {gradientBlock}
-            {tipButton}
-            {tips}
-        </div>);
+                {gameInfo}
+                {paymentButton}
+                {gradientBlock}
+                {tipButton}
+                {tips}
+            </div>);
 
         return (
             <div className={this.className + ' ' + this.className + '__tiny'}>

@@ -40,6 +40,7 @@ $widget-class: '.' + $widget-prefix;
     display: flex;
     padding-right: 4px;
     padding-left: 4px;
+    padding-bottom: 4px;
     flex-direction: column;
     background-color: $widget_background-color;
   }
@@ -112,13 +113,15 @@ $widget-class: '.' + $widget-prefix;
 
   #{$widget-class}-tip {
     color: $tip-button_color;
-    font-size: 12px;
-    display: inline-block;
-    text-align: center;
-    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    display: flex;
     overflow: hidden;
-    width: 100%;
     height: 26px;
+    justify-content: center;
+    align-self: center;
+    font-size: 12px;
+    cursor: pointer;
 
     transition: transform 200ms;
     transform: translateX(0px) translateY(0px) translateZ(0px);
@@ -138,6 +141,13 @@ $widget-class: '.' + $widget-prefix;
       }
     }
 
+    &-txt {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 20px;
+    }
+
     &-button, &-img {
       display: inline-block;
     }
@@ -150,7 +160,7 @@ $widget-class: '.' + $widget-prefix;
 
     &-img {
       color: $tip-button_color;
-      height: 22px;
+      height: 16px;
       vertical-align: middle;
       text-align: center;
       margin-right: 3px;
