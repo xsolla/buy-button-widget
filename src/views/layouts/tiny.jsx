@@ -79,10 +79,12 @@ var TinyView = React.createClass({
             setTimeout(function () {
                 this.setState({
                         isTipsListOpened: false,
-                        selectedTipIndex: index
+                        selectedTipIndex: index,
+                        isThankShow: false
                     }
-                )
+            )
             }.bind(this), 1000);
+
         } else {
             this.setState({
                 isTipsListOpened: false,
@@ -104,6 +106,7 @@ var TinyView = React.createClass({
                                tips={this.props.data.tips}
                                selectedTipIndex={this.state.selectedTipIndex}
                                isTipsListOpened={this.state.isTipsListOpened}
+                               isThankShow={this.state.isThankShow}
                                paymentButtonColor={this.state.paymentButtonColor}
                                onPaymentOpen={this.onPaymentOpen}/>
             );

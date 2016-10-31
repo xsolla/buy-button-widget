@@ -16,7 +16,10 @@ var PaymentButton = React.createClass({
             options.tips = this.props.tips[this.props.selectedTipIndex];
         }
 
-        this.props.onPaymentOpen.call(this, options, e);
+        if (!this.props.isThankShow) {
+            this.props.onPaymentOpen.call(this, options, e);
+        }
+
     },
     render: function () {
         var hasAmount = this.props.amount && this.props.amount.value;
@@ -33,9 +36,9 @@ var PaymentButton = React.createClass({
             );
 
         var logo = (<div className={this.props.baseClassName + '-payment-button-xsolla-logo'}>
-                    <XsollaLogoView />
-                </div>
-            );
+                <XsollaLogoView />
+            </div>
+        );
 
         return (
             <button className={this.props.baseClassName + '-payment-button ' +

@@ -15,31 +15,37 @@
   transition: background-color 0.1s ease 0s, transform 200ms;
   transform: translateX(0px) translateY(0px) translateZ(0px);
 
-
   &-item {
-    display: flex;
-    height: 36px;
-    width: 60px;
-    padding-right: 6px;
-    padding-left: 6px;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
     text-align: center;
+    display: flex;
+    justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    color: $tips-list_color;
+    cursor: pointer;
 
-    transition: background-color 200ms ease, -webkit-transform 200ms ease;
-    transition: background-color 200ms ease, transform 200ms ease;
-    transition: background-color 200ms ease, transform 200ms ease, -webkit-transform 200ms ease;
+    a {
+      padding-right: 6px;
+      padding-left: 6px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      min-width: 60px;
+      align-items: center;
+      color: $tips-list_color;
+      transition: background-color 200ms ease, -webkit-transform 200ms ease;
+      transition: background-color 200ms ease, transform 200ms ease;
+      transition: background-color 200ms ease, transform 200ms ease, -webkit-transform 200ms ease;
+    }
 
     &-icon {
       margin-top: 2px;
       fill: $tips-list-close_color;
+      height: 30px;
+      vertical-align: middle;
     }
 
-    &__amount:hover {
+    &__amount a:hover {
       transform: scale(1.1);
       background-color: $tips-list_background-color__hover;
     }
