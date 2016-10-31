@@ -16,7 +16,7 @@ $widget-class: '.' + $widget-prefix;
   @include normalize;
 
   background: $widget_background-color;
-  color: $widget_color;
+
   border-radius: 6px;
   overflow: hidden;
   font-size: 18px;
@@ -183,7 +183,6 @@ $widget-class: '.' + $widget-prefix;
     &__hide {
       display: none;
       opacity: 0;
-      transition: opacity 200ms;
     }
   }
 
@@ -196,10 +195,6 @@ $widget-class: '.' + $widget-prefix;
     overflow: hidden;
     width: 100%;
 
-    &:hover {
-      color: $tip-button_color__hover;
-      opacity: 1;
-    }
     &-text, &-img {
       display: inline-block;
     }
