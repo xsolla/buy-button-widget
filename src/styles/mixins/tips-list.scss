@@ -2,34 +2,29 @@
   @include no-select;
 
   list-style-type: none;
-  padding: 0;
-  margin: 0;
-
   position: absolute;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 2;
   text-align: center;
   font-size: 14px;
 
   $tips-list-class: extractClassName(&);
 
-  transition: background-color 0.2s ease 0s, transform 200ms;
+  transition: background-color 0.1s ease 0s, transform 200ms;
   transform: translateX(0px) translateY(0px) translateZ(0px);
-
 
 
   &-item {
     display: flex;
-    height: 34px;
+    height: 36px;
     width: 60px;
     padding-right: 6px;
     padding-left: 6px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    align-items: center;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -47,6 +42,11 @@
     &__amount:hover {
       transform: scale(1.1);
       background-color: $tips-list_background-color__hover;
+    }
+
+    &__close {
+      height: 30px;
+      width: 40px;
     }
 
     &__close:hover {
