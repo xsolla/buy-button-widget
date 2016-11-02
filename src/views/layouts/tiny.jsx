@@ -120,7 +120,7 @@ var TinyView = React.createClass({
         var selectedTips = null;
         var svgContent = false;
 
-        if (this.state.selectedTipIndex >= 0 && this.state.selectedTipIndex < this.props.data.tips.length) {
+        if (this.state.selectedTipIndex >= 0 && this.state.selectedTipIndex < this.props.data.tips.length && !this.state.isTipsListOpened) {
             selectedTips = this.props.data.tips[this.state.selectedTipIndex];
             svgContent = false;
 
