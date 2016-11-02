@@ -67,40 +67,16 @@
     }
   }
 
-  &-amount,
-  &-methods {
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
+  &-amount {
+    position: absolute;
+    left: 40px;
+    top: 0px;
+    right: 2px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-  }
-
-  &-methods {
-    white-space: nowrap;
-    text-align: left;
-
-    &-count,
-    &-label {
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    &-count {
-      font-size: 20px;
-      line-height: 24px;
-      width: 55px;
-      text-align: center;
-    }
-
-    &-label {
-      font-size: 10px;
-      line-height: 12px;
-      text-transform: uppercase;
-      width: 100%;
-      margin-left: -60px;
-      padding-left: 60px;
-      white-space: normal;
-    }
   }
 
   &:after {
@@ -109,12 +85,6 @@
     vertical-align: middle;
     width: 0;
     height: 100%;
-  }
-
-  &-xsolla-logo + #{$payment-button-class}-amount,
-  &-xsolla-logo + #{$payment-button-class}-methods {
-    margin-left: -60px;
-    padding-left: 60px;
   }
 
 }
