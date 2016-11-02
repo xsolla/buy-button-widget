@@ -15,7 +15,13 @@ $widget-class: '.' + $widget-prefix;
 #{$widget-class} {
   @include normalize;
 
-  background: $widget_background-color;
+  &__light {
+    background: #ffffff;
+  }
+
+  &__dark {
+    background: #000;
+  }
 
   border-radius: 6px;
   overflow: hidden;
@@ -42,7 +48,15 @@ $widget-class: '.' + $widget-prefix;
     padding-left: 4px;
     padding-bottom: 4px;
     flex-direction: column;
-    background-color: $widget_background-color;
+
+    &__light {
+      background-color: #ffffff;
+    }
+
+    &__dark {
+      background-color: #000;
+    }
+
   }
 
   &-gradient-block {
@@ -51,7 +65,14 @@ $widget-class: '.' + $widget-prefix;
     right: 0;
     height: 130px;
     top: -30px;
-    background-image: $gradient-block;
+
+    &__light {
+      background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 22%);
+    }
+
+    &__dark {
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 25%);
+    }
   }
 
   .formatted-currency {
@@ -90,7 +111,7 @@ $widget-class: '.' + $widget-prefix;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 4px;
-    color: $game-name_color;
+
     font-size: 14px;
     max-width: 450px;
     text-align: center;
@@ -99,6 +120,14 @@ $widget-class: '.' + $widget-prefix;
     vertical-align: middle;
     transition: opacity 200ms;
     opacity: 1;
+
+    &__light {
+      color: #4a4a4a;
+    }
+
+    &__dark {
+      color: #ffffff;
+    }
 
     &__moved {
       opacity: 0;
@@ -112,7 +141,6 @@ $widget-class: '.' + $widget-prefix;
   }
 
   #{$widget-class}-tip {
-    color: $tip-button_color;
     position: relative;
     z-index: 1;
     display: flex;
@@ -125,6 +153,14 @@ $widget-class: '.' + $widget-prefix;
 
     transition: transform 200ms;
     transform: translateX(0px) translateY(0px) translateZ(0px);
+
+    &__light {
+      color: #6f6f6f;
+    }
+
+    &__dark {
+      color: #acacac;
+    }
 
     &:hover {
       opacity: 0.65;
@@ -153,20 +189,30 @@ $widget-class: '.' + $widget-prefix;
     }
 
     &-plus-icon {
-      color: $tip-button_color;
       margin-bottom: 2px;
       vertical-align: middle;
     }
 
     &-img {
-      color: $tip-button_color;
       height: 16px;
       vertical-align: middle;
       text-align: center;
       margin-right: 3px;
 
-      #{$widget-class}-tip-icon {
-        fill: $tip-button_color;
+      &__light {
+        color: #6f6f6f;
+
+        #{$widget-class}-tip-icon {
+          fill: #6f6f6f;
+        }
+      }
+
+      &__dark {
+        color: #acacac;
+
+        #{$widget-class}-tip-icon {
+          fill: #acacac;
+        }
       }
 
       #{$widget-class}-thank-icon {

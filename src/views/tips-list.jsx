@@ -13,13 +13,15 @@ var TipsList = React.createClass({
         var self = this;
         return (
             <div className={this.props.baseClassName + '-tips-list-block ' + (!this.props.isTipsListOpened ? this.props.baseClassName + '-tips-list-block__hide' : '')} >
-                <div className={this.props.baseClassName + '-tips-list'}>
+                <div className={this.props.baseClassName + '-tips-list ' + this.props.baseClassName + '-tips-list' + '__' + this.props.themeColor}>
                     {
                         _.map(this.props.tips, function (tip, index) {
                             return (
                                 <div key={index} onClick={self.onTipItemClick.bind(self, index)}
-                                    className={self.props.baseClassName + '-tips-list-item ' + self.props.baseClassName + '-tips-list-item__amount'}>
-                                    <a>
+                                    className={self.props.baseClassName + '-tips-list-item ' +
+                                    self.props.baseClassName + '-tips-list-item' + '__' + self.props.themeColor + ' ' }>
+                                    <a className={self.props.baseClassName + '-tips-list-item-amount ' +
+                                    self.props.baseClassName + '-tips-list-item-amount' + '__' + self.props.themeColor}>
                                         <FormattedCurrency amount={tip.amount}
                                                            currency={tip.currency}
                                                            truncate={true}/>
@@ -31,9 +33,9 @@ var TipsList = React.createClass({
 
                     <div key={-1} onClick={this.onTipItemClick.bind(this, -1)}
                         className={this.props.baseClassName + '-tips-list-item ' + this.props.baseClassName + '-tips-list-item__close'}>
-                        <a className={this.props.baseClassName + '-tips-list-item-link'}>
+                        <a className={this.props.baseClassName + '-tips-list-item-link-close ' + this.props.baseClassName + '-tips-list-item-link-close' + '__' +  this.props.themeColor}>
                             <svg
-                                className={this.props.baseClassName + '-tips-list-item-icon'}
+                                className={this.props.baseClassName + '-tips-list-item-icon ' + this.props.baseClassName + '-tips-list-item-icon' + '__'  + this.props.themeColor}
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="14" height="14" viewBox="0 0 24 24">
                                 <path

@@ -18,6 +18,7 @@ var TinyView = React.createClass({
             isTipsListOpened: false,
             isThankShow: false,
             paymentButtonColor: null,
+            themeColor: null
         };
     },
 
@@ -61,6 +62,10 @@ var TinyView = React.createClass({
             newState.paymentButtonColor = nextProps.paymentButtonColor;
         }
 
+        if (nextProps.themeColor) {
+            newState.themeColor = nextProps.themeColor;
+        }
+
         this.setState(newState);
     },
 
@@ -97,7 +102,9 @@ var TinyView = React.createClass({
     render: function () {
         var logo = this.state.logoUrl && (
                 <div
-                    className={this.className + '-game-logo ' + (this.state.isTipsListOpened ? this.className + '-game-logo__moved' : '')}
+                    className={this.className + '-game-logo ' +
+                    (this.state.isTipsListOpened ? this.className + '-game-logo__moved' : '') +
+                    ' ' + this.className + '-game-logo' + '__' + this.state.themeColor}
                     style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
             );
 
@@ -113,7 +120,9 @@ var TinyView = React.createClass({
 
         var tips = this.props.data.tips && (
                 <TipsList baseClassName={this.className} tips={this.props.data.tips} onSelect={this.onTipSelect}
-                          isTipsListOpened={this.state.isTipsListOpened}/>
+                          isTipsListOpened={this.state.isTipsListOpened}
+                          themeColor={this.state.themeColor}
+                />
             );
 
         var tipButtonContent = false;
@@ -153,11 +162,12 @@ var TinyView = React.createClass({
             }
         }
 
-        var tipButton = this.props.data.tips && (<div className={this.className + '-tip ' +
+        var tipButton = this.props.data.tips && (<div className={this.className + '-tip ' + ' ' +
+            this.className + '-tip'  + '__' + this.state.themeColor + ' ' +
             (this.state.isTipsListOpened ? this.className + '-tip__moved ' : '') +
             ((this.state.isThankShow || this.state.isTipsListOpened) ? this.className + '-tip__disable' : '' )
             }><div className={this.className + '-tip-txt'}>
-                <div className={this.className + '-tip-img'}>
+                <div className={this.className + '-tip-img ' + this.className + '-tip-img' + '__' + this.state.themeColor}>
                     {svgContent}
                 </div>
                 <div className={this.className + '-tip-button'}
@@ -167,8 +177,9 @@ var TinyView = React.createClass({
             </div>
             </div>);
 
-        var gameInfo = <div
-            className={this.className + '-game-name ' + (this.state.isTipsListOpened ? this.className + '-game-name__moved' : '')}>
+        var gameInfo = <div className={this.className + '-game-name ' +
+            this.className + '-game-name' + '__' + this.state.themeColor + ' ' +
+            (this.state.isTipsListOpened ? this.className + '-game-name__moved' : '')}>
             {this.state.name}
         </div>;
 
@@ -180,10 +191,10 @@ var TinyView = React.createClass({
                 <ErrorMessageView errors={this.state.errors}/>
             );
 
-        var gradientBlock = (<div className={this.className + '-gradient-block'}>
+        var gradientBlock = (<div className={this.className + '-gradient-block ' + this.className + '-gradient-block' + '__' + this.state.themeColor}>
             </div>
         );
-        var blockButton = this.state.isLoaded && (<div className={this.className + '-button-block'}>
+        var blockButton = this.state.isLoaded && (<div className={this.className + '-button-block' + ' ' + this.className + '-button-block' + '__' + this.state.themeColor}>
                 {gameInfo}
                 {paymentButton}
                 {gradientBlock}
@@ -192,7 +203,7 @@ var TinyView = React.createClass({
             </div>);
 
         return (
-            <div className={this.className + ' ' + this.className + '__tiny'}>
+            <div className={this.className + ' ' + this.className + '__tiny' + ' ' + this.className + '__' + this.state.themeColor}>
                 {logo}
                 {blockButton}
                 {spinner}

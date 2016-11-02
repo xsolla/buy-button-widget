@@ -87,11 +87,7 @@ module.exports = (function () {
     };
 
     App.prototype.setUpTheme = function () {
-        if (this.config.theme.background === 'dark') {
-            require('./styles/widget-dark.scss');
-        } else {
-            require('./styles/widget-light.scss');
-        }
+        require('./styles/base/widget.scss');
     };
 
     /**
@@ -222,7 +218,8 @@ module.exports = (function () {
             onPaymentOpen: _.bind(function (params) {
                 this.open(params);
             }, this),
-            paymentButtonColor : this.config.theme.foreground
+            paymentButtonColor : this.config.theme.foreground,
+            themeColor : this.config.theme.background
         };
 
         var updateView = _.bind(function () {
