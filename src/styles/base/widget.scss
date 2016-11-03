@@ -137,7 +137,7 @@ $widget-class: '.' + $widget-prefix;
   #{$widget-class}-plus-icon {
     font-size: 110%;
     position: relative;
-    top: -0.05em;
+    top: 0.05em;
   }
 
   #{$widget-class}-tip {
