@@ -2,50 +2,96 @@
   @include no-select;
 
   list-style-type: none;
-  padding: 0;
-  margin: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   text-align: center;
+  font-size: 14px;
 
   $tips-list-class: extractClassName(&);
 
+  transition: background-color 0.1s ease 0s, transform 200ms;
+  transform: translateX(0px) translateY(0px) translateZ(0px);
+
   &-item {
-    display: inline-block;
-    font-size: 19px;
-    width: 21%;
-    padding: 4px 0;
-    margin: 8px 2px;
+    align-items: center;
     text-align: center;
-    border-radius: 4px;
-    color: $tips-list_color;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
     cursor: pointer;
-    overflow: hidden;
 
-    &:first-child {
-      margin-left: 8px;
-    }
-
-    &:last-child {
-      margin-right: 8px;
-    }
-
-    &-link {
-      vertical-align: middle;
+    a {
+      padding-right: 6px;
+      padding-left: 6px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      min-width: 60px;
+      align-items: center;
+      transition: background-color 200ms ease, -webkit-transform 200ms ease;
+      transition: background-color 200ms ease, transform 200ms ease;
+      transition: background-color 200ms ease, transform 200ms ease, -webkit-transform 200ms ease;
     }
 
     &-icon {
       margin-top: 2px;
-      fill: $tips-list-close_color;
+      height: 30px;
+      vertical-align: middle;
     }
 
-    &__amount:hover {
-      color: $tips-list_color__hover;
-      background-color: $tips-list_background-color__hover;
+    &__close {
+      height: 30px;
     }
 
-    &__close:hover {
-      #{$tips-list-class}-item-icon {
-        fill: $tips-list-close_color__hover;
+    &-amount:hover {
+      transform: scale(1.1);
+    }
+
+    &-amount__light:hover {
+      background-color: #c6c6c6;
+    }
+
+    &-amount__dark:hover {
+      background-color: #545454;
+    }
+
+    &__light {
+      a {
+        color: #000000;
       }
     }
+
+    &__dark {
+      a {
+        color: #ffffff;
+      }
+    }
+
+    &-link-close__light:hover {
+      #{$tips-list-class}-item-icon {
+        fill: #bebebe;
+      }
+    }
+
+    &-link-close__dark:hover {
+      #{$tips-list-class}-item-icon {
+        fill: #525252;
+      }
+    }
+
+    &-icon {
+      &__light {
+        fill: #8a8a8a;
+      }
+
+      &__dark {
+        fill: #acacac;
+      }
+    }
+
   }
 }

@@ -2,4 +2,16 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  height: 155px;
+  width: 100%;
+
+  transition: opacity 200ms, transform 200ms;
+  opacity: 1;
+  transform: translateX(0px) translateY(0px) translateZ(0px);
+
+  &__moved {
+    opacity: 0;
+    transform: translateX(0px) translateY(-10px) translateZ(0px);
+  }
 }

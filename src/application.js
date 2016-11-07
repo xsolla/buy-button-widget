@@ -18,10 +18,25 @@ module.exports = (function () {
     var DEFAULT_CONFIG = {
         access_token: null,
         access_data: null,
-        color: 'default',
+        theme: {
+            foreground : 'blue',
+            background : 'light'
+        },
         template: 'tiny',
         host: 'secure.xsolla.com'
     };
+
+    App.foregroundTypes = {
+        BLUE: 'blue',
+        RED: 'red',
+        GOLD: 'gold',
+        GREEN: 'green'
+    }
+
+    App.backgroundTypes = {
+        LIGHT: 'light',
+        DARK: 'dark'
+    }
 
     App.eventTypes = _.extend({}, PaystationEmbedApp.eventTypes);
 
@@ -51,9 +66,10 @@ module.exports = (function () {
             this.throwError('Invalid host');
         }
 
-        if (this.config.color !== 'dark' && this.config.color !== 'default') {
-            this.config.color = 'default';
+        if (this.config.theme.background !== App.backgroundTypes.LIGHT && this.config.theme.background !== App.backgroundTypes.DARK) {
+            this.config.theme.background = App.backgroundTypes.LIGHT;
         }
+
     };
 
     App.prototype.checkApp = function () {
@@ -71,11 +87,7 @@ module.exports = (function () {
     };
 
     App.prototype.setUpTheme = function () {
-        if (this.config.color === 'dark') {
-            require('./styles/widget-dark.scss');
-        } else {
-            require('./styles/widget-default.scss');
-        }
+        require('./styles/base/widget.scss');
     };
 
     /**
@@ -140,14 +152,17 @@ module.exports = (function () {
 
         var openHandler = _.bind(function (event) {
             var instanceId = (params || {}).instance_id;
-            if (instanceId) {
+            var tips = (params || {}).tips;
+            if (instanceId || tips) {
                 PaystationEmbedApp.sendMessage('set-data', {
                     settings: {
-                        payment_method: instanceId
+                        payment_method: instanceId,
+                        tips: tips
                     }
                 });
             }
         }, this);
+
         PaystationEmbedApp.on('load', openHandler);
 
         // Unregister events
@@ -189,9 +204,6 @@ module.exports = (function () {
         var view;
 
         switch (this.config.template) {
-            case 'full':
-                view = require('./views/layouts/full.jsx');
-                break;
             case 'compact':
                 view = require('./views/layouts/compact.jsx');
                 break;
@@ -205,7 +217,9 @@ module.exports = (function () {
             data: {},
             onPaymentOpen: _.bind(function (params) {
                 this.open(params);
-            }, this)
+            }, this),
+            paymentButtonColor : this.config.theme.foreground,
+            themeColor : this.config.theme.background
         };
 
         var updateView = _.bind(function () {

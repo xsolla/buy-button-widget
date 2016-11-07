@@ -17,6 +17,8 @@ module.exports = (function () {
         },
         version: version,
         eventTypes: App.eventTypes,
+        backgroundTypes: App.backgroundTypes,
+        foregroundTypes: App.foregroundTypes,
         $: $,
         _: _
     };

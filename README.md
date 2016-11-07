@@ -16,7 +16,7 @@ Features:
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://static.xsolla.com/embed/pay2play/1.0.4/widget.min.js](https://static.xsolla.com/embed/pay2play/1.0.4/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://static.xsolla.com/embed/pay2play/2.0.0/widget.min.js](https://static.xsolla.com/embed/pay2play/2.0.0/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -53,7 +53,7 @@ It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//static.xsolla.com/embed/pay2play/1.0.4/widget.min.js"></script>
+<script src="//static.xsolla.com/embed/pay2play/2.0.0/widget.min.js"></script>
 <script>
     var widgetInstance = XPay2PlayWidget.create({
         access_token: 'abcdef1234567890abcdef1234567890',
@@ -92,8 +92,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 * **access_token** (required) — Access token
 * **host** - Host for performing requests. The default value is **secure.xsolla.com**
 * **sandbox** — Set **true** to test the payment process, sandbox-secure.xsolla.com will be used instead secure.xsolla.com
-* **template** — Type of widget, defining its appearance. Can be 'tiny', 'compact' or 'full'
-* **color** — Widget color theme, defining its appearance. Can be 'default' or 'dark'
+* **theme** — Widget color theme, defining its appearance. Can be object { foreground : ['blue', 'red', 'green', 'gold'],  background : ['light', 'dark']. }
 * **target_element** (required) — Element of the page, where the widget should be rendered (jQuery selector should be used, for example '#widget-example')
 
 The following parameters define the payment interface appearance, and coincide with [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/) parameters.
