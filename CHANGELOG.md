@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 - 2016-10-26
+## 2.0.0 - 2016-11-07
 
 - [feature] New design for widget 
 - [feature] Added **theme** parameter for custom color
