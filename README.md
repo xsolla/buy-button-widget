@@ -39,7 +39,7 @@ $ bower install xsolla-pay2play-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//static.xsolla.com/embed/pay2play/1.0.4/widget.min.js";
+    s.src = "//static.xsolla.com/embed/pay2play/2.0.0/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XPay2PlayWidget.create(options);
     }, false);
