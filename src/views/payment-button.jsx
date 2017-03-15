@@ -22,31 +22,44 @@ var PaymentButton = React.createClass({
 
     },
     render: function () {
-        var hasAmount = this.props.amount && this.props.amount.value;
+        var amount = this.props.amount;
+        var baseClassName = this.props.baseClassName;
+        var paymentButtonColor = this.props.paymentButtonColor;
+        var isTipsListOpened = this.props.isTipsListOpened;
+        var hasAmount = amount && amount.value;
+        var hasDiscount = hasAmount && amount.value_without_discount && amount.value < amount.value_without_discount;
 
         var price = hasAmount && (
-                <div className={this.props.baseClassName + '-payment-button-amount'}>
+                <div className={baseClassName + '-payment-button-amount'}>
                     <TranslateMessage
-                        message={this.props.amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label'}
+                        message={amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label'}
                         values={{
-                            amount: <FormattedCurrency amount={this.props.amount.value}
-                                                       currency={this.props.amount.currency}/>
+                            amount: <FormattedCurrency amount={amount.value} currency={amount.currency}/>
                         }}/>
                 </div>
             );
 
-        var logo = (<div className={this.props.baseClassName + '-payment-button-xsolla-logo'}>
+        var priceWithoutDiscount = hasDiscount && (
+                <div className={baseClassName + '-payment-button-amount-without-discount ' +
+                (paymentButtonColor ? baseClassName + '-payment-button-amount-without-discount__' + paymentButtonColor : '')}>
+                    <FormattedCurrency amount={amount.value_without_discount} currency={amount.currency}/>
+                </div>
+            );
+
+        var logo = (
+            <div className={baseClassName + '-payment-button-xsolla-logo'}>
                 <XsollaLogoView />
             </div>
         );
 
         return (
-            <button className={this.props.baseClassName + '-payment-button ' +
-            (this.props.isTipsListOpened ? this.props.baseClassName + '-payment-button__moved ' : '') +
-            (this.props.paymentButtonColor ? this.props.baseClassName + '-payment-button__' + this.props.paymentButtonColor : '')}
+            <button className={baseClassName + '-payment-button ' +
+            (isTipsListOpened ? baseClassName + '-payment-button__moved ' : '') +
+            (paymentButtonColor ? baseClassName + '-payment-button__' + paymentButtonColor : '')}
                     onClick={this.onBtnClick}>
                 {logo}
                 {price}
+                {priceWithoutDiscount}
             </button>
         );
     }
