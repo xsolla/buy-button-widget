@@ -74,35 +74,16 @@
     right: 20px;
     bottom: 0px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-  }
 
-  &-amount-without-discount {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 11px;
-    padding: 0 10px;
-    line-height: 1.5;
-    text-decoration: line-through;
-    margin-top: -7px;
-
-    &__green {
-      background-color: #00b86e;
-    }
-
-    &__red {
-      background-color: #d80c0c;
-    }
-
-    &__blue {
-      background-color: #0047ff;
-    }
-
-    &__gold {
-      background-color: #b87d00;
+    &-without-discount {
+      font-size: 11px;
+      text-decoration: line-through;
+      opacity: 0.7;
+      line-height: 1;
     }
   }
 

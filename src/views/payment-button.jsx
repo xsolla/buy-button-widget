@@ -36,13 +36,11 @@ var PaymentButton = React.createClass({
                         values={{
                             amount: <FormattedCurrency amount={amount.value} currency={amount.currency}/>
                         }}/>
-                </div>
-            );
-
-        var priceWithoutDiscount = hasDiscount && (
-                <div className={baseClassName + '-payment-button-amount-without-discount ' +
-                (paymentButtonColor ? baseClassName + '-payment-button-amount-without-discount__' + paymentButtonColor : '')}>
-                    <FormattedCurrency amount={amount.value_without_discount} currency={amount.currency}/>
+                    { hasDiscount && (
+                        <div className={baseClassName + '-payment-button-amount-without-discount'}>
+                            <FormattedCurrency amount={amount.value_without_discount} currency={amount.currency}/>
+                        </div>
+                    ) }
                 </div>
             );
 
@@ -59,7 +57,6 @@ var PaymentButton = React.createClass({
                     onClick={this.onBtnClick}>
                 {logo}
                 {price}
-                {priceWithoutDiscount}
             </button>
         );
     }
