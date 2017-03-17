@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1 - 2017-03-20
+
+- [fix] Remove unused size 'compact'
+- [feature] Add price without discount on payment button
+- [feature] New design for payment button
+
 ## 2.0.0 - 2016-11-07
 
 - [feature] New design for widget 
