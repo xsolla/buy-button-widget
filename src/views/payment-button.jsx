@@ -1,9 +1,7 @@
 var _ = require('lodash');
 var React = require('react');
-var XsollaLogoView = require('./xsolla-logo.jsx');
 var TranslateMessage = require('./translate-message.jsx');
 var FormattedCurrency = require('./formatted-currency.jsx');
-var TipsList = require('./tips-list.jsx');
 
 var PaymentButton = React.createClass({
     onBtnClick: function (e) {
@@ -23,42 +21,36 @@ var PaymentButton = React.createClass({
     },
     render: function () {
         var amount = this.props.amount;
-        var baseClassName = this.props.baseClassName;
-        var paymentButtonColor = this.props.paymentButtonColor;
-        var isTipsListOpened = this.props.isTipsListOpened;
-        var hasAmount = amount && amount.value;
-        var hasDiscount = hasAmount && amount.value_without_discount && amount.value < amount.value_without_discount;
+        var hasDiscount = amount.value_without_discount && amount.value < amount.value_without_discount;
+        var buttonClassName = this.props.baseClassName + '-payment-button';
+        var modifiers = [
+            this.props.isTipsListOpened && 'moved',
+            this.props.paymentButtonColor
+        ];
+        var buttonClassNameWithModifiers = buttonClassName + ' ' +
+            modifiers
+                .map(function (m) {
+                    return m ? buttonClassName + '__' + m : '';
+                })
+                .join(' ');
 
-        var price = hasAmount && (
-                <div className={baseClassName + '-payment-button-amount'}>
+        return (
+            <button className={ buttonClassNameWithModifiers } onClick={ this.onBtnClick }>
+                <div className={ buttonClassName + '-amount' }>
                     <TranslateMessage
-                        message={amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label'}
+                        message={ amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label' }
                         values={{
-                            amount: <FormattedCurrency amount={amount.value} currency={amount.currency}/>
+                            amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
                         }}/>
                     { hasDiscount && (
-                        <div className={baseClassName + '-payment-button-amount-without-discount'}>
-                            <FormattedCurrency amount={amount.value_without_discount} currency={amount.currency}/>
+                        <div className={ buttonClassName + '-amount-without-discount' }>
+                            <FormattedCurrency amount={ amount.value_without_discount } currency={ amount.currency }/>
                         </div>
                     ) }
                 </div>
-            );
-
-        var logo = (
-            <div className={baseClassName + '-payment-button-xsolla-logo'}>
-                <XsollaLogoView />
-            </div>
-        );
-
-        return (
-            <button className={baseClassName + '-payment-button ' +
-            (isTipsListOpened ? baseClassName + '-payment-button__moved ' : '') +
-            (paymentButtonColor ? baseClassName + '-payment-button__' + paymentButtonColor : '')}
-                    onClick={this.onBtnClick}>
-                {logo}
-                {price}
             </button>
         );
     }
 });
+
 module.exports = PaymentButton;
