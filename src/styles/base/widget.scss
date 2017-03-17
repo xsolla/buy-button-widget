@@ -98,8 +98,7 @@ $widget-class: '.' + $widget-prefix;
   }
 }
 
-#{$widget-class}#{$widget-class}__tiny,
-#{$widget-class}#{$widget-class}__compact {
+#{$widget-class}#{$widget-class}__tiny {
   #{$widget-class}-game-logo {
     @include game-logo;
   }
