@@ -1,8 +1,8 @@
 # Changelog
 
-## 2.0.1 - 2017-03-20
+## 2.1.0. - 2017-03-20
 
-- [fix] Remove unused size 'compact'
+- [fix] Remove unused template 'compact'
 - [feature] Add price without discount on payment button
 - [feature] New design for payment button
 
