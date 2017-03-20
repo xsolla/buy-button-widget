@@ -247,7 +247,7 @@ $widget-class: '.' + $widget-prefix;
 
   #{$widget-class}-payment-button {
     @include payment-button;
-    height: 40px;
+    height: 44px;
     width: 100%;
 
     #{$widget-class}-tips-list {
