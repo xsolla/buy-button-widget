@@ -36,18 +36,18 @@ var PaymentButton = React.createClass({
 
         return (
             <button className={ buttonClassNameWithModifiers } onClick={ this.onBtnClick }>
-                <div className={ buttonClassName + '-amount' }>
-                    <TranslateMessage
-                        message={ amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label' }
-                        values={{
-                            amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
-                        }}/>
-                    { hasDiscount && (
-                        <div className={ buttonClassName + '-amount-without-discount' }>
-                            <FormattedCurrency amount={ amount.value_without_discount } currency={ amount.currency }/>
-                        </div>
-                    ) }
-                </div>
+                <TranslateMessage
+                    message={ amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label' }
+                    values={{
+                        amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
+                    }}/>
+                { hasDiscount && (
+                    <FormattedCurrency
+                        amount={ amount.value_without_discount }
+                        currency={ amount.currency }
+                        cls="discount"
+                    />
+                ) }
             </button>
         );
     }
