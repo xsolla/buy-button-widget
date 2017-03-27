@@ -6,33 +6,49 @@
 
   z-index: 1;
   display: block;
+  position: relative;
+  text-align: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px;
   border: 0;
   padding: 0;
-  text-align: left;
   color: #ffffff;
+  line-height: normal;
 
   background-color: #0047ff;
-  line-height: 20px;
 
   &__green {
-    background-color: #00b86e;
+    background-color: #00a562;
+
+    &:hover {
+      background-color: #00cc79;
+    }
   }
 
   &__red {
     background-color: #d80c0c;
+
+    &:hover {
+      background-color: #ff1616;
+    }
   }
 
   &__blue {
     background-color: #0047ff;
+
+    &:hover {
+      background-color: #007aff;
+    }
   }
 
   &__gold {
-    background-color: #b87d00;
+    background-color: #d69200;
+
+    &:hover {
+      background-color: #eba000;
+    }
   }
 
-  background-image: linear-gradient(180deg, hsla(0, 0%, 100%, .29), hsla(0, 0%, 100%, 0));
   border-radius: 3px;
 
   transition: background-color 0.2s ease 0s, transform 200ms;
@@ -42,49 +58,21 @@
     transform: translateX(0px) translateY(-144px) translateZ(0px);
   }
 
-  &:hover {
-      background-image: linear-gradient(180deg, hsla(0, 0%, 100%, .47), hsla(0, 0%, 100%, 0));
-  }
-
-  $payment-button-class: extractClassName(&);
-
-  &-xsolla-logo {
-    height: 100%;
-    width: 40px;
-    text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    background-position: 50% 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    svg {
-      display: inline-block;
-      height: 24px;
-      position: relative;
-      top: 8px;
-      width: 24px;
-    }
-  }
-
   &-amount {
     position: absolute;
-    left: 33px;
-    top: 0px;
-    right: 20px;
-    bottom: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-  &:after {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    width: 0;
-    height: 100%;
-  }
+    & > span {
+      display: block;
+    }
 
+    .discount {
+      margin-top: 1px;
+      font-size: 11px;
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+  }
 }

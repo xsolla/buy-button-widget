@@ -12,6 +12,8 @@ var FormattedCurrencyView = React.createClass({
         var formattedAmount = Math.abs(parseFloat(this.props.amount));
         var signAmount = parseFloat(this.props.amount) < 0 ? '-' : '';
         var formattedCurrency = _.escape(this.props.currency);
+        var discount = this.props.discount;
+        var cls = this.props.cls || '';
 
         var rubleTemplate = '<span class="formatted-currency-ruble">' + rubleSVG + '</span>';
         var spaceTemplate = ' ';
@@ -72,7 +74,7 @@ var FormattedCurrencyView = React.createClass({
         }
 
         var formattedValue = template.join('');
-        return <span className="formatted-currency" dangerouslySetInnerHTML={{__html: formattedValue}}></span>;
+        return <span className={ 'formatted-currency ' + cls } dangerouslySetInnerHTML={{__html: formattedValue}}></span>;
     }
 });
 module.exports = FormattedCurrencyView;

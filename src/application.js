@@ -22,7 +22,6 @@ module.exports = (function () {
             foreground : 'blue',
             background : 'light'
         },
-        template: 'tiny',
         host: 'secure.xsolla.com'
     };
 
@@ -31,12 +30,12 @@ module.exports = (function () {
         RED: 'red',
         GOLD: 'gold',
         GREEN: 'green'
-    }
+    };
 
     App.backgroundTypes = {
         LIGHT: 'light',
         DARK: 'dark'
-    }
+    };
 
     App.eventTypes = _.extend({}, PaystationEmbedApp.eventTypes);
 
@@ -201,18 +200,7 @@ module.exports = (function () {
      * Render widget template
      */
     App.prototype.render = function () {
-        var view;
-
-        switch (this.config.template) {
-            case 'compact':
-                view = require('./views/layouts/compact.jsx');
-                break;
-            case 'tiny':
-            default:
-                view = require('./views/layouts/tiny.jsx');
-                break;
-        }
-
+        var view = require('./views/layouts/tiny.jsx');
         var props = {
             data: {},
             onPaymentOpen: _.bind(function (params) {
@@ -221,7 +209,6 @@ module.exports = (function () {
             paymentButtonColor : this.config.theme.foreground,
             themeColor : this.config.theme.background
         };
-
         var updateView = _.bind(function () {
             ReactDOM.render(React.createElement(view, props), this.targetElement.get(0));
         }, this);
@@ -234,6 +221,7 @@ module.exports = (function () {
             props.data = {
                 amount: {
                     value: info.min_amount,
+                    value_without_discount: info.min_amount_without_discount,
                     currency: info.min_currency,
                     hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1 || _.uniq(_.pluck(info.drm, 'currency')).length > 1
                 },
