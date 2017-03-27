@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.0. - 2017-03-20
+## 2.1.0. - 2017-03-27
 
 - [fix] Remove unused template 'compact'
 - [feature] Add price without discount on payment button
