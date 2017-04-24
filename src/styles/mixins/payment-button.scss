@@ -62,6 +62,7 @@
     position: absolute;
     top: 49%;
     left: 50%;
+    white-space: nowrap;
     transform: translate(-50%, -50%);
 
     & > span {

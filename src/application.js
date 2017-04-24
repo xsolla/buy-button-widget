@@ -231,7 +231,8 @@ module.exports = (function () {
                 systemRequirements: info.system_requirements,
                 drm: info.drm,
                 logoUrl: info.image_url,
-                paymentList: data.payment_instances
+                paymentList: data.payment_instances,
+                release_date: info.release_date
             };
 
             Translate.init(data.translates || {});

@@ -21,6 +21,7 @@ var PaymentButton = React.createClass({
     },
     render: function () {
         var amount = this.props.amount;
+        var releaseDate = Date.parse(this.props.releaseDate) || 0;
         var hasDiscount = amount.value_without_discount && amount.value < amount.value_without_discount;
         var buttonClassName = this.props.baseClassName + '-payment-button';
         var modifiers = [
@@ -33,12 +34,20 @@ var PaymentButton = React.createClass({
                     return m ? buttonClassName + '__' + m : '';
                 })
                 .join(' ');
+        var isReleased = releaseDate < Date.now();
+        var message;
+
+        if (isReleased) {
+            message = amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label';
+        } else {
+            message = 'payment_button_pre_purchase';
+        }
 
         return (
             <button className={ buttonClassNameWithModifiers } onClick={ this.onBtnClick }>
                 <span className={ buttonClassName + '-amount' }>
                     <TranslateMessage
-                        message={ amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label' }
+                        message={ message }
                         values={{
                             amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
                         }}/>
