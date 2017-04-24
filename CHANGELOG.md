@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.1. - ???
+- [feature] Show 'Pre-Prepurchase' instead of 'Buy Now' if game isn't released
+
 ## 2.1.0. - 2017-03-20
 
 - [fix] Remove unused template 'compact'
