@@ -40,7 +40,7 @@ var PaymentButton = React.createClass({
         if (isReleased) {
             message = amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label';
         } else {
-            message = 'payment_button_pre_purchase';
+            message = 'payment_button_pre_purchase_label';
         }
 
         return (
