@@ -232,7 +232,7 @@ module.exports = (function () {
                 drm: info.drm,
                 logoUrl: info.image_url,
                 paymentList: data.payment_instances,
-                release_date: info.release_date
+                is_released: info.is_released
             };
 
             Translate.init(data.translates || {});

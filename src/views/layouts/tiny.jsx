@@ -116,7 +116,7 @@ var TinyView = React.createClass({
                                isThankShow={this.state.isThankShow}
                                paymentButtonColor={this.state.paymentButtonColor}
                                onPaymentOpen={this.onPaymentOpen}
-                               releaseDate={ this.props.data.release_date }
+                               isReleased={ this.props.data.is_released }
                 />
             );
 

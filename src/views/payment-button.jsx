@@ -21,7 +21,6 @@ var PaymentButton = React.createClass({
     },
     render: function () {
         var amount = this.props.amount;
-        var releaseDate = Date.parse(this.props.releaseDate) || 0;
         var hasDiscount = amount.value_without_discount && amount.value < amount.value_without_discount;
         var buttonClassName = this.props.baseClassName + '-payment-button';
         var modifiers = [
@@ -34,7 +33,7 @@ var PaymentButton = React.createClass({
                     return m ? buttonClassName + '__' + m : '';
                 })
                 .join(' ');
-        var isReleased = releaseDate < Date.now();
+        var isReleased = this.props.isReleased;
         var message;
 
         if (isReleased) {
