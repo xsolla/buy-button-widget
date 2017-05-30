@@ -115,7 +115,9 @@ var TinyView = React.createClass({
                                isTipsListOpened={this.state.isTipsListOpened}
                                isThankShow={this.state.isThankShow}
                                paymentButtonColor={this.state.paymentButtonColor}
-                               onPaymentOpen={this.onPaymentOpen}/>
+                               onPaymentOpen={this.onPaymentOpen}
+                               isReleased={ this.props.data.is_released }
+                />
             );
 
         var tips = this.props.data.tips && (
