@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 2.1.1. - ???
+## 2.1.1. - 2017-05-30
 - [feature] Show 'Pre-Prepurchase' instead of 'Buy Now' if game isn't released
 
 ## 2.1.0. - 2017-03-20
