@@ -27,13 +27,8 @@ var PaymentButton = React.createClass({
             this.props.isTipsListOpened && 'moved',
             this.props.paymentButtonColor
         ];
-        var buttonClassNameWithModifiers = buttonClassName + ' ' +
-            modifiers
-                .map(function (m) {
-                    return m ? buttonClassName + '__' + m : '';
-                })
-                .join(' ');
         var isReleased = this.props.isReleased;
+        var disabled = this.props.disabled;
         var message;
 
         if (isReleased) {
@@ -42,15 +37,27 @@ var PaymentButton = React.createClass({
             message = 'payment_button_pre_purchase_label';
         }
 
+        if (disabled) {
+            modifiers = [];
+            message = 'payment_button_not_available_label';
+        }
+
+        var buttonClassNameWithModifiers = buttonClassName + ' ' + modifiers
+                .map(function (m) { return m ? buttonClassName + '__' + m : ''; })
+                .join(' ');
+
         return (
-            <button className={ buttonClassNameWithModifiers } onClick={ this.onBtnClick }>
+            <button
+                className={ buttonClassNameWithModifiers }
+                disabled={ disabled }
+                onClick={ this.onBtnClick }>
                 <span className={ buttonClassName + '-amount' }>
                     <TranslateMessage
                         message={ message }
-                        values={{
+                        values={ !disabled && {
                             amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
-                        }}/>
-                    { hasDiscount && (
+                        } }/>
+                    { !disabled && hasDiscount && (
                         <FormattedCurrency
                             amount={ amount.value_without_discount }
                             currency={ amount.currency }
