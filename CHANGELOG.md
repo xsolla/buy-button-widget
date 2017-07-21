@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.2. - ???
+## 2.1.2. - 2017-07-21
 - [feature] Disable purchase button if game isn't available in user's country
 
 ## 2.1.1. - 2017-05-30
