@@ -6,17 +6,23 @@ var PaymentButton = require('../payment-button.jsx');
 var FormattedCurrency = require('../formatted-currency.jsx');
 var TranslateMessage = require('../translate-message.jsx');
 var TipsList = require('../tips-list.jsx');
+var Logo = require('../logo.jsx');
 
 var TinyView = React.createClass({
     className: 'xpay2Play-widget',
+    SHOW_TIPS_THANK_DURATION: 1000,
+
     getInitialState: function () {
         return {
-            isLoaded: false,
-            logoUrl: null,
-            errors: null,
             selectedTipIndex: -1,
             isTipsListOpened: false,
-            isThankShow: false,
+            isThankShow: false
+        };
+    },
+
+    getDefaultProps: function () {
+        return {
+            data: {},
             paymentButtonColor: null,
             themeColor: null
         };
@@ -35,38 +41,6 @@ var TinyView = React.createClass({
         if (!this.state.isThankShow) {
             this.setState({isTipsListOpened: true});
         }
-    },
-
-    componentWillReceiveProps: function (nextProps) {
-
-        var newState = {};
-        var data = nextProps.data || {};
-
-        if (!_.isEmpty(data)) {
-            newState.isLoaded = true;
-        }
-
-        if (data.logoUrl) {
-            newState.logoUrl = data.logoUrl;
-        }
-
-        if (data.errors) {
-            newState.errors = data.errors;
-        }
-
-        if (data.name) {
-            newState.name = data.name;
-        }
-
-        if (nextProps.paymentButtonColor) {
-            newState.paymentButtonColor = nextProps.paymentButtonColor;
-        }
-
-        if (nextProps.themeColor) {
-            newState.themeColor = nextProps.themeColor;
-        }
-
-        this.setState(newState);
     },
 
     onTipSelect: function (index) {
@@ -88,7 +62,7 @@ var TinyView = React.createClass({
                         isThankShow: false
                     }
             )
-            }.bind(this), 1000);
+            }.bind(this), this.SHOW_TIPS_THANK_DURATION);
 
         } else {
             this.setState({
@@ -100,30 +74,42 @@ var TinyView = React.createClass({
     },
 
     render: function () {
-        var logo = this.state.logoUrl && (
-                <div
-                    className={this.className + '-game-logo ' +
-                    (this.state.isTipsListOpened ? this.className + '-game-logo__moved' : '') +
-                    ' ' + this.className + '-game-logo' + '__' + this.state.themeColor}
-                    style={{backgroundImage: 'url(' + this.state.logoUrl + ')'}}></div>
-            );
+        var data = this.props.data;
+        var isLoaded = !_.isEmpty(data);
+        var logoUrl = data.logoUrl;
+        var errors = data.errors;
+        var name = data.name;
+        var paymentButtonColor = this.props.paymentButtonColor;
+        var themeColor = this.props.themeColor;
+        var allDrmLocked = data.drm
+            ? data.drm.every((function (drm) { return drm.is_locked; }))
+            : false;
+        var logoModifiers = [themeColor];
+        var amount = data.amount;
+        var showPaymentButton = amount && (amount.value || amount.value === null); // if all drm is locked amount.value = null
 
-        var paymentButton = this.props.data.amount && this.props.data.amount.value && (
-                <PaymentButton amount={this.props.data.amount} baseClassName={this.className}
-                               tips={this.props.data.tips}
+        if (this.state.isTipsListOpened) {
+            logoModifiers.push('moved');
+        }
+
+        var paymentButton = showPaymentButton && (
+                <PaymentButton amount={amount}
+                               baseClassName={this.className}
+                               tips={data.tips}
                                selectedTipIndex={this.state.selectedTipIndex}
                                isTipsListOpened={this.state.isTipsListOpened}
                                isThankShow={this.state.isThankShow}
-                               paymentButtonColor={this.state.paymentButtonColor}
+                               paymentButtonColor={paymentButtonColor}
                                onPaymentOpen={this.onPaymentOpen}
-                               isReleased={ this.props.data.is_released }
+                               isReleased={ data.is_released }
+                               disabled={ allDrmLocked }
                 />
             );
 
-        var tips = this.props.data.tips && (
-                <TipsList baseClassName={this.className} tips={this.props.data.tips} onSelect={this.onTipSelect}
+        var tips = data.tips && (
+                <TipsList baseClassName={this.className} tips={data.tips} onSelect={this.onTipSelect}
                           isTipsListOpened={this.state.isTipsListOpened}
-                          themeColor={this.state.themeColor}
+                          themeColor={themeColor}
                 />
             );
 
@@ -131,15 +117,17 @@ var TinyView = React.createClass({
         var selectedTips = null;
         var svgContent = false;
 
-        if (this.state.selectedTipIndex >= 0 && this.state.selectedTipIndex < this.props.data.tips.length && !this.state.isTipsListOpened) {
-            selectedTips = this.props.data.tips[this.state.selectedTipIndex];
+        if (this.state.selectedTipIndex >= 0 && this.state.selectedTipIndex < data.tips.length && !this.state.isTipsListOpened) {
+            selectedTips = data.tips[this.state.selectedTipIndex];
             svgContent = false;
 
-            tipButtonContent = (<span><span className={this.className + '-plus-icon'}>+</span>&thinsp;
+            tipButtonContent = (
+                <span>
+                    <span className={this.className + '-plus-icon'}>+</span>&thinsp;
                     <FormattedCurrency amount={selectedTips.amount}
                                        currency={selectedTips.currency}
                                        truncate={true}/>
-                                </span>
+                </span>
             );
             this.state.isThankShow = false;
         } else {
@@ -164,12 +152,12 @@ var TinyView = React.createClass({
             }
         }
 
-        var tipButton = this.props.data.tips && (<div className={this.className + '-tip ' + ' ' +
-            this.className + '-tip'  + '__' + this.state.themeColor + ' ' +
+        var tipButton = data.tips && (<div className={this.className + '-tip ' + ' ' +
+            this.className + '-tip'  + '__' + themeColor + ' ' +
             (this.state.isTipsListOpened ? this.className + '-tip__moved ' : '') +
             ((this.state.isThankShow || this.state.isTipsListOpened) ? this.className + '-tip__disable' : '' )
             }><div className={this.className + '-tip-txt'}>
-                <div className={this.className + '-tip-img ' + this.className + '-tip-img' + '__' + this.state.themeColor}>
+                <div className={this.className + '-tip-img ' + this.className + '-tip-img' + '__' + themeColor}>
                     {svgContent}
                 </div>
                 <div className={this.className + '-tip-button'}
@@ -180,33 +168,38 @@ var TinyView = React.createClass({
             </div>);
 
         var gameInfo = <div className={this.className + '-game-name ' +
-            this.className + '-game-name' + '__' + this.state.themeColor + ' ' +
+            this.className + '-game-name' + '__' + themeColor + ' ' +
             (this.state.isTipsListOpened ? this.className + '-game-name__moved' : '')}>
-            {this.state.name}
+            {name}
         </div>;
 
-        var spinner = !this.state.isLoaded && (
+        var spinner = !isLoaded && (
                 <SpinnerView />
             );
 
-        var errorMessage = this.state.errors && (
-                <ErrorMessageView errors={this.state.errors}/>
+        var errorMessage = errors && (
+                <ErrorMessageView errors={errors}/>
             );
 
-        var gradientBlock = (<div className={this.className + '-gradient-block ' + this.className + '-gradient-block' + '__' + this.state.themeColor}>
+        var gradientBlock = (
+            <div
+                className={this.className + '-gradient-block ' + this.className + '-gradient-block' + '__' + themeColor}>
             </div>
         );
-        var blockButton = this.state.isLoaded && (<div className={this.className + '-button-block' + ' ' + this.className + '-button-block' + '__' + this.state.themeColor}>
+        var blockButton = isLoaded && (<div className={this.className + '-button-block' + ' ' + this.className + '-button-block' + '__' + themeColor}>
                 {gameInfo}
                 {paymentButton}
                 {gradientBlock}
-                {tipButton}
-                {tips}
+                {!allDrmLocked && tipButton}
+                {!allDrmLocked && tips}
             </div>);
 
         return (
-            <div className={this.className + ' ' + this.className + '__tiny' + ' ' + this.className + '__' + this.state.themeColor}>
-                {logo}
+            <div className={this.className + ' ' + this.className + '__tiny' + ' ' + this.className + '__' + themeColor}>
+                {logoUrl && <Logo
+                    url={ logoUrl }
+                    container={ this.className }
+                    modifiers={ logoModifiers } />}
                 {blockButton}
                 {spinner}
                 {errorMessage}
@@ -214,4 +207,5 @@ var TinyView = React.createClass({
         );
     }
 });
+
 module.exports = TinyView;
