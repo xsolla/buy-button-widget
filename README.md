@@ -93,6 +93,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 * **host** - Host for performing requests. The default value is **secure.xsolla.com**
 * **sandbox** — Set **true** to test the payment process, sandbox-secure.xsolla.com will be used instead secure.xsolla.com
 * **theme** — Widget color theme, defining its appearance. Can be object { foreground : ['blue', 'red', 'green', 'gold'],  background : ['light', 'dark']. }
+* **template** - Template. Values: **string** 'standard' (default), **string** 'simple'.
 * **target_element** (required) — Element of the page, where the widget should be rendered (jQuery selector should be used, for example '#widget-example')
 
 The following parameters define the payment interface appearance, and coincide with [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/) parameters.

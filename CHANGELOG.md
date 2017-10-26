@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3. - 2017-10-26
+- [feature] The parameter config.template was added. The available values are: 
+'standard' and 'simple'. By default, 'standard'.
+
 ## 2.1.2. - 2017-07-21
 - [feature] Disable purchase button if game isn't available in user's country
 
