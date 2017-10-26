@@ -19,8 +19,8 @@ module.exports = (function () {
         access_token: null,
         access_data: null,
         theme: {
-            foreground : 'blue',
-            background : 'light'
+            foreground: 'blue',
+            background: 'light'
         },
         host: 'secure.xsolla.com'
     };
@@ -86,7 +86,15 @@ module.exports = (function () {
     };
 
     App.prototype.setUpTheme = function () {
-        require('./styles/base/widget.scss');
+        switch (this.config.template) {
+            case 'simple':
+                require('./styles/base/simple.scss');
+                break;
+            case 'standard':
+            default:
+                require('./styles/base/widget.scss');
+                break;
+        }
     };
 
     /**
@@ -200,14 +208,25 @@ module.exports = (function () {
      * Render widget template
      */
     App.prototype.render = function () {
-        var view = require('./views/layouts/tiny.jsx');
+        var view;
+
+        switch (this.config.template) {
+            case 'simple':
+                view = require('./views/layouts/simple.jsx');
+                break;
+            case 'standard':
+            default:
+                view = require('./views/layouts/tiny.jsx');
+                break;
+        }
+
         var props = {
             data: {},
             onPaymentOpen: _.bind(function (params) {
                 this.open(params);
             }, this),
-            paymentButtonColor : this.config.theme.foreground,
-            themeColor : this.config.theme.background
+            paymentButtonColor: this.config.theme.foreground,
+            themeColor: this.config.theme.background
         };
         var updateView = _.bind(function () {
             ReactDOM.render(React.createElement(view, props), this.targetElement.get(0));

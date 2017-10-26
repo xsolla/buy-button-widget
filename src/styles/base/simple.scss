@@ -1,0 +1,60 @@
+$widget-prefix: 'xpay2Play-widget-simple';
+$widget-class: '.' + $widget-prefix;
+
+@import "../functions/class-name";
+
+@import "../mixins/misc";
+@import "../mixins/game-logo";
+@import "../mixins/payment-button";
+@import "../mixins/tips-list";
+@import "../mixins/spinner";
+@import "../mixins/error-message";
+@import "../mixins/payment-method";
+@import "../mixins/tether";
+
+#{$widget-class} {
+  @include normalize;
+
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  .spinner {
+    @include spinner;
+  }
+
+  .error-message {
+    @include error-message;
+  }
+
+  &-button-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formatted-currency {
+    white-space: nowrap;
+
+    &-ruble {
+      display: inline-block;
+      font-size: .75em;
+      height: 1em;
+      vertical-align: baseline;
+      margin-left: .1em;
+
+      svg {
+        height: 1em;
+        width: 1em;
+        fill: currentColor;
+
+        g {
+          fill: currentColor;
+        }
+      }
+    }
+  }
+}
+
+#{$widget-class}#{$widget-class}__simple {
+
+}
