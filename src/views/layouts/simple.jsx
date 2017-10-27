@@ -97,11 +97,12 @@ var SimpleView = React.createClass({
                                onPaymentOpen={this.onPaymentOpen}
                                isReleased={ data.is_released }
                                disabled={ allDrmLocked }
+                               tagName={'div'}
                 />
             );
 
         var spinner = !isLoaded && (
-                <SpinnerView />
+                <div className="spinner-simple"></div>
             );
 
         var errorMessage = errors && (
