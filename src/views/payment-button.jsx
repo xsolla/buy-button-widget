@@ -21,7 +21,7 @@ var PaymentButton = React.createClass({
     },
     render: function () {
         var amount = this.props.amount;
-        var tagName = this.props.tagName ? this.props.tagName : 'button';
+        var tagName = this.props.tagName && this.props.tagName !== undefined ? this.props.tagName : 'button';
         var hasDiscount = amount.value_without_discount && amount.value < amount.value_without_discount;
         var buttonClassName = this.props.baseClassName + '-payment-button';
         var modifiers = [
