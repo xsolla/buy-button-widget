@@ -61,15 +61,18 @@ var PaymentButton = React.createClass({
                     message={ message }
                     values={ !disabled && {
                         amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
-                    } }/>
-                { !disabled && hasDiscount && (
+                    }}
+                    doubleSpan={ true }/>
+            </span>,
+            !disabled && hasDiscount && (
+                <span className={ buttonClassName + '-amount ' + buttonClassName + 'amount-discount'}>
                     <FormattedCurrency
                         amount={ amount.value_without_discount }
                         currency={ amount.currency }
                         cls="discount"
                     />
-                ) }
-            </span>
+                </span>
+            )
         )
     }
 });

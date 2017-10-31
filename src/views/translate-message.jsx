@@ -12,7 +12,16 @@ var TranslateMessage = React.createClass({
             }
         });
 
-        return <span dangerouslySetInnerHTML={{__html: Translate.translate(this.props.message, values)}} />;
+        if (this.props.doubleSpan) {
+            return <span>
+                       <span className={ 'translate-message' }
+                          dangerouslySetInnerHTML={{__html: Translate.translate(this.props.message, {amount: ''})}}/>
+                       <span className={ 'translate-message-amount' } dangerouslySetInnerHTML={{__html: values.amount}}/>
+                   </span>
+        } else {
+            return <span className={ 'translate-message' }
+                         dangerouslySetInnerHTML={{__html: Translate.translate(this.props.message, values)}}/>;
+        }
     }
 });
 module.exports = TranslateMessage;
