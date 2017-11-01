@@ -1,11 +1,10 @@
 var _ = require('lodash');
 var React = require('react');
-var SpinnerView = require('../spinner.jsx');
 var ErrorMessageView = require('../error-message.jsx');
 var PaymentButton = require('../payment-button.jsx');
 
 var SimpleView = React.createClass({
-    className: 'xpay2Play-widget-simple',
+    className: 'xpay2play-widget-simple',
     SHOW_TIPS_THANK_DURATION: 1000,
 
     getInitialState: function () {
