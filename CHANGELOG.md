@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.3. - 2017-10-26
+## 2.1.3. - 2017-11-02
 - [feature] The parameter config.template was added. The available values are: 
 'standard' and 'simple'. By default, 'standard'.
 
