@@ -21,6 +21,7 @@ var PaymentButton = React.createClass({
     },
     render: function () {
         var amount = this.props.amount;
+        var tagName = this.props.tagName && this.props.tagName !== undefined ? this.props.tagName : 'button';
         var hasDiscount = amount.value_without_discount && amount.value < amount.value_without_discount;
         var buttonClassName = this.props.baseClassName + '-payment-button';
         var modifiers = [
@@ -43,30 +44,36 @@ var PaymentButton = React.createClass({
         }
 
         var buttonClassNameWithModifiers = buttonClassName + ' ' + modifiers
-                .map(function (m) { return m ? buttonClassName + '__' + m : ''; })
+                .map(function (m) {
+                    return m ? buttonClassName + '__' + m : '';
+                })
                 .join(' ');
 
-        return (
-            <button
-                className={ buttonClassNameWithModifiers }
-                disabled={ disabled }
-                onClick={ this.onBtnClick }>
-                <span className={ buttonClassName + '-amount' }>
-                    <TranslateMessage
-                        message={ message }
-                        values={ !disabled && {
-                            amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
-                        } }/>
-                    { !disabled && hasDiscount && (
-                        <FormattedCurrency
-                            amount={ amount.value_without_discount }
-                            currency={ amount.currency }
-                            cls="discount"
-                        />
-                    ) }
+        return React.createElement(
+            tagName,
+            {
+                className: buttonClassNameWithModifiers,
+                disabled: disabled,
+                onClick: this.onBtnClick
+            },
+            <span className={ buttonClassName + '-amount' }>
+                <TranslateMessage
+                    message={ message }
+                    values={ !disabled && {
+                        amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
+                    }}
+                    doubleSpan={ true }/>
+            </span>,
+            !disabled && hasDiscount && (
+                <span className={ buttonClassName + '-amount ' + buttonClassName + 'amount-discount'}>
+                    <FormattedCurrency
+                        amount={ amount.value_without_discount }
+                        currency={ amount.currency }
+                        cls="discount"
+                    />
                 </span>
-            </button>
-        );
+            )
+        )
     }
 });
 
