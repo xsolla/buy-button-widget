@@ -20,13 +20,15 @@ var FormattedCurrencyView = React.createClass({
 
         var truncate = this.props.truncate;
 
+        var currencyInformation = currencyFormat[this.props.currency.toUpperCase()];
+
         var fractionSize;
         if (truncate && formattedAmount % 1 === 0) {
             fractionSize = 0;
         } else if (truncate && formattedAmount * 10 % 1 === 0) {
             fractionSize = 1;
-        } else if (this.props.currency) {
-            fractionSize = currencyFormat[this.props.currency.toUpperCase()].fractionSize;
+        } else if (this.props.currency && currencyInformation) {
+            fractionSize = currencyInformation.fractionSize;
         } else {
             fractionSize = 2;
         }
@@ -46,7 +48,7 @@ var FormattedCurrencyView = React.createClass({
                 template.push(rubleTemplate);
                 break;
             default:
-                var uniqSymbol = !!currencyFormat[this.props.currency.toUpperCase()].uniqSymbol ? currencyFormat[this.props.currency.toUpperCase()].uniqSymbol : null;
+                var uniqSymbol = (currencyInformation && currencyInformation.uniqSymbol) || null;
 
                 if (uniqSymbol && !!uniqSymbol.grapheme && !!uniqSymbol.template && !uniqSymbol.rtl) {
                     formattedAmount = formattedAmount.toFixed(fractionSize).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");

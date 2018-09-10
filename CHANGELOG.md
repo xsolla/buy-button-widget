@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.4. - 2018-09-04
+- [fix] Add default behaviour for unknown currencies
+
 ## 2.1.3. - 2017-11-02
 - [feature] The parameter config.template was added. The available values are: 
 'standard' and 'simple'. By default, 'standard'.
