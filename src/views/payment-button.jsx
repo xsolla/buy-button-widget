@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var React = require('react');
 var TranslateMessage = require('./translate-message.jsx');
-var FormattedCurrency = require('./formatted-currency.jsx');
+var Price = require('./price.jsx');
 
 var PaymentButton = React.createClass({
     onBtnClick: function (e) {
@@ -22,7 +22,6 @@ var PaymentButton = React.createClass({
     render: function () {
         var amount = this.props.amount;
         var tagName = this.props.tagName && this.props.tagName !== undefined ? this.props.tagName : 'button';
-        var hasDiscount = amount.value_without_discount && amount.value < amount.value_without_discount;
         var buttonClassName = this.props.baseClassName + '-payment-button';
         var modifiers = [
             this.props.isTipsListOpened && 'moved',
@@ -60,19 +59,14 @@ var PaymentButton = React.createClass({
                 <TranslateMessage
                     message={ message }
                     values={ !disabled && {
-                        amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
+                        amount: <Price
+                            amount={ amount.value }
+                            amountWithoutDiscount={ amount.value_without_discount }
+                            currency={ amount.currency }
+                        />
                     }}
                     doubleSpan={ true }/>
-            </span>,
-            !disabled && hasDiscount && (
-                <span className={ buttonClassName + '-amount ' + buttonClassName + 'amount-discount'}>
-                    <FormattedCurrency
-                        amount={ amount.value_without_discount }
-                        currency={ amount.currency }
-                        cls="discount"
-                    />
-                </span>
-            )
+            </span>
         )
     }
 });

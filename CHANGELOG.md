@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.5. - 2018-11-16
+- [fix] Fixed view of discount price
+
 ## 2.1.4. - 2018-09-04
 - [fix] Add default behaviour for unknown currencies
 
