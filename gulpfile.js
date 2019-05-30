@@ -40,6 +40,7 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/isRetina.js/isRetina.js', {expose: 'is-retina-js'});
     bundler.require('./bower_components/svg-injector/svg-injector.js', {expose: 'svg-injector'});
     bundler.require('./node_modules/currency-format/currency-format.json', {expose: 'currency-format.json'});
+    bundler.require('./node_modules/currency-number-format/currency-number-format.json', {expose: 'currency-number-format.json'});
     bundler.require('./src/main.js', {expose: 'xsolla-pay2play-widget'});
 
     bundler.transform(sassify, {

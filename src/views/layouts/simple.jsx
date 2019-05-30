@@ -97,6 +97,7 @@ var SimpleView = React.createClass({
                                isReleased={ data.is_released }
                                disabled={ allDrmLocked }
                                tagName={'div'}
+                               locale={data.locale}
                 />
             );
 

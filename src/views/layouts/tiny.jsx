@@ -103,6 +103,7 @@ var TinyView = React.createClass({
                                onPaymentOpen={this.onPaymentOpen}
                                isReleased={ data.is_released }
                                disabled={ allDrmLocked }
+                               locale={data.locale}
                 />
             );
 
