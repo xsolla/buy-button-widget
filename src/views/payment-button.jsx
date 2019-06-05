@@ -60,7 +60,7 @@ var PaymentButton = React.createClass({
                 <TranslateMessage
                     message={ message }
                     values={ !disabled && {
-                        amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency }/>
+                        amount: <FormattedCurrency amount={ amount.value } currency={ amount.currency } locale={ this.props.locale }/>
                     }}
                     doubleSpan={ true }/>
                 {
@@ -68,6 +68,7 @@ var PaymentButton = React.createClass({
                         <FormattedCurrency
                             amount={ amount.value_without_discount }
                             currency={ amount.currency }
+                            locale = { this.props.locale }
                             cls="discount"
                         />
                     )

@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.6. - 2019-05-30
+- [feature] Change amount separator
+
 ## 2.1.4. - 2018-09-04
 - [fix] Add default behaviour for unknown currencies
 
