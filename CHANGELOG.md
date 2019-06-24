@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.7. - 2019-06-19
+- [fix] Fix logger
+
 ## 2.1.6. - 2019-05-30
 - [feature] Change amount separator
 
