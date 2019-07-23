@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.8. - 2019-07-23
+- [fix] Update PayStation Widget
+
 ## 2.1.7. - 2019-06-19
 - [fix] Fix logger
 
