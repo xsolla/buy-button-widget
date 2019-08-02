@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.9. - 2019-08-02
+- [fix] Do deep copy for options
+
 ## 2.1.8. - 2019-07-23
 - [fix] Update PayStation Widget
 
