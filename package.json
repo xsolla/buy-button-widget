@@ -1,6 +1,6 @@
 {
   "name": "xsolla-pay2play-widget",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "Pay2Play Widget",
   "devDependencies": {
     "currency-format": "1.0.11",

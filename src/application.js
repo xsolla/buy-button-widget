@@ -97,13 +97,17 @@ module.exports = (function () {
         }
     };
 
+    App.prototype.deepClone = function (data) {
+        return JSON.parse(JSON.stringify(data));
+    };
+
     /**
      * Initialize widget with options
      * @param options
      */
     App.prototype.init = function (options) {
         this.isInitiated = true;
-        this.config = _.extend({}, DEFAULT_CONFIG, options);
+        this.config = this.deepClone(Object.assign({}, DEFAULT_CONFIG, options));
         this.checkConfig();
         this.setUpTheme();
 
