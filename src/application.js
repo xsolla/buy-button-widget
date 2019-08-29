@@ -44,6 +44,11 @@ module.exports = (function () {
         DARK: 'dark'
     };
 
+    App.tokenCookieName = 'xsolla_login_token';
+    App.tokenParameterName = 'token';
+    App.selectorCookieName = 'xsolla_login_selector';
+    App.selectorParameterName = 'css_selector';
+
     App.eventTypes = _.extend({}, PaystationEmbedApp.eventTypes);
 
     /** Private Members **/
@@ -160,13 +165,46 @@ module.exports = (function () {
         return JSON.parse(JSON.stringify(data));
     };
 
-    App.prototype.getToken = function () {
+    App.prototype.saveTokenToCookie = function () {
         var urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('token');
+        var token = urlParams.get(App.tokenParameterName);
+        if (token) {
+            this.setCookie(App.tokenCookieName, token);
+        }
+    };
+
+    App.prototype.saveSelectorToCookie = function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        var selector = urlParams.get(App.selectorParameterName);
+        if (selector) {
+            this.setCookie(App.selectorCookieName, selector);
+        }
+    };
+
+    App.prototype.getToken = function () {
+        if (this.config.access_token) {
+            return this.config.access_token;
+        }
+        return this.getCookie(App.tokenCookieName)
+    };
+
+    App.prototype.getSelector = function () {
+        return this.getCookie(App.selectorCookieName)
     };
 
     App.prototype.needShowLogin = function () {
-        return this.xsollaLoginProjectId && !this.getToken();
+        return this.xsollaLoginProjectId && !this.getToken()
+    };
+
+    App.prototype.getCookie = function (name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    };
+
+    App.prototype.setCookie = function (name, value) {
+        document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
     };
 
     /**
@@ -178,6 +216,8 @@ module.exports = (function () {
         this.config = this.deepClone(Object.assign({}, DEFAULT_CONFIG, options));
         this.checkConfig();
         this.setUpTheme();
+        this.saveTokenToCookie();
+        this.saveSelectorToCookie();
 
         this.targetElement = $(options.target_element);
 
@@ -189,6 +229,10 @@ module.exports = (function () {
             request.access_token = options.access_token;
         } else {
             request.access_data = JSON.stringify(options.access_data);
+        }
+
+        if (this.getToken()) {
+            request.xsolla_login_token = this.getToken()
         }
 
         this.api = new Api(request, {
@@ -265,12 +309,15 @@ module.exports = (function () {
         }, this);
         var initLogin = _.bind(function (locale) {
             this.xsollaLoginProjectId = props.data.xsollaLoginProjectId;
+            var loginPayload = {
+                url: document.location.href,
+                css_selector: this.targetElement.attr('id')
+            };
+
             var loginOptions = {
-                state: {
-                    url: document.location.href
-                },
+                payload: JSON.stringify(loginPayload),
                 projectId: this.xsollaLoginProjectId,
-                callbackUrl: 'https://secure.xsolla.com/some-proxy',
+                callbackUrl: 'https://secure.xsolla.com/pages/p2ploginredirect',
                 locale: locale,
                 popupBackgroundColor: this.config.login.popupBackgroundColor,
                 theme: this.config.login.theme,
@@ -278,6 +325,9 @@ module.exports = (function () {
             };
 
             XL.init(this.deepClone(loginOptions));
+        }, this);
+        var updateAccessToken = _.bind(function () {
+            this.config.access_token = props.data.access_token;
         }, this);
 
         updateView();
@@ -301,13 +351,18 @@ module.exports = (function () {
                 paymentList: data.payment_instances,
                 is_released: info.is_released,
                 locale: data.user.language,
-                xsollaLoginProjectId: data.user.xsolla_login_project
+                xsollaLoginProjectId: data.user.xsolla_login_project,
+                access_token: data.access_token
             };
 
             Translate.init(data.translates || {});
-
+            props.data.xsollaLoginProjectId = 'qwret';
             if (props.data.xsollaLoginProjectId) {
                 initLogin(data.user.language);
+            }
+            props.data.access_token = 'p2oj805b1lJpKXBtaxKhQisLcZ1Yq57e';
+            if (props.data.access_token) {
+                updateAccessToken();
             }
 
             updateView();
