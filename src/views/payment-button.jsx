@@ -17,7 +17,22 @@ var PaymentButton = React.createClass({
         if (!this.props.isThankShow) {
             this.props.onPaymentOpen.call(this, options, e);
         }
+    },
+    componentDidMount: function () {
+        if (this.props.needShowPaystation) {
+            var options = {
+                instance_id: null,
+                tips: null
+            };
 
+            if (this.props.selectedTipIndex >= 0) {
+                options.tips = this.props.tips[this.props.selectedTipIndex];
+            }
+
+            if (!this.props.isThankShow) {
+                this.props.onPaymentOpen.call(this, options, null);
+            }
+        }
     },
     render: function () {
         var amount = this.props.amount;

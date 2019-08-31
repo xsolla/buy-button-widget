@@ -15,6 +15,7 @@ module.exports = (function () {
         this.isInitiated = false;
         this.targetElement = null;
         this.xsollaLoginProjectId = null;
+        this.locale = null;
     }
 
     var DEFAULT_CONFIG = {
@@ -84,6 +85,22 @@ module.exports = (function () {
     };
 
     App.prototype.openXsollaLogin = function () {
+        var loginPayload = {
+            url: document.location.href,
+            css_selector: this.targetElement.attr('id')
+        };
+
+        var loginOptions = {
+            payload: JSON.stringify(loginPayload),
+            projectId: this.xsollaLoginProjectId,
+            callbackUrl: 'https://secure.xsolla.com/pages/p2ploginredirect',
+            locale: this.locale,
+            popupBackgroundColor: this.config.login.popupBackgroundColor,
+            theme: this.config.login.theme,
+            iframeZIndex: this.config.login.iframeZIndex
+        };
+
+        XL.init(this.deepClone(loginOptions));
         XL.show();
     };
 
@@ -130,6 +147,7 @@ module.exports = (function () {
             PaystationEmbedApp.off(event);
             PaystationEmbedApp.off('load', openHandler);
             PaystationEmbedApp.off(events, eventHandler);
+            this.deleteCookie(App.selectorCookieName);
         }, this));
 
         PaystationEmbedApp.open();
@@ -203,8 +221,27 @@ module.exports = (function () {
         return matches ? decodeURIComponent(matches[1]) : undefined;
     };
 
-    App.prototype.setCookie = function (name, value) {
-        document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    App.prototype.setCookie = function (name, value, options = {}) {
+        options = {
+            path: '/',
+            ...options
+        };
+
+        let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+        for (let optionKey in options) {
+            updatedCookie += "; " + optionKey;
+            let optionValue = options[optionKey];
+            if (optionValue !== true) {
+                updatedCookie += "=" + optionValue;
+            }
+        }
+
+        document.cookie = updatedCookie;
+    };
+
+    App.prototype.deleteCookie = function (name) {
+        this.setCookie(name, '', {'max-age': -1});
     };
 
     /**
@@ -232,7 +269,7 @@ module.exports = (function () {
         }
 
         if (this.getToken()) {
-            request.xsolla_login_token = this.getToken()
+            request.token = this.getToken()
         }
 
         this.api = new Api(request, {
@@ -250,7 +287,6 @@ module.exports = (function () {
      */
     App.prototype.open = function (params) {
         this.checkApp();
-
         if (this.needShowLogin()) {
             this.openXsollaLogin();
         } else {
@@ -305,26 +341,13 @@ module.exports = (function () {
             themeColor: this.config.theme.background
         };
         var updateView = _.bind(function () {
+            props.data.css_selector = this.getSelector();
+            props.data.current_selector = this.targetElement.attr('id');
             ReactDOM.render(React.createElement(view, props), this.targetElement.get(0));
         }, this);
-        var initLogin = _.bind(function (locale) {
+        var initLoginParams = _.bind(function (locale) {
             this.xsollaLoginProjectId = props.data.xsollaLoginProjectId;
-            var loginPayload = {
-                url: document.location.href,
-                css_selector: this.targetElement.attr('id')
-            };
-
-            var loginOptions = {
-                payload: JSON.stringify(loginPayload),
-                projectId: this.xsollaLoginProjectId,
-                callbackUrl: 'https://secure.xsolla.com/pages/p2ploginredirect',
-                locale: locale,
-                popupBackgroundColor: this.config.login.popupBackgroundColor,
-                theme: this.config.login.theme,
-                iframeZIndex: this.config.login.iframeZIndex
-            };
-
-            XL.init(this.deepClone(loginOptions));
+            this.locale = locale;
         }, this);
         var updateAccessToken = _.bind(function () {
             this.config.access_token = props.data.access_token;
@@ -351,16 +374,15 @@ module.exports = (function () {
                 paymentList: data.payment_instances,
                 is_released: info.is_released,
                 locale: data.user.language,
-                xsollaLoginProjectId: data.user.xsolla_login_project,
+                xsollaLoginProjectId: data.user.xsolla_login_id,
                 access_token: data.access_token
             };
 
             Translate.init(data.translates || {});
-            props.data.xsollaLoginProjectId = 'qwret';
+
             if (props.data.xsollaLoginProjectId) {
-                initLogin(data.user.language);
+                initLoginParams(data.user.language);
             }
-            props.data.access_token = 'p2oj805b1lJpKXBtaxKhQisLcZ1Yq57e';
             if (props.data.access_token) {
                 updateAccessToken();
             }
