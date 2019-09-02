@@ -1,4 +1,5 @@
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var currencyFormat = require('currency-format.json');
 var currencyNumberFormat = require('currency-number-format.json');
 
@@ -105,7 +106,7 @@ function getFormattedCurrency(amount, currency, locale) {
     };
 }
 
-var FormattedCurrencyView = React.createClass({
+var FormattedCurrencyView = CreateReactClass({
     render: function () {
         if (!this.props.amount) {
             return null;

@@ -31,9 +31,9 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/xsolla-paystation-widget/src/main.js', {expose: 'paystation-embed-app'});
     bundler.require('./bower_components/lodash/lodash.js', {expose: 'lodash'});
     bundler.require('./bower_components/jquery/dist/jquery.js', {expose: 'jquery'});
-    bundler.require('./bower_components/react/react.js', {expose: 'react'});
-    bundler.require('./bower_components/react/react-dom.js', {expose: 'react-dom'});
-    bundler.require('./bower_components/react/react-dom-server.js', {expose: 'react-dom-server'});
+    bundler.require('./bower_components/react/react.production.min.js', {expose: 'react'});
+    bundler.require('./bower_components/react/react-dom.production.min.js', {expose: 'react-dom'});
+    bundler.require('./bower_components/react/react-dom-server.browser.production.min.js', {expose: 'react-dom-server'});
     bundler.require('./bower_components/polyglot/index.js', {expose: 'polyglot'});
     bundler.require('./bower_components/tether/dist/js/tether.js', {expose: 'tether'});
     bundler.require('./bower_components/react-onclickoutside/index.js', {expose: 'react-onclickoutside'});

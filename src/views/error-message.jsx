@@ -1,7 +1,8 @@
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var errorSVG = require('./images/error.svg');
 
-var ErrorMessageView = React.createClass({
+var ErrorMessageView = CreateReactClass({
     render: function () {
         var supportCode = (((this.props.errors || [])[0] || {}).support_code || '').replace(/([\d\*]{4})([\d\*]{4})/gi, '$1-$2');
         return (

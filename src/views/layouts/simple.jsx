@@ -1,9 +1,10 @@
 var _ = require('lodash');
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var ErrorMessageView = require('../error-message.jsx');
 var PaymentButton = require('../payment-button.jsx');
 
-var SimpleView = React.createClass({
+var SimpleView = CreateReactClass({
     className: 'xpay2play-widget-simple',
     SHOW_TIPS_THANK_DURATION: 1000,
 

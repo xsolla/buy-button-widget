@@ -1,7 +1,8 @@
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var xsollaLogoSVG = require('./images/xsolla-logo.svg');
 
-var XsollaLogoView = React.createClass({
+var XsollaLogoView = CreateReactClass({
     render: function () {
         return <span dangerouslySetInnerHTML={{__html: xsollaLogoSVG}} />;
     }

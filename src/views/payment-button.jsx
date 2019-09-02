@@ -1,9 +1,10 @@
 var _ = require('lodash');
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var TranslateMessage = require('./translate-message.jsx');
 var FormattedCurrency = require('./formatted-currency.jsx');
 
-var PaymentButton = React.createClass({
+var PaymentButton = CreateReactClass({
     onBtnClick: function (e) {
         var options = {
             instance_id: null,
