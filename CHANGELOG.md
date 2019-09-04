@@ -1,10 +1,7 @@
 # Changelog
 
-## 2.1.11. - 2019-09-04
+## 2.2.0. - 2019-09-04
 - [feature] Integration with xsolla login
-
-## 2.1.10. - 2019-09-02
-- [fix] Conflicts with React Dev Tools Extension
 
 ## 2.1.9. - 2019-08-02
 - [fix] Do deep copy for options

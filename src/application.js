@@ -97,7 +97,8 @@ module.exports = (function () {
             locale: this.locale,
             popupBackgroundColor: this.config.login.popupBackgroundColor,
             theme: this.config.login.theme,
-            iframeZIndex: this.config.login.iframeZIndex
+            iframeZIndex: this.config.login.iframeZIndex,
+            route: XL.ROUTES.SOCIALS_LOGIN
         };
 
         XL.init(this.deepClone(loginOptions));
@@ -148,6 +149,7 @@ module.exports = (function () {
             PaystationEmbedApp.off('load', openHandler);
             PaystationEmbedApp.off(events, eventHandler);
             this.deleteCookie(App.selectorCookieName);
+            this.deleteCookie(App.tokenCookieName);
         }, this));
 
         PaystationEmbedApp.open();
@@ -211,7 +213,11 @@ module.exports = (function () {
     };
 
     App.prototype.needShowLogin = function () {
-        return this.xsollaLoginProjectId && !this.getToken()
+        return this.xsollaLoginProjectId && !this.hasAccessToken();
+    };
+
+    App.prototype.hasAccessToken = function () {
+        return this.config.access_token !== null;
     };
 
     App.prototype.getCookie = function (name) {
@@ -351,6 +357,9 @@ module.exports = (function () {
         }, this);
         var updateAccessToken = _.bind(function () {
             this.config.access_token = props.data.access_token;
+            if (props.data.access_token !== null) {
+                this.config.access_data = null;
+            }
         }, this);
 
         updateView();
@@ -383,10 +392,7 @@ module.exports = (function () {
             if (props.data.xsollaLoginProjectId) {
                 initLoginParams(data.user.language);
             }
-            if (props.data.access_token) {
-                updateAccessToken();
-            }
-
+            updateAccessToken();
             updateView();
         }).fail(_.bind(function (errors) {
             props.data = {
