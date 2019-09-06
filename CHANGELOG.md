@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.2.0. - 2019-09-04
+- [feature] Integration with xsolla login
+
 ## 2.1.9. - 2019-08-02
 - [fix] Do deep copy for options
 

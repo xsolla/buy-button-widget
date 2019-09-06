@@ -80,7 +80,7 @@ var SimpleView = React.createClass({
         var logoModifiers = [themeColor];
         var amount = data.amount;
         var showPaymentButton = amount && (amount.value || amount.value === null); // if all drm is locked amount.value = null
-
+        var needShowPaystation = data.css_selector === data.current_selector && data.access_token !== null;
         if (this.state.isTipsListOpened) {
             logoModifiers.push('moved');
         }
@@ -98,6 +98,7 @@ var SimpleView = React.createClass({
                                disabled={ allDrmLocked }
                                tagName={'div'}
                                locale={data.locale}
+                               needShowPaystation={needShowPaystation}
                 />
             );
 

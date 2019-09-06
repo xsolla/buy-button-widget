@@ -22,7 +22,6 @@ module.exports = (function () {
         var deferred = $.Deferred();
 
         var apiUrl = getPaystationApiUrl(this.config.sandbox, this.config.host);
-
         $.ajax(apiUrl + route, {
             cache: false,
             dataType: 'json',
