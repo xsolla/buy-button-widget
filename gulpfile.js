@@ -11,7 +11,7 @@ var sassify = require('sassify');
 var stringify = require('stringify');
 var watchify = require('watchify');
 var gulpif = require('gulp-if');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var replace = require('gulp-replace');
 var fs = require('fs');
 
@@ -21,7 +21,12 @@ function setupBrowserify(watch) {
     var bundleOptions = {
         cache: {},
         packageCache: {},
-        paths: ['./src', './bower_components', './bower_components/xsolla-paystation-widget/src'],
+        paths: [
+            './src',
+            './bower_components',
+            './bower_components/xsolla-paystation-widget/src',
+            './bower_components/xsolla-login-js-sdk/src'
+        ],
         standalone: 'XPay2PlayWidget',
         fullPaths: false,
         debug: true
@@ -29,6 +34,7 @@ function setupBrowserify(watch) {
 
     var bundler = browserify('./src/main.js', bundleOptions);
     bundler.require('./bower_components/xsolla-paystation-widget/src/main.js', {expose: 'paystation-embed-app'});
+    bundler.require('./bower_components/xsolla-login-js-sdk/src/main.js', {expose: 'xsolla-login-app'});
     bundler.require('./bower_components/lodash/lodash.js', {expose: 'lodash'});
     bundler.require('./bower_components/jquery/dist/jquery.js', {expose: 'jquery'});
     bundler.require('./bower_components/react/react.js', {expose: 'react'});
@@ -65,7 +71,12 @@ function setupBrowserify(watch) {
         }
     }));
 
-    bundler.transform(reactify);
+    bundler.transform(
+        babelify,
+        {
+            presets: ["@babel/preset-react", "@babel/preset-env"],
+        }
+    );
 
     if (watch) {
         bundler = watchify(bundler);
