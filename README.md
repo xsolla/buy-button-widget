@@ -16,7 +16,7 @@ Features:
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://static.xsolla.com/embed/pay2play/2.2.1/widget.min.js](https://static.xsolla.com/embed/pay2play/2.1.9/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://static.xsolla.com/embed/pay2play/2.2.1/widget.min.js](https://static.xsolla.com/embed/pay2play/2.2.1/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
