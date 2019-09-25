@@ -1,9 +1,10 @@
 var _ = require('lodash');
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var ReactDOMServer = require('react-dom-server');
 var Translate = require('../translate.js');
 
-var TranslateMessage = React.createClass({
+var TranslateMessage = CreateReactClass({
     render: function () {
         var values = this.props.values;
         _.each(values, function (value, index) {

@@ -1,8 +1,9 @@
 var _ = require('lodash');
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var FormattedCurrency = require('./formatted-currency.jsx');
 
-var TipsList = React.createClass({
+var TipsList = CreateReactClass({
     onTipItemClick: function (index, e) {
         e.stopPropagation();
         e.preventDefault();

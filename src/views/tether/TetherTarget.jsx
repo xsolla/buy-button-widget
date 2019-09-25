@@ -3,12 +3,13 @@
 
 var _ = require('lodash');
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
 var OnClickOutside = require('react-onclickoutside');
 
 var TetheredElement = require('./TetheredElement');
 
-var TetherTarget = React.createClass({
+var TetherTarget = CreateReactClass({
     mixins: [
         OnClickOutside
     ],

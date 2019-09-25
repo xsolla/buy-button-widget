@@ -356,8 +356,8 @@ module.exports = (function () {
             this.locale = locale;
         }, this);
         var updateAccessToken = _.bind(function () {
-            this.config.access_token = props.data.access_token;
             if (props.data.access_token !== null) {
+                this.config.access_token = props.data.access_token;
                 this.config.access_data = null;
             }
         }, this);
@@ -391,8 +391,9 @@ module.exports = (function () {
 
             if (props.data.xsollaLoginProjectId) {
                 initLoginParams(data.user.language);
+                updateAccessToken();
             }
-            updateAccessToken();
+
             updateView();
         }).fail(_.bind(function (errors) {
             props.data = {

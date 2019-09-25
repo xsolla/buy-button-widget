@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var React = require('react');
+var CreateReactClass = require('create-react-class');
 var SpinnerView = require('../spinner.jsx');
 var ErrorMessageView = require('../error-message.jsx');
 var PaymentButton = require('../payment-button.jsx');
@@ -8,7 +9,7 @@ var TranslateMessage = require('../translate-message.jsx');
 var TipsList = require('../tips-list.jsx');
 var Logo = require('../logo.jsx');
 
-var TinyView = React.createClass({
+var TinyView = CreateReactClass({
     className: 'xpay2Play-widget',
     SHOW_TIPS_THANK_DURATION: 1000,
 
