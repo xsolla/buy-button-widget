@@ -86,14 +86,13 @@ module.exports = (function () {
 
     App.prototype.openXsollaLogin = function () {
         var loginPayload = {
-            url: document.location.href,
             css_selector: this.targetElement.attr('id')
         };
 
         var loginOptions = {
             payload: JSON.stringify(loginPayload),
             projectId: this.xsollaLoginProjectId,
-            callbackUrl: 'https://secure.xsolla.com/pages/p2ploginredirect',
+            callbackUrl: document.location.href,
             locale: this.locale,
             popupBackgroundColor: this.config.login.popupBackgroundColor,
             theme: this.config.login.theme,
@@ -185,21 +184,49 @@ module.exports = (function () {
         return JSON.parse(JSON.stringify(data));
     };
 
-    App.prototype.saveTokenToCookie = function () {
+    App.prototype.saveDataToCookie = function() {
         var urlParams = new URLSearchParams(window.location.search);
         var token = urlParams.get(App.tokenParameterName);
+
+        if (token) {
+            this.saveSelectorToCookie(token);
+            this.saveTokenToCookie(token);
+            this.removeParamFromUrl(App.tokenParameterName);
+        }
+
+    }
+
+
+    App.prototype.saveTokenToCookie = function (token) {
         if (token) {
             this.setCookie(App.tokenCookieName, token);
         }
     };
 
-    App.prototype.saveSelectorToCookie = function () {
-        var urlParams = new URLSearchParams(window.location.search);
-        var selector = urlParams.get(App.selectorParameterName);
-        if (selector) {
-            this.setCookie(App.selectorCookieName, selector);
+    App.prototype.saveSelectorToCookie = function (token) {
+        if (token) {
+            var parsedJwt = this.parseJwt(token);
+            if (parsedJwt && parsedJwt.payload) {
+                var payload = JSON.parse(parsedJwt.payload);
+            }
+            var selector = payload && payload[App.selectorParameterName];
+
+            if (selector) {
+                this.setCookie(App.selectorCookieName, selector);
+            }
         }
     };
+
+    App.prototype.removeParamFromUrl = function (paramName) {
+        var urlParams = new URLSearchParams(window.location.search);
+        urlParams.delete(paramName);
+
+        var url = document.location.origin
+            + document.location.pathname
+            + '?' + urlParams.toString()
+            + document.location.hash;
+        window.history.pushState({}, document.title, url);
+    }
 
     App.prototype.getToken = function () {
         if (this.config.access_token) {
@@ -250,6 +277,16 @@ module.exports = (function () {
         this.setCookie(name, '', {'max-age': -1});
     };
 
+    App.prototype.parseJwt = function (jwtToken) {
+        var base64Url = jwtToken.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    }
+
     /**
      * Initialize widget with options
      * @param options
@@ -259,8 +296,7 @@ module.exports = (function () {
         this.config = this.deepClone(Object.assign({}, DEFAULT_CONFIG, options));
         this.checkConfig();
         this.setUpTheme();
-        this.saveTokenToCookie();
-        this.saveSelectorToCookie();
+        this.saveDataToCookie();
 
         this.targetElement = $(options.target_element);
 

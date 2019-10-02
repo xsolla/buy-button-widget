@@ -1,14 +1,14 @@
 {
   "name": "xsolla-pay2play-widget",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Pay2Play Widget",
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babelify": "^10.0.0",
-    "bower": "1.7.1",
-    "browser-sync": "2.10.0",
+    "bower": "1.8.8",
+    "browser-sync": "2.26.7",
     "browserify": "12.0.1",
     "currency-format": "1.0.11",
     "currency-number-format": "1.1.0",
