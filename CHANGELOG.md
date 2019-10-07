@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.2. - 2019-10-02
+- [fix] Minor fixes with Xsolla Login Integration
+- [fix] Fix potential security vulnerability in one of module dependencies
+
 ## 2.2.1. - 2019-09-09
 - [fix] Conflicts with React Dev Tools Extension
 
