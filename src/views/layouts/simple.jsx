@@ -75,12 +75,9 @@ var SimpleView = CreateReactClass({
         var errors = data.errors;
         var paymentButtonColor = this.props.paymentButtonColor;
         var themeColor = this.props.themeColor;
-        var allDrmLocked = data.drm
-            ? data.drm.every((function (drm) { return drm.is_locked; }))
-            : false;
         var logoModifiers = [themeColor];
         var amount = data.amount;
-        var showPaymentButton = amount && (amount.value || amount.value === null); // if all drm is locked amount.value = null
+        var showPaymentButton = amount !== undefined;
         var needShowPaystation = data.css_selector === data.current_selector && data.access_token !== null;
         if (this.state.isTipsListOpened) {
             logoModifiers.push('moved');
@@ -96,7 +93,7 @@ var SimpleView = CreateReactClass({
                                paymentButtonColor={paymentButtonColor}
                                onPaymentOpen={this.onPaymentOpen}
                                isReleased={ data.is_released }
-                               disabled={ allDrmLocked }
+                               disabled={ false }
                                tagName={'div'}
                                locale={data.locale}
                                needShowPaystation={needShowPaystation}
