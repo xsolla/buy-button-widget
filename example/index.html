@@ -13,93 +13,105 @@
 </head>
 <body>
 
-    <div id="widget-example-green" >
-    </div>
+<div id="widget-example-green" >
+</div>
 
-    <div id="widget-example-blue">
-    </div>
+<div id="widget-example-blue">
+</div>
 
-    <div id="widget-example-red">
-    </div>
+<div id="widget-example-red">
+</div>
 
-    <div id="widget-example-gold">
-    </div>
+<div id="widget-example-gold">
+</div>
 
-    <script>
+<script>
 
-        var options = {
-            lightbox: {
-                height: '650px'
+    var options = {
+        lightbox: {
+            height: '650px'
+        },
+        access_data: {
+            "user": {
+                "id": {
+                    "value": "johncarter",
+                    "hidden": true
+                },
+                "name": {
+                    "value": "John Carter"
+                },
+                "country": {
+                    "value": "US",
+                    "allow_modify": true
+                }
             },
-            access_data: {
-                "user": {
-                    "country": {
-                        "allow_modify": true
-                    }
-                },
-                "settings": {
-                    "project_id": 49284
-                },
-                "purchase": {
-                    "pin_codes": {
-                        "codes": [
-                            {
-                                "digital_content": "188774_Asia",
-                                "drm": "epicgames"
-                            }
-                        ]
-                    }
+            "settings": {
+                "project_id": 16878,
+                "language": "en",
+                "currency": "USD",
+                "ui": {
+                    "size": "medium"
+                }
+            },
+            "purchase": {
+                "pin_codes": {
+                    "codes": [
+                        {
+                            "digital_content": "addon-spice"
+                        }
+                    ]
                 }
             }
-        };
-        var s = document.createElement('script');
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "widget.js";
-        s.addEventListener('load', function (e) {
-            var _ = XPay2PlayWidget._;
+        }
+    };
+    var s = document.createElement('script');
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = "widget.js";
+    s.addEventListener('load', function (e) {
+        var _ = XPay2PlayWidget._;
 
-            var greenWidget = XPay2PlayWidget.create(_.extend({
-                theme : {
-                    foreground: XPay2PlayWidget.foregroundTypes.GREEN,
-                    background: XPay2PlayWidget.backgroundTypes.LIGHT
-                },
-                target_element: '#widget-example-green'
-            }, options));
+        var greenWidget = XPay2PlayWidget.create(_.extend({
+            theme : {
+                foreground: XPay2PlayWidget.foregroundTypes.GREEN,
+                background: XPay2PlayWidget.backgroundTypes.LIGHT
+            },
+            target_element: '#widget-example-green'
+        }, options));
 
-            var blueWidget = XPay2PlayWidget.create(_.extend({
-                theme : {
-                    foreground: XPay2PlayWidget.foregroundTypes.BLUE,
-                    background: XPay2PlayWidget.backgroundTypes.LIGHT
-                },
-                target_element: '#widget-example-blue'
-            }, options));
+        var blueWidget = XPay2PlayWidget.create(_.extend({
+            theme : {
+                foreground: XPay2PlayWidget.foregroundTypes.BLUE,
+                background: XPay2PlayWidget.backgroundTypes.LIGHT
+            },
+            target_element: '#widget-example-blue'
+        }, options));
 
-            var redWidget = XPay2PlayWidget.create(_.extend({
-                theme : {
-                    foreground: XPay2PlayWidget.foregroundTypes.RED,
-                    background: XPay2PlayWidget.backgroundTypes.DARK
-                },
-                target_element: '#widget-example-red'
-            }, options));
+        var redWidget = XPay2PlayWidget.create(_.extend({
+            theme : {
+                foreground: XPay2PlayWidget.foregroundTypes.RED,
+                background: XPay2PlayWidget.backgroundTypes.DARK
+            },
+            target_element: '#widget-example-red'
+        }, options));
 
-            var goldWidget = XPay2PlayWidget.create(_.extend({
-                theme : {
-                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                    background: XPay2PlayWidget.backgroundTypes.DARK
-                },
-                target_element: '#widget-example-gold'
-            }, options));
+        var goldWidget = XPay2PlayWidget.create(_.extend({
+            theme : {
+                foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                background: XPay2PlayWidget.backgroundTypes.DARK
+            },
+            target_element: '#widget-example-gold'
+        }, options));
 
 
-            _.each([greenWidget, blueWidget, redWidget, goldWidget], function (widgetInstance) {
-                widgetInstance.on(_.values(XPay2PlayWidget.eventTypes).join(' '), function (event) {
-                    console.log(event.type);
-                });
+        _.each([greenWidget, blueWidget, redWidget, goldWidget], function (widgetInstance) {
+            widgetInstance.on(_.values(XPay2PlayWidget.eventTypes).join(' '), function (event) {
+                console.log(event.type);
             });
-        }, false);
-        var head = document.getElementsByTagName('head')[0];
-        head.appendChild(s);
-    </script>
+        });
+    }, false);
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(s);
+</script>
 </body>
 </html>
