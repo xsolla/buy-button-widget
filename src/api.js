@@ -1,13 +1,10 @@
-var $ = require('jquery');
-var _ = require('lodash');
-
 module.exports = (function () {
     function Api(data, options) {
         this.data = data || {};
-        this.config = _.extend({
+        this.config = Object.assign({
             sandbox: false,
             host: 'secure.xsolla.com'
-        }, options);
+        }, options)
     }
 
     var getPaystationApiUrl = function (sandbox, host) {
@@ -19,30 +16,45 @@ module.exports = (function () {
      * Perform request to PayStation API
      */
     Api.prototype.request = function (route, data) {
-        var deferred = $.Deferred();
+        const apiUrl = getPaystationApiUrl(this.config.sandbox, this.config.host);
+        const url = apiUrl + route;
 
-        var apiUrl = getPaystationApiUrl(this.config.sandbox, this.config.host);
-        $.ajax(apiUrl + route, {
-            cache: false,
-            dataType: 'json',
-            method: 'POST',
-            data: _.extend(this.data, data || {})
-        }).done(function (data) {
-            if ((data.api || {}).ver !== '1.0.1') {
-                // Non PayStation API answer
-                deferred.reject([{support_code: '20000002'}]);
-                return;
+        const postData = (Object.assign(this.data, data || {}));
+
+        const searchParams = Object.keys(postData).map((key) => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
+          }).join('&');
+
+        return new Promise((function(resolve, reject) {
+            const request = new XMLHttpRequest();
+            request.open('POST', url, true);
+            request.setRequestHeader('Accept', 'application/json, text/javascript, */*; q=0.01');
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+            request.send(searchParams);
+
+            request.onreadystatechange = function() {
+                if (request.readyState === 4) {
+
+                    const jsonResponse = JSON.parse(request.responseText);
+
+                    if (this.status !== 200) {
+                        reject(jsonResponse && jsonResponse.errors || [{support_code: '20000001'}]);
+                    }
+
+                    if ((jsonResponse.api || {}).ver !== '1.0.1') {
+                        // Non PayStation API answer
+                        reject([{support_code: '20000002'}]);
+                        return;
+                    }
+
+                    delete jsonResponse.api;
+
+                    resolve(jsonResponse);
+                  }
             }
 
-            delete data.api;
-
-            deferred.resolve(data);
-        }).fail(function (jqXHR) {
-            // HTTP Error, Fatal PayStation API error
-            deferred.reject(jqXHR.responseJSON && jqXHR.responseJSON.errors || [{support_code: '20000001'}]);
-        });
-
-        return deferred;
+        }).bind(this));
     };
 
     return Api;

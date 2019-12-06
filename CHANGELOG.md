@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.3.0. - 2019-12-06
+- [feature] Remove lodash and JQuery from project
+
 ## 2.2.2. - 2019-10-02
 - [fix] Minor fixes with Xsolla Login Integration
 - [fix] Fix potential security vulnerability in one of module dependencies
@@ -26,7 +29,7 @@
 - [fix] Add default behaviour for unknown currencies
 
 ## 2.1.3. - 2017-11-02
-- [feature] The parameter config.template was added. The available values are: 
+- [feature] The parameter config.template was added. The available values are:
 'standard' and 'simple'. By default, 'standard'.
 
 ## 2.1.2. - 2017-07-21
@@ -43,7 +46,7 @@
 
 ## 2.0.0 - 2016-11-07
 
-- [feature] New design for widget 
+- [feature] New design for widget
 - [feature] Added **theme** parameter for custom color
 - [feature] Added common size widget, deleted 'full' version
 

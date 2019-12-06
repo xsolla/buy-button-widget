@@ -1,7 +1,6 @@
-var $ = require('jquery');
-var _ = require('lodash');
 var PaystationEmbedApp = require('paystation-embed-app');
 var Api = require('./api');
+var Helpers = require('./helpers');
 var Exception = require('exception');
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -10,8 +9,23 @@ var XL = require('xsolla-login-app');
 
 module.exports = (function () {
     function App() {
-        this.config = _.extend({}, DEFAULT_CONFIG);
-        this.eventObject = $({});
+        this.config = Object.assign({}, DEFAULT_CONFIG);
+        this.eventObject = {
+            on: (function(event, handle) {
+                if (!this.targetElement) {
+                    return;
+                }
+
+                this.targetElement.addEventListener(event, handle);
+            }).bind(this),
+            off: (function(event, handle) {
+                if (!this.targetElement) {
+                    return;
+                }
+
+                this.targetElement.addEventListener(event, handle);
+            }).bind(this)
+        };
         this.isInitiated = false;
         this.targetElement = null;
         this.xsollaLoginProjectId = null;
@@ -50,31 +64,46 @@ module.exports = (function () {
     App.selectorCookieName = 'xsolla_login_selector';
     App.selectorParameterName = 'css_selector';
 
-    App.eventTypes = _.extend({}, PaystationEmbedApp.eventTypes);
+    App.eventTypes = Object.assign({}, PaystationEmbedApp.eventTypes);
 
     /** Private Members **/
     App.prototype.config = {};
     App.prototype.isInitiated = false;
-    App.prototype.eventObject = $({});
+    App.prototype.eventObject = {
+        on: (function(event, handle) {
+            if (!this.targetElement) {
+                return;
+            }
+
+            this.targetElement.addEventListener(event, handle);
+        }).bind(this),
+        off: (function(event, handle) {
+            if (!this.targetElement) {
+                return;
+            }
+
+            this.targetElement.addEventListener(event, handle);
+        }).bind(this)
+    };
 
     App.prototype.checkConfig = function () {
-        if (_.isEmpty(this.config.access_token) && _.isEmpty(this.config.access_data)) {
+        if (Helpers.isEmpty(this.config.access_token) && Helpers.isEmpty(this.config.access_data)) {
             this.throwError('No access token or access data given');
         }
 
-        if (!_.isEmpty(this.config.access_data) && !_.isPlainObject(this.config.access_data)) {
+        if (!Helpers.isEmpty(this.config.access_data) && typeof this.config.access_data !== 'object') {
             this.throwError('Invalid access data format');
         }
 
-        if (_.isEmpty(this.config.target_element)) {
+        if (Helpers.isEmpty(this.config.target_element)) {
             this.throwError('No target element given');
         }
 
-        if (!$(this.config.target_element).length) {
+        if (!this.config.target_element) {
             this.throwError('Target element doesn\'t exist in the DOM');
         }
 
-        if (_.isEmpty(this.config.host)) {
+        if (Helpers.isEmpty(this.config.host)) {
             this.throwError('Invalid host');
         }
 
@@ -86,7 +115,7 @@ module.exports = (function () {
 
     App.prototype.openXsollaLogin = function () {
         var loginPayload = {
-            css_selector: this.targetElement.attr('id')
+            css_selector: this.targetElement.getAttribute('id')
         };
 
         var loginOptions = {
@@ -113,7 +142,7 @@ module.exports = (function () {
 
         PaystationEmbedApp.init({
             access_token: this.config.access_token,
-            access_data: _.merge(access_data, this.config.access_data),
+            access_data: Object.assign(access_data, this.config.access_data),
             sandbox: this.config.sandbox,
             lightbox: this.config.lightbox,
             childWindow: this.config.childWindow,
@@ -121,13 +150,13 @@ module.exports = (function () {
         });
 
         // Register events (forwarding)
-        var events = _.values(App.eventTypes).join(' ');
-        var eventHandler = _.bind(function () {
+        var events = Object.values(App.eventTypes).join(' ');
+        var eventHandler = (function () {
             this.triggerEvent.apply(this, arguments);
-        }, this);
+        }).bind(this);
         PaystationEmbedApp.on(events, eventHandler);
 
-        var openHandler = _.bind(function (event) {
+        var openHandler = (function (event) {
             var instanceId = (params || {}).instance_id;
             var tips = (params || {}).tips;
             if (instanceId || tips) {
@@ -138,24 +167,24 @@ module.exports = (function () {
                     }
                 });
             }
-        }, this);
+        }).bind(this);
 
         PaystationEmbedApp.on('load', openHandler);
 
         // Unregister events
-        PaystationEmbedApp.on('close', _.bind(function (event) {
+        PaystationEmbedApp.on('close', (function (event) {
             PaystationEmbedApp.off(event);
             PaystationEmbedApp.off('load', openHandler);
             PaystationEmbedApp.off(events, eventHandler);
             this.deleteCookie(App.selectorCookieName);
             this.deleteCookie(App.tokenCookieName);
-        }, this));
+        }).bind(this));
 
         PaystationEmbedApp.open();
     };
 
     App.prototype.checkApp = function () {
-        if (_.isUndefined(this.isInitiated)) {
+        if (this.isInitiated === undefined) {
             this.throwError('Initialize widget before opening');
         }
     };
@@ -165,7 +194,11 @@ module.exports = (function () {
     };
 
     App.prototype.triggerEvent = function () {
-        this.eventObject.trigger.apply(this.eventObject, arguments);
+        [].forEach.call(arguments, (function (eventName) {
+            var event = document.createEvent('HTMLEvents');
+            event.initEvent(eventName, true, false);
+            this.targetElement.dispatchEvent(event);
+        }).bind(this));
     };
 
     App.prototype.setUpTheme = function () {
@@ -298,7 +331,7 @@ module.exports = (function () {
         this.setUpTheme();
         this.saveDataToCookie();
 
-        this.targetElement = $(options.target_element);
+        this.targetElement = document.querySelector(options.target_element);
 
         var request = {
             fail_locale: 'en'
@@ -342,7 +375,7 @@ module.exports = (function () {
      * @param handler A function to execute when the event is triggered
      */
     App.prototype.on = function (event, handler) {
-        if (!_.isFunction(handler)) {
+        if (typeof handler !== 'function') {
             return;
         }
 
@@ -376,39 +409,42 @@ module.exports = (function () {
 
         var props = {
             data: {},
-            onPaymentOpen: _.bind(function (params) {
+            onPaymentOpen: (function (params) {
                 this.open(params);
-            }, this),
+            }).bind(this),
             paymentButtonColor: this.config.theme.foreground,
             themeColor: this.config.theme.background
         };
-        var updateView = _.bind(function () {
+        var updateView = (function () {
             props.data.css_selector = this.getSelector();
-            props.data.current_selector = this.targetElement.attr('id');
-            ReactDOM.render(React.createElement(view, props), this.targetElement.get(0));
-        }, this);
-        var initLoginParams = _.bind(function (locale) {
+            props.data.current_selector = this.targetElement.getAttribute('id');
+            ReactDOM.render(React.createElement(view, props), this.targetElement);
+        }).bind(this);
+        var initLoginParams = (function (locale) {
             this.xsollaLoginProjectId = props.data.xsollaLoginProjectId;
             this.locale = locale;
-        }, this);
-        var updateAccessToken = _.bind(function () {
+        }).bind(this);
+        var updateAccessToken = (function () {
             if (props.data.access_token !== null) {
                 this.config.access_token = props.data.access_token;
                 this.config.access_data = null;
             }
-        }, this);
+        }).bind(this);
 
         updateView();
 
-        this.api.request('pay2play/init').done(function (data) {
+        this.api.request('pay2play/init').then(function(data) {
             var info = data.digital_content || {};
+
+            const uniqDrmAmount = Helpers.uniq(info.drm.map(data => data.amount));
+            const uniqDrmCurrency = Helpers.uniq(info.drm.map(data => data.currency));
 
             props.data = {
                 amount: {
                     value: info.min_amount,
                     value_without_discount: info.min_amount_without_discount,
                     currency: info.min_currency,
-                    hasDifferent: _.uniq(_.pluck(info.drm, 'amount')).length > 1 || _.uniq(_.pluck(info.drm, 'currency')).length > 1
+                    hasDifferent: uniqDrmAmount.length > 1 || uniqDrmCurrency.length > 1
                 },
                 tips: info.tips,
                 name: info.name,
@@ -431,19 +467,19 @@ module.exports = (function () {
             }
 
             updateView();
-        }).fail(_.bind(function (errors) {
+        }).catch(function(errors) {
             props.data = {
                 errors: errors
             };
 
-            _.each(errors, function (error) {
+            errors.forEach((error) => {
                 if (error.message) {
                     console.warn('XsollaPay2PlayWidget', error.support_code, error.message);
                 }
             });
 
             updateView();
-        }, this));
+        })
     };
 
     return App;

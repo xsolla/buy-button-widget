@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var React = require('react');
 var CreateReactClass = require('create-react-class');
 var TranslateMessage = require('./translate-message.jsx');

@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 'use strict';
 
-var _ = require('lodash');
 var React = require('react');
 var CreateReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
@@ -20,7 +19,7 @@ var TetherTarget = CreateReactClass({
     },
 
     componentDidMount: function () {
-        var tetherOptions = _.merge({
+        var tetherOptions = Object.assign({
             target: ReactDOM.findDOMNode(this)
         }, this.props.tetherOptions);
         this.tethered = new TetheredElement(this.props.tethered, tetherOptions);
@@ -39,25 +38,31 @@ var TetherTarget = CreateReactClass({
     },
 
     render: function () {
-        var divProps = _.omit(this.props, ['tethered', 'tetherOptions']);
+        const {
+            tethered,
+            tetherOptions,
+            ...restProps,
+        } = this.props;
+        const divProps = restProps;
+        const handles = {};
 
         if (this.props.toggleOnClick) {
-            divProps.onClick = _.bind(function () {
+            handles.onClick = (function () {
                 this.tethered.toggle();
-            }, this);
+            }).bind(this);
         }
 
         if (this.props.toggleOnMouse) {
-            divProps.onMouseEnter = _.bind(function () {
+            handles.onMouseEnter = (function () {
                 this.tethered.show();
-            }, this);
+            }).bind(this);
 
-            divProps.onMouseLeave = _.bind(function () {
+            handles.onMouseLeave = (function () {
                 this.tethered.hide();
-            }, this);
+            }).bind(this);
         }
 
-        return <div {... divProps }>
+        return <div { ...divProps } { ...handles }>
             { this.props.children }
         </div>;
     }

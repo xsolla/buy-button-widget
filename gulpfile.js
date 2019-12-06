@@ -12,7 +12,6 @@ var stringify = require('stringify');
 var watchify = require('watchify');
 var gulpif = require('gulp-if');
 var babelify = require('babelify');
-var replace = require('gulp-replace');
 var fs = require('fs');
 
 var devMode = process.argv.slice(2).indexOf('--dev') !== -1;
@@ -35,8 +34,6 @@ function setupBrowserify(watch) {
     var bundler = browserify('./src/main.js', bundleOptions);
     bundler.require('./bower_components/xsolla-paystation-widget/src/main.js', {expose: 'paystation-embed-app'});
     bundler.require('./bower_components/xsolla-login-js-sdk/src/main.js', {expose: 'xsolla-login-app'});
-    bundler.require('./bower_components/lodash/lodash.js', {expose: 'lodash'});
-    bundler.require('./bower_components/jquery/dist/jquery.js', {expose: 'jquery'});
     bundler.require('./bower_components/react/react.production.min.js', {expose: 'react'});
     bundler.require('./bower_components/react/react-dom.production.min.js', {expose: 'react-dom'});
     bundler.require('./bower_components/react/react-dom-server.browser.production.min.js', {expose: 'react-dom-server'});

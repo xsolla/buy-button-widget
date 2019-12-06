@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var React = require('react');
 var CreateReactClass = require('create-react-class');
 var SpinnerView = require('../spinner.jsx');
@@ -8,6 +7,7 @@ var FormattedCurrency = require('../formatted-currency.jsx');
 var TranslateMessage = require('../translate-message.jsx');
 var TipsList = require('../tips-list.jsx');
 var Logo = require('../logo.jsx');
+var Helpers = require('../../helpers');
 
 var TinyView = CreateReactClass({
     className: 'xpay2Play-widget',
@@ -45,7 +45,7 @@ var TinyView = CreateReactClass({
     },
 
     onTipSelect: function (index) {
-        if (!_.isFinite(index)) {
+        if (typeof index !== 'number') {
             index = -1;
         }
 
@@ -76,7 +76,7 @@ var TinyView = CreateReactClass({
 
     render: function () {
         var data = this.props.data;
-        var isLoaded = !_.isEmpty(data);
+        var isLoaded = !Helpers.isEmpty(data);
         var logoUrl = data.logoUrl;
         var errors = data.errors;
         var name = data.name;

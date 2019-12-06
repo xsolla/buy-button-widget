@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Tether = require('tether');
@@ -15,7 +14,7 @@ function TetheredElement(reactComponent, tetherOptions) {
     this.domNode.style.position = 'absolute'; // needed for Tether
     document.body.appendChild(this.domNode);
 
-    this.tether = new Tether(_.merge({
+    this.tether = new Tether(Object.assign({
         element: this.domNode,
         classPrefix: this.classPrefix
     }, tetherOptions));
@@ -42,9 +41,9 @@ TetheredElement.prototype.update = function () {
     ReactDOM.render(
         React.createElement('div', {className: this.classPrefix + '-content'}, this.reactComponent),
         this.domNode,
-        _.bind(function () {
+        (function () {
             this.tether.position()
-        }, this)
+        }.bind(this))
     );
 };
 
