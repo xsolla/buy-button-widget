@@ -3,6 +3,9 @@
 ## 2.3.0. - 2019-12-06
 - [feature] Remove lodash and JQuery from project
 
+## 2.2.3. - 2019-12-04
+- [fix] Upd button behavior with null price
+
 ## 2.2.2. - 2019-10-02
 - [fix] Minor fixes with Xsolla Login Integration
 - [fix] Fix potential security vulnerability in one of module dependencies
