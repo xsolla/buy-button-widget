@@ -1,6 +1,9 @@
 var App = require('./application');
 var version = require('./version');
 var Helpers = require('./helpers');
+var polyfills = require('./polyfills');
+
+polyfills.applyPolyfills();
 
 module.exports = (function () {
     return {

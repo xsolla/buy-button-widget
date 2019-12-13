@@ -16,17 +16,17 @@ module.exports = (function () {
      * Perform request to PayStation API
      */
     Api.prototype.request = function (route, data) {
-        const apiUrl = getPaystationApiUrl(this.config.sandbox, this.config.host);
-        const url = apiUrl + route;
+        var apiUrl = getPaystationApiUrl(this.config.sandbox, this.config.host);
+        var url = apiUrl + route;
 
-        const postData = (Object.assign(this.data, data || {}));
+        var postData = (Object.assign(this.data, data || {}));
 
-        const searchParams = Object.keys(postData).map((key) => {
+        var searchParams = Object.keys(postData).map((key) => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
           }).join('&');
 
         return new Promise((function(resolve, reject) {
-            const request = new XMLHttpRequest();
+            var request = new XMLHttpRequest();
             request.open('POST', url, true);
             request.setRequestHeader('Accept', 'application/json, text/javascript, */*; q=0.01');
             request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
@@ -36,7 +36,7 @@ module.exports = (function () {
             request.onreadystatechange = function() {
                 if (request.readyState === 4) {
 
-                    const jsonResponse = JSON.parse(request.responseText);
+                    var jsonResponse = JSON.parse(request.responseText);
 
                     if (this.status !== 200) {
                         reject(jsonResponse && jsonResponse.errors || [{support_code: '20000001'}]);

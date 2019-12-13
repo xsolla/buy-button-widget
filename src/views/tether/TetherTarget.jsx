@@ -38,13 +38,12 @@ var TetherTarget = CreateReactClass({
     },
 
     render: function () {
-        const {
-            tethered,
-            tetherOptions,
-            ...restProps,
-        } = this.props;
-        const divProps = restProps;
-        const handles = {};
+        var restProps = Object.keys(this.props)
+            .filter((key) => ['tethered', 'tetherOptions'].indexOf(key) < 0)
+            .reduce((newObj, key) => Object.assign(newObj, { [key]: this.props[key] }), {})
+
+        var divProps = restProps;
+        var handles = {};
 
         if (this.props.toggleOnClick) {
             handles.onClick = (function () {

@@ -5,9 +5,11 @@ var Translate = require('../translate.js');
 
 var TranslateMessage = CreateReactClass({
   render: function () {
-      const { values, message, doubleSpan } = this.props;
+      var values = this.props.values;
+      var message = this.props.message;
+      var doubleSpan = this.props.doubleSpan;
 
-      const translateContent = (values && Object.keys(values)
+      var translateContent = (values && Object.keys(values)
           .filter(key => React.isValidElement(values[key]))
           .reduce((acc, curr) => {
               acc[curr] = ReactDOMServer.renderToStaticMarkup(values[curr]);

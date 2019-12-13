@@ -1,11 +1,12 @@
 var PaystationEmbedApp = require('paystation-embed-app');
-var Api = require('./api');
-var Helpers = require('./helpers');
+var XL = require('xsolla-login-app');
 var Exception = require('exception');
 var React = require('react');
 var ReactDOM = require('react-dom');
+
+var Api = require('./api');
+var Helpers = require('./helpers');
 var Translate = require('./translate');
-var XL = require('xsolla-login-app');
 
 module.exports = (function () {
     function App() {
@@ -150,7 +151,7 @@ module.exports = (function () {
         });
 
         // Register events (forwarding)
-        var events = Object.values(App.eventTypes).join(' ');
+        var events = Object.keys(App.eventTypes).map(k => App.eventTypes[k]).join(' ');
         var eventHandler = (function () {
             this.triggerEvent.apply(this, arguments);
         }).bind(this);
@@ -436,8 +437,8 @@ module.exports = (function () {
         this.api.request('pay2play/init').then(function(data) {
             var info = data.digital_content || {};
 
-            const uniqDrmAmount = Helpers.uniq(info.drm.map(data => data.amount));
-            const uniqDrmCurrency = Helpers.uniq(info.drm.map(data => data.currency));
+            var uniqDrmAmount = Helpers.uniq(info.drm.map(data => data.amount));
+            var uniqDrmCurrency = Helpers.uniq(info.drm.map(data => data.currency));
 
             props.data = {
                 amount: {

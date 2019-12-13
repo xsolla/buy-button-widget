@@ -29,7 +29,7 @@ function zipObject(props, values) {
 
 
 module.exports = {
-  isEmpty,
-  uniq,
-  zipObject
+  isEmpty: isEmpty,
+  uniq: uniq,
+  zipObject: zipObject,
 }
