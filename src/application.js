@@ -173,13 +173,14 @@ module.exports = (function () {
         PaystationEmbedApp.on('load', openHandler);
 
         // Unregister events
-        PaystationEmbedApp.on('close', (function (event) {
-            PaystationEmbedApp.off(event);
+        var that = this;
+        PaystationEmbedApp.on('close', function handleClose(event) {
+            PaystationEmbedApp.off('close', handleClose);
             PaystationEmbedApp.off('load', openHandler);
             PaystationEmbedApp.off(events, eventHandler);
-            this.deleteCookie(App.selectorCookieName);
-            this.deleteCookie(App.tokenCookieName);
-        }).bind(this));
+            that.deleteCookie(App.selectorCookieName);
+            that.deleteCookie(App.tokenCookieName);
+        });
 
         PaystationEmbedApp.open();
     };
