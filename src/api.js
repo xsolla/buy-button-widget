@@ -21,7 +21,7 @@ module.exports = (function () {
 
         var postData = (Object.assign(this.data, data || {}));
 
-        var searchParams = Object.keys(postData).map((key) => {
+        var searchParams = Object.keys(postData).map(function(key) {
             return encodeURIComponent(key) + '=' + encodeURIComponent(postData[key]);
           }).join('&');
 

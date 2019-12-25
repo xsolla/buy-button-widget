@@ -10,8 +10,8 @@ var TranslateMessage = CreateReactClass({
       var doubleSpan = this.props.doubleSpan;
 
       var translateContent = (values && Object.keys(values)
-          .filter(key => React.isValidElement(values[key]))
-          .reduce((acc, curr) => {
+          .filter(function(key) { return React.isValidElement(values[key]) })
+          .reduce(function(acc, curr) {
               acc[curr] = ReactDOMServer.renderToStaticMarkup(values[curr]);
               return acc;
           }, {})) || [];

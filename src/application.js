@@ -151,7 +151,7 @@ module.exports = (function () {
         });
 
         // Register events (forwarding)
-        var events = Object.keys(App.eventTypes).map(k => App.eventTypes[k]).join(' ');
+        var events = Object.keys(App.eventTypes).map(function(k) { return App.eventTypes[k] }).join(' ');
         var eventHandler = (function () {
             this.triggerEvent.apply(this, arguments);
         }).bind(this);
@@ -438,8 +438,8 @@ module.exports = (function () {
         this.api.request('pay2play/init').then(function(data) {
             var info = data.digital_content || {};
 
-            var uniqDrmAmount = Helpers.uniq(info.drm.map(data => data.amount));
-            var uniqDrmCurrency = Helpers.uniq(info.drm.map(data => data.currency));
+            var uniqDrmAmount = Helpers.uniq(info.drm.map(function(data) { return data.amount; }));
+            var uniqDrmCurrency = Helpers.uniq(info.drm.map(function(data) { return data.currency; }));
 
             props.data = {
                 amount: {
@@ -474,7 +474,7 @@ module.exports = (function () {
                 errors: errors
             };
 
-            errors.forEach((error) => {
+            errors.forEach(function(error) {
                 if (error.message) {
                     console.warn('XsollaPay2PlayWidget', error.support_code, error.message);
                 }

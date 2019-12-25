@@ -104,7 +104,7 @@
 
         [greenWidget, blueWidget, redWidget, goldWidget].forEach(function (widgetInstance) {
             widgetInstance.on(Object.keys(XPay2PlayWidget.eventTypes)
-            .map(k => XPay2PlayWidget[k]).join(' '), function (event) {
+            .map(function(k) { return XPay2PlayWidget[k] }).join(' '), function (event) {
                 console.log(event.type);
             });
         });
