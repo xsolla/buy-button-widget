@@ -69,9 +69,7 @@
     s.async = true;
     s.src = "widget.js";
     s.addEventListener('load', function (e) {
-        var _ = XPay2PlayWidget._;
-
-        var greenWidget = XPay2PlayWidget.create(_.extend({
+        var greenWidget = XPay2PlayWidget.create(Object.assign({
             theme : {
                 foreground: XPay2PlayWidget.foregroundTypes.GREEN,
                 background: XPay2PlayWidget.backgroundTypes.LIGHT
@@ -79,7 +77,7 @@
             target_element: '#widget-example-green'
         }, options));
 
-        var blueWidget = XPay2PlayWidget.create(_.extend({
+        var blueWidget = XPay2PlayWidget.create(Object.assign({
             theme : {
                 foreground: XPay2PlayWidget.foregroundTypes.BLUE,
                 background: XPay2PlayWidget.backgroundTypes.LIGHT
@@ -87,7 +85,7 @@
             target_element: '#widget-example-blue'
         }, options));
 
-        var redWidget = XPay2PlayWidget.create(_.extend({
+        var redWidget = XPay2PlayWidget.create(Object.assign({
             theme : {
                 foreground: XPay2PlayWidget.foregroundTypes.RED,
                 background: XPay2PlayWidget.backgroundTypes.DARK
@@ -95,7 +93,7 @@
             target_element: '#widget-example-red'
         }, options));
 
-        var goldWidget = XPay2PlayWidget.create(_.extend({
+        var goldWidget = XPay2PlayWidget.create(Object.assign({
             theme : {
                 foreground: XPay2PlayWidget.foregroundTypes.GOLD,
                 background: XPay2PlayWidget.backgroundTypes.DARK
@@ -104,8 +102,9 @@
         }, options));
 
 
-        _.each([greenWidget, blueWidget, redWidget, goldWidget], function (widgetInstance) {
-            widgetInstance.on(_.values(XPay2PlayWidget.eventTypes).join(' '), function (event) {
+        [greenWidget, blueWidget, redWidget, goldWidget].forEach(function (widgetInstance) {
+            widgetInstance.on(Object.keys(XPay2PlayWidget.eventTypes)
+            .map(function(k) { return XPay2PlayWidget[k] }).join(' '), function (event) {
                 console.log(event.type);
             });
         });

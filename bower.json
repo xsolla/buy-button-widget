@@ -19,8 +19,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
-    "lodash": "~3.10.1",
     "react": "~16.1.0",
     "polyglot": "~1.0.0",
     "tether": "~1.1.1",

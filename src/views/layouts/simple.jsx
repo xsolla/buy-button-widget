@@ -1,8 +1,8 @@
-var _ = require('lodash');
 var React = require('react');
 var CreateReactClass = require('create-react-class');
 var ErrorMessageView = require('../error-message.jsx');
 var PaymentButton = require('../payment-button.jsx');
+var Helpers = require('../../helpers');
 
 var SimpleView = CreateReactClass({
     className: 'xpay2play-widget-simple',
@@ -40,7 +40,7 @@ var SimpleView = CreateReactClass({
     },
 
     onTipSelect: function (index) {
-        if (!_.isFinite(index)) {
+        if (typeof index !== 'number') {
             index = -1;
         }
 
@@ -71,7 +71,7 @@ var SimpleView = CreateReactClass({
 
     render: function () {
         var data = this.props.data;
-        var isLoaded = !_.isEmpty(data);
+        var isLoaded = !Helpers.isEmpty(data);
         var errors = data.errors;
         var paymentButtonColor = this.props.paymentButtonColor;
         var themeColor = this.props.themeColor;

@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var React = require('react');
 var CreateReactClass = require('create-react-class');
 var FormattedCurrency = require('./formatted-currency.jsx');
@@ -16,7 +15,7 @@ var TipsList = CreateReactClass({
             <div className={this.props.baseClassName + '-tips-list-block ' + (!this.props.isTipsListOpened ? this.props.baseClassName + '-tips-list-block__hide' : '')} >
                 <div className={this.props.baseClassName + '-tips-list ' + this.props.baseClassName + '-tips-list' + '__' + this.props.themeColor}>
                     {
-                        _.map(this.props.tips, function (tip, index) {
+                        this.props.tips.map(function (tip, index) {
                             return (
                                 <div key={index} onClick={self.onTipItemClick.bind(self, index)}
                                     className={self.props.baseClassName + '-tips-list-item ' +
@@ -24,8 +23,8 @@ var TipsList = CreateReactClass({
                                     <a className={self.props.baseClassName + '-tips-list-item-amount ' +
                                     self.props.baseClassName + '-tips-list-item-amount' + '__' + self.props.themeColor}>
                                         <FormattedCurrency amount={tip.amount}
-                                                           currency={tip.currency}
-                                                           truncate={true}/>
+                                                            currency={tip.currency}
+                                                            truncate={true}/>
                                     </a>
                                 </div>
                             );
