@@ -19,14 +19,14 @@ You should have node v10+ and also you need to install [Bower](https://bower.io/
 ```sh
 npm install
 bower install
-gulp server
+gulp serve
 ```
 
 ### Getting the code
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/2.3.0/widget.min.js](https://cdn.xsolla.net/embed/pay2play/2.3.0/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -43,13 +43,14 @@ $ bower install xsolla-pay2play-widget
 ``` javascript
 <script>
     var options = {
-        access_token: 'abcdef1234567890abcdef1234567890',
-        target_element: '#widget-example-element'
+        target_element: '#widget-example-element',
+        project_id: 48772,
+        sku: "YOUR-SKU",
     };
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//cdn.xsolla.net/embed/pay2play/2.3.0/widget.min.js";
+    s.src = "//cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XPay2PlayWidget.create(options);
     }, false);
@@ -63,11 +64,12 @@ It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//cdn.xsolla.net/embed/pay2play/2.3.0/widget.min.js"></script>
+<script src="//cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js"></script>
 <script>
     var widgetInstance = XPay2PlayWidget.create({
-        access_token: 'abcdef1234567890abcdef1234567890',
-        target_element: '#widget-example-element'
+        target_element: '#widget-example-element',
+        project_id: 48772,
+        sku: "YOUR-SKU",
     });
 </script>
 ```
@@ -79,8 +81,9 @@ If your project uses CommonJS module format, you can access the widget by requir
 ``` javascript
 var XPay2PlayWidget = require('PATH_TO_WIDGET/embed');
 var widgetInstance = XPay2PlayWidget.create({
-    access_token: 'abcdef1234567890abcdef1234567890',
-    target_element: '#widget-example-element'
+        target_element: '#widget-example-element',
+        project_id: 48772,
+        sku: "YOUR-SKU",
 });
 ```
 
@@ -91,19 +94,26 @@ Also you can use widget with RequireJS loader
 ``` javascript
 define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
     var widgetInstance = XPay2PlayWidget.create({
-        access_token: 'abcdef1234567890abcdef1234567890',
-        target_element: '#widget-example-element'
+        target_element: '#widget-example-element',
+        project_id: 48772,
+        sku: "YOUR-SKU",
     });
 });
 ```
 
 ### Widget Options
 
-* **access_token** (required) — Access token
-* **host** - Host for performing requests. The default value is **secure.xsolla.com**
+* **access_token** — Access token
+* **sku** — Unique identifier that refers to the particular stock keeping unit
+* **xsolla_login_token** — Xsolla Login authorization token
+* **item_type** — One of values: "digital_content", "physical_good", "virtual_item", "virtual_currency", "bundle". Default value is "digital_content".
+* **porject_id** — Unique project identifier in Publisher Account
+* **drm** (optional, only for "digital_content" item_type) — Allows you to skip the drm selection step when opening the PayStation.
+* **host** — Host for performing requests. The default value is **store.xsolla.com**
+* **payment_ui** — Payment options. See [here](https://developers.xsolla.com/api/v2/getting-started/#api_param_payment_ui_get_token_settings_ui) for details
 * **sandbox** — Set **true** to test the payment process, sandbox-secure.xsolla.com will be used instead secure.xsolla.com
 * **theme** — Widget color theme, defining its appearance. Can be object { foreground : ['blue', 'red', 'green', 'gold'],  background : ['light', 'dark']. }
-* **template** - Template. Values: **string** 'standard' (default), **string** 'simple'.
+* **template** — Template. Values: **string** 'standard' (default), **string** 'simple'.
 * **target_element** (required) — Element of the page, where the widget should be rendered (jQuery selector should be used, for example '#widget-example')
 
 The following parameters define the payment interface appearance, and coincide with [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/) parameters.

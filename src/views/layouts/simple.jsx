@@ -78,7 +78,6 @@ var SimpleView = CreateReactClass({
         var logoModifiers = [themeColor];
         var amount = data.amount;
         var showPaymentButton = amount !== undefined;
-        var needShowPaystation = data.css_selector === data.current_selector && data.access_token !== null;
         if (this.state.isTipsListOpened) {
             logoModifiers.push('moved');
         }
@@ -96,7 +95,7 @@ var SimpleView = CreateReactClass({
                                disabled={ false }
                                tagName={'div'}
                                locale={data.locale}
-                               needShowPaystation={needShowPaystation}
+                               needShowPaystation={this.props.needShowPaystation}
                 />
             );
 

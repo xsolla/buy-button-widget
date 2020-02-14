@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>PayStation 3 Integration Example</title>
     <style>
+        .widgets {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .xpay2Play-widget {
             box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .55);
             display: inline-block;
@@ -13,98 +18,155 @@
 </head>
 <body>
 
-<div id="widget-example-green" >
-</div>
+<div class="widgets">
+    <div id="widget-example-green">
+    </div>
 
-<div id="widget-example-blue">
-</div>
+    <div id="widget-example-blue">
+    </div>
 
-<div id="widget-example-red">
-</div>
+    <div id="widget-example-red">
+    </div>
 
-<div id="widget-example-gold">
+    <div id="widget-example-gold">
+    </div>
+
+    <div id="widget-example-gold-drm">
+    </div>
+
+    <div id="widget-example-gold-locale-email">
+    </div>
+
+    <div id="widget-example-gold-auth">
+    </div>
+
+    <div id="widget-example-physical">
+    </div>
 </div>
 
 <script>
 
-    var options = {
-        lightbox: {
-            height: '650px'
-        },
-        access_data: {
-            "user": {
-                "id": {
-                    "value": "johncarter",
-                    "hidden": true
-                },
-                "name": {
-                    "value": "John Carter"
-                },
-                "country": {
-                    "value": "US",
-                    "allow_modify": true
-                }
-            },
-            "settings": {
-                "project_id": 16878,
-                "language": "en",
-                "currency": "USD",
-                "ui": {
-                    "size": "medium"
-                }
-            },
-            "purchase": {
-                "pin_codes": {
-                    "codes": [
-                        {
-                            "digital_content": "addon-spice"
-                        }
-                    ]
-                }
-            }
+    var options_digital_content_basic = {
+        project_id: 20421,
+        sku: "1",
+    };
+
+    var options_digital_content_with_drm = {
+        project_id: 20421,
+        sku: "1",
+        drm: "steam"
+    };
+
+    var options_digital_content_with_custom_locale_and_email = {
+        project_id: 20421,
+        sku: "1",
+        user: {
+            locale: "de",
+            email: "support@xsolla.com"
         }
     };
+
+    var options_digital_content_with_auth = {
+        project_id: 48243,
+        sku: "2",
+    };
+
+    var options_physical_good_basic = {
+        project_id: 44056,
+        sku: "kicker_shirt_1",
+        item_type: "physical_good"
+    };
+
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
     s.src = "widget.js";
     s.addEventListener('load', function (e) {
         var greenWidget = XPay2PlayWidget.create(Object.assign({
-            theme : {
-                foreground: XPay2PlayWidget.foregroundTypes.GREEN,
-                background: XPay2PlayWidget.backgroundTypes.LIGHT
-            },
-            target_element: '#widget-example-green'
-        }, options));
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.GREEN,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                },
+                target_element: '#widget-example-green'
+            }
+        }, options_digital_content_basic));
 
         var blueWidget = XPay2PlayWidget.create(Object.assign({
-            theme : {
-                foreground: XPay2PlayWidget.foregroundTypes.BLUE,
-                background: XPay2PlayWidget.backgroundTypes.LIGHT
-            },
-            target_element: '#widget-example-blue'
-        }, options));
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.BLUE,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                },
+                target_element: '#widget-example-blue'
+            }
+        }, options_digital_content_basic));
 
         var redWidget = XPay2PlayWidget.create(Object.assign({
-            theme : {
-                foreground: XPay2PlayWidget.foregroundTypes.RED,
-                background: XPay2PlayWidget.backgroundTypes.DARK
-            },
-            target_element: '#widget-example-red'
-        }, options));
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.RED,
+                    background: XPay2PlayWidget.backgroundTypes.DARK
+                },
+                target_element: '#widget-example-red'
+            }
+        }, options_digital_content_basic));
 
         var goldWidget = XPay2PlayWidget.create(Object.assign({
-            theme : {
-                foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                background: XPay2PlayWidget.backgroundTypes.DARK
-            },
-            target_element: '#widget-example-gold'
-        }, options));
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                    background: XPay2PlayWidget.backgroundTypes.DARK
+                },
+                target_element: '#widget-example-gold'
+            }
+        }, options_digital_content_basic));
 
+        var goldWidgetDrm = XPay2PlayWidget.create(Object.assign({
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                },
+                target_element: '#widget-example-gold-drm'
+            }
+        }, options_digital_content_with_drm));
 
-        [greenWidget, blueWidget, redWidget, goldWidget].forEach(function (widgetInstance) {
+        var goldWidgetCustomLocaleAndEmail = XPay2PlayWidget.create(Object.assign({
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                },
+                target_element: '#widget-example-gold-locale-email'
+            }
+        }, options_digital_content_with_custom_locale_and_email));
+
+        var goldWidgetAuth = XPay2PlayWidget.create(Object.assign({
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                    background: XPay2PlayWidget.backgroundTypes.DARK
+                },
+                target_element: '#widget-example-gold-auth'
+            }
+        }, options_digital_content_with_auth));
+
+        var widgetPhysical = XPay2PlayWidget.create(Object.assign({
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                    background: XPay2PlayWidget.backgroundTypes.DARK
+                },
+                target_element: '#widget-example-physical'
+            }
+        }, options_physical_good_basic));
+
+        [greenWidget, blueWidget, redWidget, goldWidget, goldWidgetDrm, goldWidgetCustomLocaleAndEmail, goldWidgetAuth, widgetPhysical].forEach(function (widgetInstance) {
             widgetInstance.on(Object.keys(XPay2PlayWidget.eventTypes)
-            .map(function(k) { return XPay2PlayWidget[k] }).join(' '), function (event) {
+                .map(function (k) {
+                    return XPay2PlayWidget[k]
+                }).join(' '), function (event) {
                 console.log(event.type);
             });
         });

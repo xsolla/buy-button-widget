@@ -1,15 +1,18 @@
-var React = require('react');
-var CreateReactClass = require('create-react-class');
-var errorSVG = require('./images/error.svg');
+const React = require('react');
+const CreateReactClass = require('create-react-class');
+const errorSVG = require('./images/error.svg');
 
-var ErrorMessageView = CreateReactClass({
+const DEFAULT_ERROR_CODE = 1000;
+
+const ErrorMessageView = CreateReactClass({
     render: function () {
-        var supportCode = (((this.props.errors || [])[0] || {}).support_code || '').replace(/([\d\*]{4})([\d\*]{4})/gi, '$1-$2');
+        const {errorCode} = (this.props.errors || [{errorCode: DEFAULT_ERROR_CODE}])[0];
+
         return (
             <span className="error-message">
-                <div dangerouslySetInnerHTML={{__html: errorSVG}}></div>
+                <div dangerouslySetInnerHTML={{__html: errorSVG}}/>
                 <div>Error</div>
-                <div>{supportCode ? '(' + supportCode + ')' : ''}</div>
+                <div>{errorCode ? '(' + errorCode + ')' : ''}</div>
             </span>
         );
     }

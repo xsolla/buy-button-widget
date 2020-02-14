@@ -11,6 +11,11 @@ var TipsList = CreateReactClass({
     },
     render: function () {
         var self = this;
+
+        if (!this.props.tips) {
+            return null;
+        }
+
         return (
             <div className={this.props.baseClassName + '-tips-list-block ' + (!this.props.isTipsListOpened ? this.props.baseClassName + '-tips-list-block__hide' : '')} >
                 <div className={this.props.baseClassName + '-tips-list ' + this.props.baseClassName + '-tips-list' + '__' + this.props.themeColor}>

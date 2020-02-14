@@ -85,7 +85,6 @@ var TinyView = CreateReactClass({
         var logoModifiers = [themeColor];
         var amount = data.amount;
         var showPaymentButton = amount !== undefined;
-        var needShowPaystation = data.css_selector === data.current_selector && data.access_token !== null;
         if (this.state.isTipsListOpened) {
             logoModifiers.push('moved');
         }
@@ -102,7 +101,7 @@ var TinyView = CreateReactClass({
                                isReleased={ data.is_released }
                                disabled={ false }
                                locale={data.locale}
-                               needShowPaystation={needShowPaystation}
+                               needShowPaystation={this.props.needShowPaystation}
                 />
             );
 
