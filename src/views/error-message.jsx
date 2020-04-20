@@ -2,17 +2,23 @@ const React = require('react');
 const CreateReactClass = require('create-react-class');
 const errorSVG = require('./images/error.svg');
 
-const DEFAULT_ERROR_CODE = 1000;
+const DEFAULT_DISPLAY_ERROR_CODE = '0401-1000';
+const ERROR_CODE_REGEX = /[\d]{4}-[\d]{4}/gi;
 
 const ErrorMessageView = CreateReactClass({
     render: function () {
-        const {errorCode} = (this.props.errors || [{errorCode: DEFAULT_ERROR_CODE}])[0];
+        let displayErrorCode = DEFAULT_DISPLAY_ERROR_CODE;
+
+        const {error} = this.props;
+        if (error.errorMessage) {
+            displayErrorCode = error.errorMessage.match(ERROR_CODE_REGEX);
+        }
 
         return (
             <span className="error-message">
                 <div dangerouslySetInnerHTML={{__html: errorSVG}}/>
                 <div>Error</div>
-                <div>{errorCode ? '(' + errorCode + ')' : ''}</div>
+                <div>{displayErrorCode ? `(${displayErrorCode})` : ''}</div>
             </span>
         );
     }

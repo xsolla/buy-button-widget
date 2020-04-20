@@ -118,6 +118,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 * **drm** — Predefined DRM (e.g. Steam) for Digital Content item. Allows user to skip the DRM selection step
 * **api_settings** 
     * **host** — Host for performing requests. The default value is **store.xsolla.com**
+    * **api_host** — Host for performing API requests. The default value is **store.xsolla.com/api**
     * **sandbox** — Set **true** to test the payment process, **sandbox-secure.xsolla.com** will be used instead **secure.xsolla.com** to process payments (see [Testing the Payment Process](https://developers.xsolla.com/doc/pay-station/#guides_pay_station_testing_payment_process))
 * **user** — Custom user data
     * **xsolla_login_token** — Xsolla Login user authorization token
@@ -129,10 +130,11 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
     * **theme** — Widget color theme, defining its appearance. Can be object { foreground : ['blue', 'red', 'green', 'gold'],  background : ['light', 'dark']. }
     * **template** — Template. Values: **string** 'standard' (default), **string** 'simple'.
     * **target_element** (required) — Element of the page, where the widget should be rendered (jQuery selector should be used, for example '#widget-example')
+* **payment_ui** - Payment interface appearance parameters (see [Payment UI settings](https://developers.xsolla.com/api/v2/getting-started/#api_param_payment_ui_get_token_settings_ui))
 
-The following parameters define the payment interface appearance, and coincide with [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/) parameters.
+The following parameters define the payment widget appearance, and coincide with [Xsolla PayStation Widget](https://github.com/xsolla/paystation-embed/) parameters.
 
-* **payment_ui** 
+* **payment_widget_ui** 
     * **lightbox** — Options for modal dialog that contains frame of PayStation
         * **width** — Width of lightbox frame. If null, depends on paystation width. Default is null
         * **height** — Height of lightbox frame. If null, depends on paystation height. Default is '100%'

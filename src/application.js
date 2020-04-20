@@ -11,9 +11,14 @@ const Jwt = require('./jwt');
 const Cookie = require('./cookie');
 
 module.exports = (function () {
+    const DEFAULT_ITEM_TYPE = 'digital_content';
+    const DEFAULT_HOST = 'store.xsolla.com';
+    const DEFAULT_API_HOST = 'store.xsolla.com/api';
+    const DEFAULT_PAYSTATION_RESIZE_TIMEOUT = 2000;
+
     const DEFAULT_CONFIG = {
         access_token: null,
-        item_type: 'digital_content',
+        item_type: DEFAULT_ITEM_TYPE,
         project_id: null,
         sku: null,
         drm: null,
@@ -24,8 +29,9 @@ module.exports = (function () {
             locale: null,
             currency: null
         },
-        api_parameters: {
-            host: ''
+        api_settings: {
+            host: DEFAULT_HOST,
+            api_host: DEFAULT_API_HOST,
         },
         widget_ui: {
             theme: {
@@ -35,14 +41,13 @@ module.exports = (function () {
             template: 'standard'
         },
         payment_ui: null,
+        payment_widget_ui: null,
         login_ui: {
             popupBackgroundColor: 'rgba(0, 0, 0, 0.64)',
             theme: null,
             iframeZIndex: 1000000
         }
     };
-
-    const DEFAULT_HOST = 'store.xsolla.com';
 
     function App() {
         this.config = Object.assign({}, DEFAULT_CONFIG);
@@ -89,30 +94,59 @@ module.exports = (function () {
     App.eventTypes = Object.assign({}, PaystationEmbedApp.eventTypes);
 
     /** Private Members **/
-    App.prototype.checkConfig = function () {
-        if (Helpers.isEmpty(this.config.project_id) && Helpers.isEmpty(this.config.access_token)) {
+    App.prototype.checkConfigForRequiredParams = function () {
+        if (Helpers.isEmpty(this.config.project_id)) {
             this.throwError('No project id given');
         }
 
-        if (Helpers.isEmpty(this.config.sku) && Helpers.isEmpty(this.config.access_token)) {
-            this.throwError('No sku given');
-        }
-
-        if (Helpers.isEmpty(this.config.item_type) && Helpers.isEmpty(this.config.access_token)) {
+        if (Helpers.isEmpty(this.config.item_type)) {
             this.throwError('No item_type given');
         }
 
-        if (Helpers.isEmpty(this.config.widget_ui.target_element)) {
+        if (Helpers.isEmpty(this.config.access_token)) {
+            if (Helpers.isEmpty(this.config.sku)) {
+                this.throwError('No sku given');
+            }
+        }
+
+        if (this.config.api_settings && Helpers.isEmpty(this.config.api_settings.host)) {
+            this.config.api_settings.host = DEFAULT_HOST;
+        }
+
+        if (this.config.api_settings && this.config.api_settings.host && Helpers.isEmpty(this.config.api_settings.api_host)) {
+            this.config.api_settings.api_host = this.config.api_settings.host + '/api';
+        }
+
+        if (Helpers.isEmpty(this.config.widget_ui) || Helpers.isEmpty(this.config.widget_ui.target_element)) {
             this.throwError('No target element given');
         }
 
-        if (!document.querySelector(this.config.widget_ui.target_element)) {
+        if (this.config.widget_ui && this.config.widget_ui.target_element && !document.querySelector(this.config.widget_ui.target_element)) {
             this.throwError('Target element doesn\'t exist in the DOM');
         }
 
-        if (this.config.widget_ui.theme.background !== App.backgroundTypes.LIGHT && this.config.widget_ui.theme.background !== App.backgroundTypes.DARK) {
-            this.config.widget_ui.theme.background = App.backgroundTypes.LIGHT;
+        if (this.config.widget_ui) {
+            if (Helpers.isEmpty(this.config.widget_ui.theme)) {
+                this.config.widget_ui.theme = {};
+            }
+
+            if (!(Object.values(App.foregroundTypes).includes(this.config.widget_ui.theme.foreground))) {
+                this.config.widget_ui.theme.foreground = App.foregroundTypes.BLUE;
+            }
+
+            if (!(Object.values(App.backgroundTypes).includes(this.config.widget_ui.theme.background))) {
+                this.config.widget_ui.theme.background = App.backgroundTypes.LIGHT;
+            }
         }
+
+        if (Helpers.isEmpty(this.config.payment_widget_ui)) {
+            this.config.payment_widget_ui = {};
+        }
+
+        this.config.payment_widget_ui.lightbox = {
+            resizeTimeout: DEFAULT_PAYSTATION_RESIZE_TIMEOUT,
+            ...this.config.payment_widget_ui.lightbox
+        };
     };
 
     App.prototype.openXsollaLogin = function () {
@@ -142,8 +176,8 @@ module.exports = (function () {
             sku: this.config.sku,
             drm: this.config.drm,
             access_token: this.config.access_token,
-            mode: this.config.api_settings && this.config.api_settings.sandbox,
-            ui_settings: typeof this.config.ui_settings === 'object' && btoa(JSON.stringify(this.config.ui_settings)),
+            mode: this.config.api_settings && this.config.api_settings.sandbox && 'sandbox',
+            ui_settings: this.config.payment_ui && btoa(JSON.stringify(this.config.payment_ui)),
             xsolla_login_token: this.getXsollaLoginToken(),
             email: this.config.user && this.config.user.email,
             country: this.config.user && this.config.user.country,
@@ -152,32 +186,28 @@ module.exports = (function () {
         };
         Helpers.filterObject(buyParams);
 
-        const buyUrlWithoutQueryParams = 'https://' +
-            (this.config.api_parameters && this.config.api_parameters.host ?
-                this.config.api_parameters.host :
-                DEFAULT_HOST)
-            + '/pages/buy.php?';
+        const buyUrlWithoutQueryParams = 'https://' + this.config.api_settings.host + '/pages/buy.php?';
         const buyUrl = buyUrlWithoutQueryParams + Helpers.buildQueryString(buyParams);
 
         PaystationEmbedApp.init({
-            store_api_url: buyUrl,
+            payment_url: buyUrl,
             embed_type: 'widget',
-            lightbox: this.config.payment_ui && this.config.payment_ui.lightbox,
-            childWindow: this.config.payment_ui && this.config.payment_ui.childWindow
+            lightbox: this.config.payment_widget_ui && this.config.payment_widget_ui.lightbox,
+            childWindow: this.config.payment_widget_ui && this.config.payment_widget_ui.childWindow
         });
 
         // Register events (forwarding)
-        var events = Object.keys(App.eventTypes).map(function (k) {
-            return App.eventTypes[k]
+        const events = Object.keys(App.eventTypes).map(function (eventType) {
+            return App.eventTypes[eventType]
         }).join(' ');
-        var eventHandler = (function () {
+        const eventHandler = (function () {
             this.triggerEvent.apply(this, arguments);
         }).bind(this);
         PaystationEmbedApp.on(events, eventHandler);
 
-        var openHandler = (function (event) {
-            var instanceId = (params || {}).instance_id;
-            var tips = (params || {}).tips;
+        const openHandler = (function () {
+            const instanceId = (params || {}).instance_id;
+            const tips = (params || {}).tips;
             if (instanceId || tips) {
                 PaystationEmbedApp.sendMessage('set-data', {
                     settings: {
@@ -191,8 +221,7 @@ module.exports = (function () {
         PaystationEmbedApp.on('load', openHandler);
 
         // Unregister events
-        var that = this;
-        PaystationEmbedApp.on('close', function handleClose(event) {
+        PaystationEmbedApp.on('close', function handleClose() {
             PaystationEmbedApp.off('close', handleClose);
             PaystationEmbedApp.off('load', openHandler);
             PaystationEmbedApp.off(events, eventHandler);
@@ -289,7 +318,7 @@ module.exports = (function () {
     App.prototype.init = function (config) {
         this.isInitiated = true;
         this.config = Helpers.deepClone(Object.assign({}, DEFAULT_CONFIG, config));
-        this.checkConfig();
+        this.checkConfigForRequiredParams();
         this.setUpTheme();
         this.reinitializeAfterLogin();
 
@@ -365,7 +394,7 @@ module.exports = (function () {
             sku: options.sku,
             drm: options.drm,
             access_token: options.access_token,
-            mode: options.api_settings && options.api_settings.sandbox,
+            mode: options.api_settings && options.api_settings.sandbox && 'sandbox',
             country: options.user && options.user.country,
             locale: options.user && options.user.locale,
             currency: options.user && options.user.currency,
@@ -396,7 +425,7 @@ module.exports = (function () {
             updateView();
         }).catch(function (error) {
             props.data = {
-                errors: [error]
+                error
             };
 
             if (error.errorCode && error.errorMessage) {

@@ -162,14 +162,20 @@
             }
         }, options_physical_good_basic));
 
-        [greenWidget, blueWidget, redWidget, goldWidget, goldWidgetDrm, goldWidgetCustomLocaleAndEmail, goldWidgetAuth, widgetPhysical].forEach(function (widgetInstance) {
-            widgetInstance.on(Object.keys(XPay2PlayWidget.eventTypes)
-                .map(function (k) {
-                    return XPay2PlayWidget[k]
-                }).join(' '), function (event) {
-                console.log(event.type);
-            });
-        });
+        [greenWidget, blueWidget, redWidget, goldWidget, goldWidgetDrm, goldWidgetCustomLocaleAndEmail, goldWidgetAuth, widgetPhysical].forEach(
+            function (widgetInstance) {
+                widgetInstance.on(
+                    Object.keys(XPay2PlayWidget.eventTypes)
+                        .map(function (k) {
+                            return XPay2PlayWidget.eventTypes[k];
+                        })
+                        .join(' '),
+                    function (event) {
+                        console.log(event.type);
+                    }
+                );
+            }
+        );
     }, false);
     var head = document.getElementsByTagName('head')[0];
     head.appendChild(s);

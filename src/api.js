@@ -2,15 +2,12 @@ const Helpers = require('./helpers');
 
 module.exports = (function () {
     function Api(options) {
-        this.config = Object.assign({
-            sandbox: false,
-            host: 'store.xsolla.com'
-        }, options)
+        this.config = options;
     }
 
     Api.prototype.initRequest = function (project_id, data) {
         return new Promise((function (resolve, reject) {
-            const url = `https://${this.config.host}/api/v2/project/${project_id}/widget/init`;
+            const url = `https://${this.config.api_host}/v2/project/${project_id}/widget/init`;
             const searchParams = Helpers.buildQueryString(data);
 
             const request = new XMLHttpRequest();

@@ -78,7 +78,7 @@ var TinyView = CreateReactClass({
         var data = this.props.data;
         var isLoaded = !Helpers.isEmpty(data);
         var logoUrl = data.logoUrl;
-        var errors = data.errors;
+        var error = data.error;
         var name = data.name;
         var paymentButtonColor = this.props.paymentButtonColor;
         var themeColor = this.props.themeColor;
@@ -176,8 +176,8 @@ var TinyView = CreateReactClass({
                 <SpinnerView />
             );
 
-        var errorMessage = errors && (
-                <ErrorMessageView errors={errors}/>
+        var errorMessage = error && (
+                <ErrorMessageView error={error}/>
             );
 
         var gradientBlock = (
