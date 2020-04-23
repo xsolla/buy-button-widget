@@ -23,7 +23,7 @@
     "polyglot": "~1.0.0",
     "tether": "~1.1.1",
     "react-onclickoutside": "~4.5.0",
-    "xsolla-paystation-widget": "#feature/PAR_24_update_widget_for_new_schema",
+    "xsolla-paystation-widget": "master",
     "retina.js": "retinajs#~1.3.0",
     "isRetina.js": "*",
     "svg-injector": "^1.1.3",
