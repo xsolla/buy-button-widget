@@ -72,13 +72,12 @@ var SimpleView = CreateReactClass({
     render: function () {
         var data = this.props.data;
         var isLoaded = !Helpers.isEmpty(data);
-        var errors = data.errors;
+        var error = data.error;
         var paymentButtonColor = this.props.paymentButtonColor;
         var themeColor = this.props.themeColor;
         var logoModifiers = [themeColor];
         var amount = data.amount;
         var showPaymentButton = amount !== undefined;
-        var needShowPaystation = data.css_selector === data.current_selector && data.access_token !== null;
         if (this.state.isTipsListOpened) {
             logoModifiers.push('moved');
         }
@@ -96,7 +95,7 @@ var SimpleView = CreateReactClass({
                                disabled={ false }
                                tagName={'div'}
                                locale={data.locale}
-                               needShowPaystation={needShowPaystation}
+                               needShowPaystation={this.props.needShowPaystation}
                 />
             );
 
@@ -104,8 +103,8 @@ var SimpleView = CreateReactClass({
                 <div className="spinner-simple"></div>
             );
 
-        var errorMessage = errors && (
-                <ErrorMessageView errors={errors}/>
+        var errorMessage = error && (
+                <ErrorMessageView error={error}/>
             );
 
         var blockButton = isLoaded && (<div className={this.className + '-button-block' + ' ' + this.className + '-button-block' + '__' + themeColor}>

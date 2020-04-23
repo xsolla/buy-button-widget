@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.0. - 2020-03-01
+- [feature] Update widget for new schema
+
 ## 2.3.0. - 2019-12-06
 - [feature] Remove lodash and JQuery from project
 

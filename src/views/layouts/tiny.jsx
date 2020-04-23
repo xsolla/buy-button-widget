@@ -78,14 +78,13 @@ var TinyView = CreateReactClass({
         var data = this.props.data;
         var isLoaded = !Helpers.isEmpty(data);
         var logoUrl = data.logoUrl;
-        var errors = data.errors;
+        var error = data.error;
         var name = data.name;
         var paymentButtonColor = this.props.paymentButtonColor;
         var themeColor = this.props.themeColor;
         var logoModifiers = [themeColor];
         var amount = data.amount;
         var showPaymentButton = amount !== undefined;
-        var needShowPaystation = data.css_selector === data.current_selector && data.access_token !== null;
         if (this.state.isTipsListOpened) {
             logoModifiers.push('moved');
         }
@@ -102,7 +101,7 @@ var TinyView = CreateReactClass({
                                isReleased={ data.is_released }
                                disabled={ false }
                                locale={data.locale}
-                               needShowPaystation={needShowPaystation}
+                               needShowPaystation={this.props.needShowPaystation}
                 />
             );
 
@@ -177,8 +176,8 @@ var TinyView = CreateReactClass({
                 <SpinnerView />
             );
 
-        var errorMessage = errors && (
-                <ErrorMessageView errors={errors}/>
+        var errorMessage = error && (
+                <ErrorMessageView error={error}/>
             );
 
         var gradientBlock = (
