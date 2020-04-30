@@ -1,6 +1,6 @@
 {
   "name": "xsolla-pay2play-widget",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Pay2Play Widget",
   "devDependencies": {
     "@babel/core": "^7.5.5",

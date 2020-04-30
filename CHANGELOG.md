@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.1. - 2020-04-30
+- [fix] Paystation events forwarding
+
 ## 3.0.0. - 2020-03-01
 - [feature] Update widget for new schema
 
