@@ -224,4 +224,24 @@ The following parameters define the payment widget appearance, and coincide with
 
 You can refer to the widget object, using the following methods:
 
-* **XPay2PlayWidget.create(options)** — Create the widget instance and render it on the page
+* **var widgetInstance = XPay2PlayWidget.create(options)** — Create the widget instance and render it on the page
+* **widgetInstance.on(event, handler)** — Attach an event handler function for event to the widget.
+    * **event** (string) — Event type.
+    * **handler** (function) — A function to execute when the event is triggered.
+* **widgetInstance.off(event, handler)** — Remove an event handler.
+    * **event** (string) — Event type.
+    * **handler** (function) — A handler function previously attached for the event.
+    
+#### Events
+
+* **init** — Event on widget initialization
+* **open** — Event on opening of the widget
+* **load** — Event after payment interface (PayStation) was loaded
+* **close** — Event after payment interface (PayStation) was closed
+* **status** — Event when the user was moved on the status page
+* **status-invoice** — Event when the user was moved on the status page, but the payment is not yet completed
+* **status-delivering** — Event when the user was moved on the status page, payment was completed, and we’re sending payment notification
+* **status-done** — Event when the user was moved on the status page, and the payment was completed successfully
+* **status-troubled** — Event when the user was moved on the status page, but the payment failed
+
+You can access list of events using XPay2PlayWidget.eventTypes object.

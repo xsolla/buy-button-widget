@@ -64,7 +64,7 @@ module.exports = (function () {
                     return;
                 }
 
-                this.targetElement.addEventListener(event, handle);
+                this.targetElement.removeEventListener(event, handle);
             }).bind(this)
         };
         this.isInitiated = false;
