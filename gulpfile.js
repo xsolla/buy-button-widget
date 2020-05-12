@@ -108,11 +108,11 @@ gulp.task('build', function () {
 
     var readme = fs.readFileSync('./README.md', 'utf8');
     readme = readme.replace(/(static\.xsolla\.com\/embed\/pay2play\/)(\d+\.\d+\.[\w\-\.]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
-    fs.writeFile('./README.md', readme);
+    fs.writeFileSync('./README.md', readme);
 
     var packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
     packageJSON.version = version;
-    fs.writeFile('./package.json', JSON.stringify(packageJSON, null, 2));
+    fs.writeFileSync('./package.json', JSON.stringify(packageJSON, null, 2));
 
     setupBrowserify(false);
 });

@@ -64,7 +64,7 @@ module.exports = (function () {
                     return;
                 }
 
-                this.targetElement.addEventListener(event, handle);
+                this.targetElement.removeEventListener(event, handle);
             }).bind(this)
         };
         this.isInitiated = false;
@@ -244,8 +244,11 @@ module.exports = (function () {
 
     App.prototype.triggerEvent = function () {
         [].forEach.call(arguments, (function (eventName) {
+            if (typeof eventName !== 'string') {
+                eventName = eventName.type;
+            }
             var event = document.createEvent('HTMLEvents');
-            event.initEvent(eventName, true, false);
+            event.initEvent(eventName, false, false);
             this.targetElement.dispatchEvent(event);
         }).bind(this));
     };
