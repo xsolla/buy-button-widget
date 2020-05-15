@@ -112,6 +112,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 ### Widget Options
 
 * **access_token** — Access token (see [Get Token](https://developers.xsolla.com/api/v1/getting-started/#api_token_ui)). Use this parameter only if you are already integrated Xsolla through Access Token. Configuration through Project ID and Sku is preferable way to integrate widget
+* **access_data** — Access data, you can pass additional parameters to Payment Interface (see [available parameters](https://developers.xsolla.com/api/v2/getting-started/#api_param_payment_ui_get_token_user))
 * **project_id** — Unique project identifier in Publisher Account
 * **item_type** — One of values: "digital_content", "physical_good", "virtual_item", "virtual_currency", "bundle". Default value is "digital_content"
 * **sku** — Unique identifier that refers to the particular stock keeping unit
@@ -122,10 +123,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
     * **sandbox** — Set **true** to test the payment process, **sandbox-secure.xsolla.com** will be used instead **secure.xsolla.com** to process payments (see [Testing the Payment Process](https://developers.xsolla.com/doc/pay-station/#guides_pay_station_testing_payment_process))
 * **user** — Custom user data
     * **xsolla_login_token** — Xsolla Login user authorization token
-    * **email** — User email, will be passed to Payment Interface
-    * **country** — User country, will be passed to Payment Interface
     * **locale** — User locale, will be passed to Payment Interface
-    * **currency** — Payment currency, will be passed to Payment Interface
 * **widget_ui**
     * **theme** — Widget color theme, defining its appearance. Can be object { foreground : ['blue', 'red', 'green', 'gold'],  background : ['light', 'dark']. }
     * **template** — Template. Values: **string** 'standard' (default), **string** 'simple'.
