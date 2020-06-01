@@ -112,7 +112,6 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 ### Widget Options
 
 * **access_token** — Access token (see [Get Token](https://developers.xsolla.com/api/v1/getting-started/#api_token_ui)). Use this parameter only if you are already integrated Xsolla through Access Token. Configuration through Project ID and Sku is preferable way to integrate widget
-* **access_data** — Access data, you can pass additional parameters to Payment Interface (see [available parameters](https://developers.xsolla.com/api/v2/getting-started/#api_param_payment_ui_get_token_user))
 * **project_id** — Unique project identifier in Publisher Account
 * **item_type** — One of values: "digital_content", "physical_good", "virtual_item", "virtual_currency", "bundle". Default value is "digital_content"
 * **sku** — Unique identifier that refers to the particular stock keeping unit
@@ -150,6 +149,12 @@ The following parameters define the payment widget appearance, and coincide with
         * **spinnerRotationPeriod** — Rotation period of custom spinner, default 0
     * **childWindow** — Options for child window that contains PayStation. Suitable for mobile version
         * **target** — The target option specifies where to open the Paystation window, can be '_blank', '_self', '_parent', default is '_blank'
+
+Also, if you need to define parameters that are not described above. You can define additional parameters in the payment widget (see [available parameters](https://developers.xsolla.com/api/v2/getting-started/#api_payment_ui_get_token/)).
+
+* **access_data**
+    * **user** — user specific settings, for example 'user.email.value' or 'user.country.value'
+    * **settings** — common widget settings, for example 'settings.language' or 'settings.currency'
 
 ### Configuration Examples
 #### Example 1 (Digital Content)
