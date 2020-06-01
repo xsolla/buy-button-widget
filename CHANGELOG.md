@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.2. - 2020-06-01
+- [feature] Add access_data settings
+
 ## 3.0.1. - 2020-04-30
 - [fix] Paystation events forwarding
 

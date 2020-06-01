@@ -26,7 +26,7 @@ gulp serve
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -52,7 +52,7 @@ $ bower install xsolla-pay2play-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js";
+    s.src = "//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XPay2PlayWidget.create(options);
     }, false);
@@ -66,7 +66,7 @@ It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js"></script>
+<script src="//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js"></script>
 <script>
     var widgetInstance = XPay2PlayWidget.create({
         project_id: "YOUR-PROJECT-ID",
