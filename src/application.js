@@ -18,16 +18,14 @@ module.exports = (function () {
 
     const DEFAULT_CONFIG = {
         access_token: null,
+        access_data: null,
         item_type: DEFAULT_ITEM_TYPE,
         project_id: null,
         sku: null,
         drm: null,
         user: {
             xsolla_login_token: null,
-            email: null,
-            country: null,
-            locale: null,
-            currency: null
+            locale: null
         },
         api_settings: {
             host: DEFAULT_HOST,
@@ -109,6 +107,10 @@ module.exports = (function () {
             }
         }
 
+        if (!Helpers.isEmpty(this.config.access_data) && typeof this.config.access_data !== 'object') {
+            this.throwError('Invalid access data format');
+        }
+
         if (this.config.api_settings && Helpers.isEmpty(this.config.api_settings.host)) {
             this.config.api_settings.host = DEFAULT_HOST;
         }
@@ -176,13 +178,13 @@ module.exports = (function () {
             sku: this.config.sku,
             drm: this.config.drm,
             access_token: this.config.access_token,
+            access_data: this.config.access_data && btoa(JSON.stringify(this.config.access_data)),
             mode: this.config.api_settings && this.config.api_settings.sandbox && 'sandbox',
             ui_settings: this.config.payment_ui && btoa(JSON.stringify(this.config.payment_ui)),
             xsolla_login_token: this.getXsollaLoginToken(),
-            email: this.config.user && this.config.user.email,
-            country: this.config.user && this.config.user.country,
             locale: this.config.user && this.config.user.locale,
-            currency: this.config.user && this.config.user.currency,
+            country: this.getCountryFromAccessData(),
+            currency: this.getCurrencyFromAccessData()
         };
         Helpers.filterObject(buyParams);
 
@@ -306,6 +308,19 @@ module.exports = (function () {
         return Cookie.getCookie(App.tokenCookieName)
     };
 
+    App.prototype.getCountryFromAccessData = function () {
+        return this.config.access_data &&
+            this.config.access_data.user &&
+            this.config.access_data.user.country &&
+            this.config.access_data.user.country.value;
+    };
+
+    App.prototype.getCurrencyFromAccessData = function () {
+        return this.config.access_data &&
+        this.config.access_data.settings &&
+        this.config.access_data.settings.currency;
+    };
+
     App.prototype.getSelector = function () {
         return Cookie.getCookie(App.selectorCookieName)
     };
@@ -371,7 +386,7 @@ module.exports = (function () {
     /**
      * Render widget template
      */
-    App.prototype.render = function (options) {
+    App.prototype.render = function () {
         const props = {
             data: {},
             onPaymentOpen: params => this.open(params),
@@ -393,18 +408,18 @@ module.exports = (function () {
         updateView();
 
         const initParams = {
-            type: options.item_type,
-            sku: options.sku,
-            drm: options.drm,
-            access_token: options.access_token,
-            mode: options.api_settings && options.api_settings.sandbox && 'sandbox',
-            country: options.user && options.user.country,
-            locale: options.user && options.user.locale,
-            currency: options.user && options.user.currency,
+            type: this.config.item_type,
+            sku: this.config.sku,
+            drm: this.config.drm,
+            access_token: this.config.access_token,
+            mode: this.config.api_settings && this.config.api_settings.sandbox && 'sandbox',
+            locale: this.config.user && this.config.user.locale,
+            country: this.getCountryFromAccessData(),
+            currency: this.getCurrencyFromAccessData()
         };
         Helpers.filterObject(initParams);
 
-        this.api.initRequest(Number(options.project_id), initParams).then(function (data) {
+        this.api.initRequest(Number(this.config.project_id), initParams).then(function (data) {
             props.data = {
                 amount: {
                     value: data.item.amount,

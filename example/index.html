@@ -37,6 +37,9 @@
     <div id="widget-example-gold-locale-email">
     </div>
 
+    <div id="widget-example-gold-access-data">
+    </div>
+
     <div id="widget-example-gold-auth">
     </div>
 
@@ -61,14 +64,35 @@
         project_id: 20421,
         sku: "1",
         user: {
-            locale: "de",
-            email: "support@xsolla.com"
+            locale: "de"
+        },
+        access_data: {
+            user: {
+                email: {
+                    value: "support@xsolla.com"
+                }
+            }
         }
     };
 
     var options_digital_content_with_auth = {
         project_id: 48243,
-        sku: "2",
+        sku: "2"
+    };
+
+    var options_digital_content_with_access_data_settings = {
+        project_id: 20421,
+        sku: "1",
+        access_data: {
+            user: {
+                email: {
+                    value: "support@xsolla.com"
+                }
+            },
+            settings: {
+                xsolla_product_tag: "test_attrubtion"
+            }
+        }
     };
 
     var options_physical_good_basic = {
@@ -142,6 +166,17 @@
             }
         }, options_digital_content_with_custom_locale_and_email));
 
+
+        var goldWidgetAccessData = XPay2PlayWidget.create(Object.assign({
+            widget_ui: {
+                theme: {
+                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
+                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                },
+                target_element: '#widget-example-gold-access-data'
+            }
+        }, options_digital_content_with_access_data_settings));
+
         var goldWidgetAuth = XPay2PlayWidget.create(Object.assign({
             widget_ui: {
                 theme: {
@@ -162,7 +197,7 @@
             }
         }, options_physical_good_basic));
 
-        [greenWidget, blueWidget, redWidget, goldWidget, goldWidgetDrm, goldWidgetCustomLocaleAndEmail, goldWidgetAuth, widgetPhysical].forEach(
+        [greenWidget, blueWidget, redWidget, goldWidget, goldWidgetDrm, goldWidgetCustomLocaleAndEmail, goldWidgetAccessData, goldWidgetAuth, widgetPhysical].forEach(
             function (widgetInstance) {
                 widgetInstance.on(
                     Object.keys(XPay2PlayWidget.eventTypes)

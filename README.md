@@ -26,7 +26,7 @@ gulp serve
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -52,7 +52,7 @@ $ bower install xsolla-pay2play-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js";
+    s.src = "//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XPay2PlayWidget.create(options);
     }, false);
@@ -66,7 +66,7 @@ It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js"></script>
+<script src="//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js"></script>
 <script>
     var widgetInstance = XPay2PlayWidget.create({
         project_id: "YOUR-PROJECT-ID",
@@ -122,10 +122,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
     * **sandbox** — Set **true** to test the payment process, **sandbox-secure.xsolla.com** will be used instead **secure.xsolla.com** to process payments (see [Testing the Payment Process](https://developers.xsolla.com/doc/pay-station/#guides_pay_station_testing_payment_process))
 * **user** — Custom user data
     * **xsolla_login_token** — Xsolla Login user authorization token
-    * **email** — User email, will be passed to Payment Interface
-    * **country** — User country, will be passed to Payment Interface
     * **locale** — User locale, will be passed to Payment Interface
-    * **currency** — Payment currency, will be passed to Payment Interface
 * **widget_ui**
     * **theme** — Widget color theme, defining its appearance. Can be object { foreground : ['blue', 'red', 'green', 'gold'],  background : ['light', 'dark']. }
     * **template** — Template. Values: **string** 'standard' (default), **string** 'simple'.
@@ -152,6 +149,12 @@ The following parameters define the payment widget appearance, and coincide with
         * **spinnerRotationPeriod** — Rotation period of custom spinner, default 0
     * **childWindow** — Options for child window that contains PayStation. Suitable for mobile version
         * **target** — The target option specifies where to open the Paystation window, can be '_blank', '_self', '_parent', default is '_blank'
+
+Also, if you need to define parameters that are not described above. You can define additional parameters in the payment widget (see [available parameters](https://developers.xsolla.com/api/v2/getting-started/#api_payment_ui_get_token/)).
+
+* **access_data**
+    * **user** — user specific settings, for example 'user.email.value' or 'user.country.value'
+    * **settings** — common widget settings, for example 'settings.language' or 'settings.currency'
 
 ### Configuration Examples
 #### Example 1 (Digital Content)

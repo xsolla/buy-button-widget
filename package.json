@@ -21,7 +21,7 @@
     "gulp-sourcemaps": "1.6.0",
     "gulp-uglify": "1.5.1",
     "gulp-util": "3.0.7",
-    "sassify": "0.9.1",
+    "sassify": "^4.0.1",
     "stringify": "3.2.0",
     "to-snake-case": "^1.0.0",
     "vinyl-buffer": "1.0.0",
