@@ -1,4 +1,4 @@
-# Xsolla Pay2Play Widget
+# Xsolla Buy Button Widget
 
 ## Integration Guide
 
@@ -26,7 +26,7 @@ gulp serve
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.0/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -54,21 +54,21 @@ $ bower install xsolla-pay2play-widget
     s.async = true;
     s.src = "//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js";
     s.addEventListener('load', function (e) {
-        var widgetInstance = XPay2PlayWidget.create(options);
+        var widgetInstance = XBuyButtonWidget.create(options);
     }, false);
     var head = document.getElementsByTagName('head')[0];
     head.appendChild(s);
 </script>
 ```
 
-It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded. You can track the appropriate event, or add the script after the element, where widget should be rendered.
+It is necessary to perform XBuyButtonWidget.create() when the DOM is fully loaded. You can track the appropriate event, or add the script after the element, where widget should be rendered.
 
 #### Synchronous loading (blocks content)
 
 ``` javascript
 <script src="//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js"></script>
 <script>
-    var widgetInstance = XPay2PlayWidget.create({
+    var widgetInstance = XBuyButtonWidget.create({
         project_id: "YOUR-PROJECT-ID",
         sku: "YOUR-SKU",
         widget_ui: {
@@ -83,8 +83,8 @@ It is necessary to perform XPay2PlayWidget.create() when the DOM is fully loaded
 If your project uses CommonJS module format, you can access the widget by require()
 
 ``` javascript
-var XPay2PlayWidget = require('PATH_TO_WIDGET/embed');
-var widgetInstance = XPay2PlayWidget.create({
+var XBuyButtonWidget = require('PATH_TO_WIDGET/embed');
+var widgetInstance = XBuyButtonWidget.create({
         project_id: "YOUR-PROJECT-ID",
         sku: "YOUR-SKU",
         widget_ui: {
@@ -98,8 +98,8 @@ var widgetInstance = XPay2PlayWidget.create({
 Also you can use widget with RequireJS loader
 
 ``` javascript
-define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
-    var widgetInstance = XPay2PlayWidget.create({
+define(['PATH_TO_WIDGET/embed'], function (XBuyButtonWidget) {
+    var widgetInstance = XBuyButtonWidget.create({
         project_id: "YOUR-PROJECT-ID",
         sku: "YOUR-SKU",
         widget_ui: {
@@ -113,7 +113,7 @@ define(['PATH_TO_WIDGET/embed'], function (XPay2PlayWidget) {
 
 * **access_token** — Access token (see [Get Token](https://developers.xsolla.com/api/v1/getting-started/#api_token_ui)). Use this parameter only if you are already integrated Xsolla through Access Token. Configuration through Project ID and Sku is preferable way to integrate widget
 * **project_id** — Unique project identifier in Publisher Account
-* **item_type** — One of values: "digital_content", "physical_good", "virtual_item", "virtual_currency", "bundle". Default value is "digital_content"
+* **item_type** — One of values: "game_key", "physical_good", "virtual_item", "virtual_currency", "bundle". Default value is "game_key"
 * **sku** — Unique identifier that refers to the particular stock keeping unit
 * **drm** — Predefined DRM (e.g. Steam) for Digital Content item. Allows user to skip the DRM selection step
 * **api_settings** 
@@ -161,7 +161,7 @@ Also, if you need to define parameters that are not described above. You can def
 ``` javascript
 {
     project_id: "YOUR-PROJECT-ID",
-    item_type: "digital_content",
+    item_type: "game_key",
     sku: "YOUR-SKU",
     widget_ui: {
         target_element: '#widget-example-element'
@@ -173,7 +173,7 @@ Also, if you need to define parameters that are not described above. You can def
 ``` javascript
 {
     project_id: "YOUR-PROJECT-ID",
-    item_type: "digital_content",
+    item_type: "game_key",
     sku: "YOUR-SKU",
     drm: "steam"
     widget_ui: {
@@ -186,7 +186,7 @@ Also, if you need to define parameters that are not described above. You can def
 ``` javascript
 {
     project_id: "YOUR-PROJECT-ID",
-    item_type: "digital_content",
+    item_type: "game_key",
     access_token: "YOUR-ACCESS-TOKEN",
     widget_ui: {
         target_element: '#widget-example-element'
@@ -227,7 +227,7 @@ Also, if you need to define parameters that are not described above. You can def
 
 You can refer to the widget object, using the following methods:
 
-* **var widgetInstance = XPay2PlayWidget.create(options)** — Create the widget instance and render it on the page
+* **var widgetInstance = XBuyButtonWidget.create(options)** — Create the widget instance and render it on the page
 * **widgetInstance.on(event, handler)** — Attach an event handler function for event to the widget.
     * **event** (string) — Event type.
     * **handler** (function) — A function to execute when the event is triggered.
@@ -247,4 +247,4 @@ You can refer to the widget object, using the following methods:
 * **status-done** — Event when the user was moved on the status page, and the payment was completed successfully
 * **status-troubled** — Event when the user was moved on the status page, but the payment failed
 
-You can access list of events using XPay2PlayWidget.eventTypes object.
+You can access list of events using XBuyButtonWidget.eventTypes object.

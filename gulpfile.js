@@ -1,23 +1,23 @@
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var sourcemaps = require('gulp-sourcemaps');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var browserSync = require('browser-sync');
-var browserify = require('browserify');
-var sassify = require('sassify');
-var stringify = require('stringify');
-var watchify = require('watchify');
-var gulpif = require('gulp-if');
-var babelify = require('babelify');
-var fs = require('fs');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const sourcemaps = require('gulp-sourcemaps');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const browserSync = require('browser-sync');
+const browserify = require('browserify');
+const sassify = require('sassify');
+const stringify = require('stringify');
+const watchify = require('watchify');
+const gulpif = require('gulp-if');
+const babelify = require('babelify');
+const fs = require('fs');
 
-var devMode = process.argv.slice(2).indexOf('--dev') !== -1;
+const devMode = process.argv.slice(2).indexOf('--dev') !== -1;
 
 function setupBrowserify(watch) {
-    var bundleOptions = {
+    const bundleOptions = {
         cache: {},
         packageCache: {},
         paths: [
@@ -26,12 +26,12 @@ function setupBrowserify(watch) {
             './bower_components/xsolla-paystation-widget/src',
             './bower_components/xsolla-login-js-sdk/src'
         ],
-        standalone: 'XPay2PlayWidget',
+        standalone: 'XBuyButtonWidget',
         fullPaths: false,
         debug: true
     };
 
-    var bundler = browserify('./src/main.js', bundleOptions);
+    let bundler = browserify('./src/main.js', bundleOptions);
     bundler.require('./bower_components/xsolla-paystation-widget/src/main.js', {expose: 'paystation-embed-app'});
     bundler.require('./bower_components/xsolla-login-js-sdk/src/main.js', {expose: 'xsolla-login-app'});
     bundler.require('./bower_components/react/react.production.min.js', {expose: 'react'});
@@ -102,22 +102,23 @@ function runBundle(bundler, watch) {
         .pipe(gulpif(watch, browserSync.reload({stream: true, once: true})));
 }
 
-gulp.task('build', function () {
+gulp.task('build', (done) => {
     // Stamp current version
-    var version = require('./src/version.js');
+    const version = require('./src/version.js');
 
-    var readme = fs.readFileSync('./README.md', 'utf8');
+    let readme = fs.readFileSync('./README.md', 'utf8');
     readme = readme.replace(/(static\.xsolla\.com\/embed\/pay2play\/)(\d+\.\d+\.[\w\-\.]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
     fs.writeFileSync('./README.md', readme);
 
-    var packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+    const packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
     packageJSON.version = version;
     fs.writeFileSync('./package.json', JSON.stringify(packageJSON, null, 2));
 
     setupBrowserify(false);
+    done();
 });
 
-gulp.task('browser-sync', function () {
+gulp.task('browser-sync', (done) => {
     browserSync({
         startPath: '/index.html',
         server: {
@@ -126,13 +127,14 @@ gulp.task('browser-sync', function () {
         port: 3150,
         ghostMode: false
     });
+
+    browserSync.watch('example/*.html').on('change', browserSync.reload);
+    browserSync.watch('src/styles/**/*.scss').on('change', browserSync.reload);
+
+    done();
 });
 
-gulp.task('serve', ['browser-sync'], function () {
-    var bundler = setupBrowserify(true);
-
-    gulp.watch(['example/*.html']).on('change', browserSync.reload); //all the other files are managed by watchify
-    gulp.watch(['src/styles/**/*.scss']).on('change', function () {
-        bundler.emit('update');
-    });
-});
+gulp.task('serve', gulp.parallel('browser-sync', (done) => {
+    setupBrowserify(true);
+    done();
+}));

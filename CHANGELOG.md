@@ -1,44 +1,49 @@
 # Changelog
 
+## 3.0.3. - 2020-07-10
+- [feature] Renamed to buybutton-widget
+- [fix] Updated dependencies
+- [fix] Updated old Javascript syntax
+
 ## 3.0.2. - 2020-06-01
-- [feature] Add access_data settings
+- [feature] Added access_data settings
 
 ## 3.0.1. - 2020-04-30
 - [fix] Paystation events forwarding
 
 ## 3.0.0. - 2020-03-01
-- [feature] Update widget for new schema
+- [feature] Updated widget for new schema
 
 ## 2.3.0. - 2019-12-06
-- [feature] Remove lodash and JQuery from project
+- [feature] Removed lodash and JQuery from project
 
 ## 2.2.3. - 2019-12-04
-- [fix] Upd button behavior with null price
+- [fix] Updated button behavior with null price
 
 ## 2.2.2. - 2019-10-02
-- [fix] Minor fixes with Xsolla Login Integration
-- [fix] Fix potential security vulnerability in one of module dependencies
+- [fix] Xsolla Login Integration
+- [fix] Potential security vulnerability in one of module dependencies
 
 ## 2.2.1. - 2019-09-09
 - [fix] Conflicts with React Dev Tools Extension
 
 ## 2.2.0. - 2019-09-04
-- [feature] Integration with xsolla login
+- [feature] Xsolla Login Integration
 
 ## 2.1.9. - 2019-08-02
 - [fix] Do deep copy for options
 
 ## 2.1.8. - 2019-07-23
-- [fix] Update PayStation Widget
+- [fix] Updated PayStation Widget
 
 ## 2.1.7. - 2019-06-19
-- [fix] Fix logger
+- [fix] Fixed logger
 
 ## 2.1.6. - 2019-05-30
-- [feature] Change amount separator
+- [feature] Changed amount separator
 
 ## 2.1.4. - 2018-09-04
-- [fix] Add default behaviour for unknown currencies
+- [fix] Added default behaviour for unknown currencies
 
 ## 2.1.3. - 2017-11-02
 - [feature] The parameter config.template was added. The available values are:
@@ -52,8 +57,8 @@
 
 ## 2.1.0. - 2017-03-20
 
-- [fix] Remove unused template 'compact'
-- [feature] Add price without discount on payment button
+- [fix] Removed unused template 'compact'
+- [feature] Added price without discount on payment button
 - [feature] New design for payment button
 
 ## 2.0.0 - 2016-11-07

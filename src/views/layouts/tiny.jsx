@@ -10,7 +10,7 @@ var Logo = require('../logo.jsx');
 var Helpers = require('../../helpers');
 
 var TinyView = CreateReactClass({
-    className: 'xpay2Play-widget',
+    className: 'xbuyButton-widget',
     SHOW_TIPS_THANK_DURATION: 1000,
 
     getInitialState: function () {
