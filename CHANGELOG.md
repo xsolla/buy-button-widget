@@ -3,6 +3,7 @@
 ## 3.0.3. - 2020-07-10
 - [feature] Renamed to buybutton-widget
 - [fix] Updated dependencies
+- [fix] Updated old Javascript syntax
 
 ## 3.0.2. - 2020-06-01
 - [feature] Added access_data settings
