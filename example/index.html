@@ -9,7 +9,7 @@
             flex-wrap: wrap;
         }
 
-        .xpay2Play-widget {
+        .xbuyButton-widget {
             box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .55);
             display: inline-block;
             margin: 20px;
@@ -106,92 +106,92 @@
     s.async = true;
     s.src = "widget.js";
     s.addEventListener('load', function (e) {
-        var greenWidget = XPay2PlayWidget.create(Object.assign({
+        var greenWidget = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.GREEN,
-                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                    foreground: XBuyButtonWidget.foregroundTypes.GREEN,
+                    background: XBuyButtonWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-green'
             }
         }, options_digital_content_basic));
 
-        var blueWidget = XPay2PlayWidget.create(Object.assign({
+        var blueWidget = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.BLUE,
-                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                    foreground: XBuyButtonWidget.foregroundTypes.BLUE,
+                    background: XBuyButtonWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-blue'
             }
         }, options_digital_content_basic));
 
-        var redWidget = XPay2PlayWidget.create(Object.assign({
+        var redWidget = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.RED,
-                    background: XPay2PlayWidget.backgroundTypes.DARK
+                    foreground: XBuyButtonWidget.foregroundTypes.RED,
+                    background: XBuyButtonWidget.backgroundTypes.DARK
                 },
                 target_element: '#widget-example-red'
             }
         }, options_digital_content_basic));
 
-        var goldWidget = XPay2PlayWidget.create(Object.assign({
+        var goldWidget = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                    background: XPay2PlayWidget.backgroundTypes.DARK
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.DARK
                 },
                 target_element: '#widget-example-gold'
             }
         }, options_digital_content_basic));
 
-        var goldWidgetDrm = XPay2PlayWidget.create(Object.assign({
+        var goldWidgetDrm = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-gold-drm'
             }
         }, options_digital_content_with_drm));
 
-        var goldWidgetCustomLocaleAndEmail = XPay2PlayWidget.create(Object.assign({
+        var goldWidgetCustomLocaleAndEmail = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-gold-locale-email'
             }
         }, options_digital_content_with_custom_locale_and_email));
 
 
-        var goldWidgetAccessData = XPay2PlayWidget.create(Object.assign({
+        var goldWidgetAccessData = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                    background: XPay2PlayWidget.backgroundTypes.LIGHT
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.LIGHT
                 },
                 target_element: '#widget-example-gold-access-data'
             }
         }, options_digital_content_with_access_data_settings));
 
-        var goldWidgetAuth = XPay2PlayWidget.create(Object.assign({
+        var goldWidgetAuth = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                    background: XPay2PlayWidget.backgroundTypes.DARK
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.DARK
                 },
                 target_element: '#widget-example-gold-auth'
             }
         }, options_digital_content_with_auth));
 
-        var widgetPhysical = XPay2PlayWidget.create(Object.assign({
+        var widgetPhysical = XBuyButtonWidget.create(Object.assign({
             widget_ui: {
                 theme: {
-                    foreground: XPay2PlayWidget.foregroundTypes.GOLD,
-                    background: XPay2PlayWidget.backgroundTypes.DARK
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.DARK
                 },
                 target_element: '#widget-example-physical'
             }
@@ -200,9 +200,9 @@
         [greenWidget, blueWidget, redWidget, goldWidget, goldWidgetDrm, goldWidgetCustomLocaleAndEmail, goldWidgetAccessData, goldWidgetAuth, widgetPhysical].forEach(
             function (widgetInstance) {
                 widgetInstance.on(
-                    Object.keys(XPay2PlayWidget.eventTypes)
+                    Object.keys(XBuyButtonWidget.eventTypes)
                         .map(function (k) {
-                            return XPay2PlayWidget.eventTypes[k];
+                            return XBuyButtonWidget.eventTypes[k];
                         })
                         .join(' '),
                     function (event) {

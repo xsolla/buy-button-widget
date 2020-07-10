@@ -26,7 +26,7 @@ function setupBrowserify(watch) {
             './bower_components/xsolla-paystation-widget/src',
             './bower_components/xsolla-login-js-sdk/src'
         ],
-        standalone: 'XPay2PlayWidget',
+        standalone: 'XBuyButtonWidget',
         fullPaths: false,
         debug: true
     };
