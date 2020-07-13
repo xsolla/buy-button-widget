@@ -1,10 +1,10 @@
 {
-  "name": "xsolla-pay2play-widget",
+  "name": "xsolla-buy-button-widget",
   "authors": [
-    "Andrey Salnikov <a.salnikov@xsolla.com>"
+    "Buy Button Team  <buy_button@xsolla.com>"
   ],
-  "description": "Pay2Play Widget",
-  "main": "dist/widget.js",
+  "description": "Buy Button Widget",
+  "main": "dist/widget.min.js",
   "moduleType": [
     "node"
   ],

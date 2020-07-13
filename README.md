@@ -4,7 +4,7 @@
 
 Xsolla team created a script to simplify the integration of Buy Button product into your website.
 
-[See Demo](https://livedemo.xsolla.com/pay2play/)
+[See Demo](https://livedemo.xsolla.com/buy-button/)
 
 Features:
 * Widget can be easily embedded on your page, and will provide user the details about selling item (e.g. Digital Content, Physical Good, Virtual Item, Bundle)
@@ -26,14 +26,20 @@ gulp serve
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js](https://cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/buy-button/3.1.0/widget.min.js](https://cdn.xsolla.net/embed/buy-button/3.1.0/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
-If you want to include the source code of widget as a part of your project, you can install the package using [Bower](http://bower.io/).
+If you want to include the source code of widget as a part of your project, you can install the package using [Bower](http://bower.io/) or [NPM](https://www.npmjs.com/).
 
+Bower
 ``` bash
-$ bower install xsolla-pay2play-widget
+$ bower install xsolla-buy-button-widget
+```
+
+NPM
+``` bash
+$ npm install xsolla-buy-button-widget
 ```
 
 ### Script Loading
@@ -52,7 +58,7 @@ $ bower install xsolla-pay2play-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js";
+    s.src = "//cdn.xsolla.net/embed/buy-button/3.1.0/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XBuyButtonWidget.create(options);
     }, false);
@@ -66,7 +72,7 @@ It is necessary to perform XBuyButtonWidget.create() when the DOM is fully loade
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//cdn.xsolla.net/embed/pay2play/3.0.2/widget.min.js"></script>
+<script src="//cdn.xsolla.net/embed/buy-button/3.1.0/widget.min.js"></script>
 <script>
     var widgetInstance = XBuyButtonWidget.create({
         project_id: "YOUR-PROJECT-ID",
@@ -106,6 +112,22 @@ define(['PATH_TO_WIDGET/embed'], function (XBuyButtonWidget) {
             target_element: '#widget-example-element'
         }
     });
+});
+```
+
+#### ES6 import
+
+If you are using ES6 modules syntax
+
+``` javascript
+import XBuyButtonWidget from 'xsolla-buy-button-widget';
+
+const widgetInstance = XBuyButtonWidget.create({
+        project_id: "YOUR-PROJECT-ID",
+        sku: "YOUR-SKU",
+        widget_ui: {
+            target_element: '#widget-example-element'
+        }
 });
 ```
 
@@ -175,7 +197,7 @@ Also, if you need to define parameters that are not described above. You can def
     project_id: "YOUR-PROJECT-ID",
     item_type: "game_key",
     sku: "YOUR-SKU",
-    drm: "steam"
+    drm: "steam",
     widget_ui: {
         target_element: '#widget-example-element'
     }

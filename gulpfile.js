@@ -44,7 +44,7 @@ function setupBrowserify(watch) {
     bundler.require('./bower_components/svg-injector/svg-injector.js', {expose: 'svg-injector'});
     bundler.require('./node_modules/currency-format/currency-format.json', {expose: 'currency-format.json'});
     bundler.require('./node_modules/currency-number-format/currency-number-format.json', {expose: 'currency-number-format.json'});
-    bundler.require('./src/main.js', {expose: 'xsolla-pay2play-widget'});
+    bundler.require('./src/main.js', {expose: 'xsolla-pay2play-widget'}); // Оставляем pay2play - иначе путается порядок загрузки и первым грузится Xsolla login
 
     bundler.transform(sassify, {
         outputStyle: 'compressed',
@@ -107,7 +107,7 @@ gulp.task('build', (done) => {
     const version = require('./src/version.js');
 
     let readme = fs.readFileSync('./README.md', 'utf8');
-    readme = readme.replace(/(static\.xsolla\.com\/embed\/pay2play\/)(\d+\.\d+\.[\w\-\.]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
+    readme = readme.replace(/(cdn\.xsolla\.net\/embed\/buy-button\/)(\d+\.\d+\.[\w\-\.]+)(\/widget\.min\.js)/gi, '$1' + version + '$3');
     fs.writeFileSync('./README.md', readme);
 
     const packageJSON = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
