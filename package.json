@@ -1,9 +1,10 @@
 {
   "name": "xsolla-buy-button-widget",
   "authors": [
-    "Buy Button Team  <buy_button@xsolla.com>"
+    "Buy Button Team <buy_button@xsolla.com>"
   ],
-  "version": "3.1.0",
+  "license": "MIT",
+  "version": "3.1.2",
   "description": "Buy Button Widget",
   "main": "dist/widget.min.js",
   "devDependencies": {

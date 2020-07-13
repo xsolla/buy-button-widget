@@ -1,7 +1,8 @@
 {
   "name": "xsolla-buy-button-widget",
+  "version": "3.1.2",
   "authors": [
-    "Buy Button Team  <buy_button@xsolla.com>"
+    "Buy Button Team <buy_button@xsolla.com>"
   ],
   "description": "Buy Button Widget",
   "main": "dist/widget.min.js",
