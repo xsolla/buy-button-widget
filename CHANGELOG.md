@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.2 - 2020-07-13
+- [feature] Renamed to buy-button-widget, update css class names
+- [feature] Added NPM support
+
 ## 3.0.3. - 2020-07-10
 - [feature] Renamed to buybutton-widget
 - [fix] Updated dependencies
