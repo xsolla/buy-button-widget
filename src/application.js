@@ -447,7 +447,7 @@ module.exports = (function () {
             };
 
             if (error.errorCode && error.errorMessage) {
-                console.warn('XsollaPay2PlayWidget', error.errorCode, error.errorMessage);
+                console.warn('XsollaBuyButtonWidget', error.errorCode, error.errorMessage);
             }
 
             updateView();

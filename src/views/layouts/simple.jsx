@@ -5,7 +5,7 @@ var PaymentButton = require('../payment-button.jsx');
 var Helpers = require('../../helpers');
 
 var SimpleView = CreateReactClass({
-    className: 'xbuyButton-widget-simple',
+    className: 'x-buy-button-widget-simple',
     SHOW_TIPS_THANK_DURATION: 1000,
 
     getInitialState: function () {

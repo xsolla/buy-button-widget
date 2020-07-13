@@ -1,7 +1,11 @@
 {
-  "name": "xsolla-pay2play-widget",
-  "version": "3.0.3",
-  "description": "Pay2Play Widget",
+  "name": "xsolla-buy-button-widget",
+  "authors": [
+    "Buy Button Team  <buy_button@xsolla.com>"
+  ],
+  "version": "3.1.0",
+  "description": "Buy Button Widget",
+  "main": "dist/widget.min.js",
   "devDependencies": {
     "@babel/core": "7.5.5",
     "@babel/preset-env": "7.5.5",
@@ -31,5 +35,9 @@
   },
   "dependencies": {
     "create-react-class": "15.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xsolla/buy-button-widget.git"
   }
 }
