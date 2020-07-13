@@ -34,7 +34,7 @@ If you want to include the source code of widget as a part of your project, you 
 
 Bower
 ``` bash
-$ bower install xsolla-buy-button-widget
+$ bower install xsolla/buy-button-widget
 ```
 
 NPM
