@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.3 - 2020-08-27
+- [feature] Move NPM package to Xsolla org
+
 ## 3.1.2 - 2020-07-13
 - [feature] Renamed to buy-button-widget, update css class names
 - [feature] Added NPM support
