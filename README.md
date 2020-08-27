@@ -39,7 +39,7 @@ $ bower install xsolla/buy-button-widget
 
 NPM
 ``` bash
-$ npm install @xsolla/buy-button-widget
+$ npm install xsolla-buy-button-widget
 ```
 
 ### Script Loading
