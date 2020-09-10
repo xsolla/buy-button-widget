@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.4 - 2020-09-10
+- [fix] Update paystation-embed version
+
 ## 3.1.3 - 2020-08-27
 - [feature] Move NPM package to Xsolla org
 

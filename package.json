@@ -4,7 +4,7 @@
     "Buy Button Team <buy_button@xsolla.com>"
   ],
   "license": "MIT",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "description": "Buy Button Widget",
   "main": "dist/widget.min.js",
   "devDependencies": {
