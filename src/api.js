@@ -5,7 +5,7 @@ module.exports = (function () {
         this.config = options;
     }
 
-    Api.prototype.initRequest = function (project_id, data) {
+    Api.prototype.initRequest = function (project_id, data, auth_token) {
         return new Promise((function (resolve, reject) {
             const url = `https://${this.config.api_host}/v2/project/${project_id}/widget/init`;
             const searchParams = Helpers.buildQueryString(data);
@@ -14,6 +14,10 @@ module.exports = (function () {
             request.open('POST', url, true);
             request.setRequestHeader('Accept', 'application/json, text/javascript, */*; q=0.01');
             request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+
+            if (auth_token) {
+                request.setRequestHeader('Authorization', `Bearer ${auth_token}`);
+            }
 
             request.send(searchParams);
 

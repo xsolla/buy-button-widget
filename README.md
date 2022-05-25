@@ -26,7 +26,7 @@ gulp serve
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/buy-button/3.1.4/widget.min.js](https://cdn.xsolla.net/embed/buy-button/3.1.4/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js](https://cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -58,7 +58,7 @@ $ npm install @xsolla/buy-button-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//cdn.xsolla.net/embed/buy-button/3.1.4/widget.min.js";
+    s.src = "//cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XBuyButtonWidget.create(options);
     }, false);
@@ -72,7 +72,7 @@ It is necessary to perform XBuyButtonWidget.create() when the DOM is fully loade
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//cdn.xsolla.net/embed/buy-button/3.1.4/widget.min.js"></script>
+<script src="//cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js"></script>
 <script>
     var widgetInstance = XBuyButtonWidget.create({
         project_id: "YOUR-PROJECT-ID",
@@ -143,7 +143,7 @@ const widgetInstance = XBuyButtonWidget.create({
     * **api_host** — Host for performing API requests. The default value is **store.xsolla.com/api**
     * **sandbox** — Set **true** to test the payment process, **sandbox-secure.xsolla.com** will be used instead **secure.xsolla.com** to process payments (see [Testing the Payment Process](https://developers.xsolla.com/doc/pay-station/#guides_pay_station_testing_payment_process))
 * **user** — Custom user data
-    * **xsolla_login_token** — Xsolla Login user authorization token
+    * **auth** — Xsolla Login user authorization token or PayStation access token
     * **locale** — User locale, will be passed to Payment Interface
 * **widget_ui**
     * **theme** — Widget color theme, defining its appearance. Can be object { foreground : ['blue', 'red', 'green', 'gold'],  background : ['light', 'dark']. }
@@ -235,7 +235,7 @@ Also, if you need to define parameters that are not described above. You can def
     item_type: "virtual_item",
     sku: "YOUR-SKU",
     user: {
-        xsolla_login_token: "XSOLLA-LOGIN-TOKEN"
+        auth: "XSOLLA-LOGIN-TOKEN"
     }
     widget_ui: {
         target_element: '#widget-example-element'
