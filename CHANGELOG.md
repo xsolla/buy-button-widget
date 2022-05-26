@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.5 - 2022-05-25
+- [fix] Use authorization for widget init request
+
 ## 3.1.4 - 2020-09-10
 - [fix] Update paystation-embed version
 

@@ -25,6 +25,7 @@ module.exports = (function () {
         drm: null,
         user: {
             xsolla_login_token: null,
+            auth: null,
             locale: null
         },
         api_settings: {
@@ -181,7 +182,7 @@ module.exports = (function () {
             access_data: this.config.access_data && btoa(JSON.stringify(this.config.access_data)),
             mode: this.config.api_settings && this.config.api_settings.sandbox && 'sandbox',
             ui_settings: this.config.payment_ui && btoa(JSON.stringify(this.config.payment_ui)),
-            xsolla_login_token: this.getXsollaLoginToken(),
+            xsolla_login_token: this.getAuthToken(),
             locale: this.config.user && this.config.user.locale,
             country: this.getCountryFromAccessData(),
             currency: this.getCurrencyFromAccessData()
@@ -300,7 +301,11 @@ module.exports = (function () {
         }
     };
 
-    App.prototype.getXsollaLoginToken = function () {
+    App.prototype.getAuthToken = function () {
+        if (this.config.user && this.config.user.auth) {
+            return this.config.user.auth;
+        }
+
         if (this.config.user && this.config.user.xsolla_login_token) {
             return this.config.user.xsolla_login_token;
         }
@@ -326,7 +331,7 @@ module.exports = (function () {
     };
 
     App.prototype.needShowLogin = function () {
-        return this.xsollaLoginProjectId && !this.getXsollaLoginToken();
+        return this.xsollaLoginProjectId && !this.getAuthToken();
     };
 
     /**
@@ -419,7 +424,7 @@ module.exports = (function () {
         };
         Helpers.filterObject(initParams);
 
-        this.api.initRequest(Number(this.config.project_id), initParams).then(function (data) {
+        this.api.initRequest(Number(this.config.project_id), initParams, this.getAuthToken()).then(function (data) {
             props.data = {
                 amount: {
                     value: data.item.amount,
