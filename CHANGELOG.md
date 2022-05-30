@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.6 - 2022-05-30
+- [fix] Errors at console
+
 ## 3.1.5 - 2022-05-25
 - [fix] Use authorization for widget init request
 

@@ -203,8 +203,8 @@ module.exports = (function () {
         const events = Object.keys(App.eventTypes).map(function (eventType) {
             return App.eventTypes[eventType]
         }).join(' ');
-        const eventHandler = (function () {
-            this.triggerEvent.apply(this, arguments);
+        const eventHandler = (function (event) {
+            this.triggerEvent.apply(this, [event]);
         }).bind(this);
         PaystationEmbedApp.on(events, eventHandler);
 

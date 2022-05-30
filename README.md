@@ -26,7 +26,7 @@ gulp serve
 
 #### Linking to Xsolla CDN
 
-Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js](https://cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js). Use this URL to integrate script on your website.
+Script is located on our CDN and is available here: [https://cdn.xsolla.net/embed/buy-button/3.1.6/widget.min.js](https://cdn.xsolla.net/embed/buy-button/3.1.6/widget.min.js). Use this URL to integrate script on your website.
 
 #### Installing with Bower
 
@@ -58,7 +58,7 @@ $ npm install @xsolla/buy-button-widget
     var s = document.createElement('script');
     s.type = "text/javascript";
     s.async = true;
-    s.src = "//cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js";
+    s.src = "//cdn.xsolla.net/embed/buy-button/3.1.6/widget.min.js";
     s.addEventListener('load', function (e) {
         var widgetInstance = XBuyButtonWidget.create(options);
     }, false);
@@ -72,7 +72,7 @@ It is necessary to perform XBuyButtonWidget.create() when the DOM is fully loade
 #### Synchronous loading (blocks content)
 
 ``` javascript
-<script src="//cdn.xsolla.net/embed/buy-button/3.1.5/widget.min.js"></script>
+<script src="//cdn.xsolla.net/embed/buy-button/3.1.6/widget.min.js"></script>
 <script>
     var widgetInstance = XBuyButtonWidget.create({
         project_id: "YOUR-PROJECT-ID",
