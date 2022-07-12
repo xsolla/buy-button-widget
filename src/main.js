@@ -11,7 +11,7 @@ module.exports = (function () {
             var app = new App();
             app.init.apply(app, arguments);
 
-            return Helpers.zipObject(['open', 'on', 'off'].map(function (methodName) {
+            return Helpers.zipObject(['open', 'on', 'off', 'close'].map(function (methodName) {
                 return [methodName, function () {
                     return app[methodName].apply(app, arguments);
                 }];
