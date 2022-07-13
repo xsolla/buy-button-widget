@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.7 - 2022-07-12
+- [feat] Added close function
+
 ## 3.1.6 - 2022-05-30
 - [fix] Errors at console
 

@@ -367,6 +367,13 @@ module.exports = (function () {
     };
 
     /**
+     * Close payment interface (PayStation)
+     */
+    App.prototype.close = function () {
+        PaystationEmbedApp.close();
+    };
+
+    /**
      * Attach an event handler function for one or more events to the widget
      * @param event One or more space-separated event types (init, open, load, close, status, status-invoice, status-delivering, status-troubled, status-done)
      * @param handler A function to execute when the event is triggered
