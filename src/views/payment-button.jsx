@@ -47,10 +47,14 @@ var PaymentButton = CreateReactClass({
         var disabled = this.props.disabled;
         var message;
 
-        if (isReleased) {
-            message = amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label';
+        if (amount.isFree) {
+            message = 'payment_button_free_label';
         } else {
-            message = 'payment_button_pre_purchase_label';
+            if (isReleased) {
+                message = amount.hasDifferent ? 'payment_button_from_label' : 'payment_button_label';
+            } else {
+                message = amount.hasDifferent ? 'payment_button_pre_purchase_from_label' : 'payment_button_pre_purchase_label';
+            }
         }
 
         if (disabled) {

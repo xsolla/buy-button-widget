@@ -45,6 +45,12 @@
 
     <div id="widget-example-physical">
     </div>
+
+    <div id="widget-example-free-virtual-item">
+    </div>
+
+    <div id="widget-example-unit">
+    </div>
 </div>
 
 <script>
@@ -99,6 +105,18 @@
         project_id: 44056,
         sku: "kicker_shirt_1",
         item_type: "physical_good"
+    };
+
+    var options_free_virtual_item_basic = {
+        project_id: 44056,
+        sku: "lootbox_max",
+        item_type: "virtual_item"
+    };
+
+    var options_unit_basic = {
+        project_id: 44056,
+        sku: "xsollus_deluxe_edition",
+        item_type: "unit"
     };
 
     var s = document.createElement('script');
@@ -197,7 +215,39 @@
             }
         }, options_physical_good_basic));
 
-        [greenWidget, blueWidget, redWidget, goldWidget, goldWidgetDrm, goldWidgetCustomLocaleAndEmail, goldWidgetAccessData, goldWidgetAuth, widgetPhysical].forEach(
+        var widgetFreeVirtualItem = XBuyButtonWidget.create(Object.assign({
+            widget_ui: {
+                theme: {
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.DARK
+                },
+                target_element: '#widget-example-free-virtual-item'
+            }
+        }, options_free_virtual_item_basic));
+
+        var widgetUnit = XBuyButtonWidget.create(Object.assign({
+            widget_ui: {
+                theme: {
+                    foreground: XBuyButtonWidget.foregroundTypes.GOLD,
+                    background: XBuyButtonWidget.backgroundTypes.DARK
+                },
+                target_element: '#widget-example-unit'
+            }
+        }, options_unit_basic));
+
+        [
+            greenWidget,
+            blueWidget,
+            redWidget,
+            goldWidget,
+            goldWidgetDrm,
+            goldWidgetCustomLocaleAndEmail,
+            goldWidgetAccessData,
+            goldWidgetAuth,
+            widgetPhysical,
+            widgetFreeVirtualItem,
+            widgetUnit
+        ].forEach(
             function (widgetInstance) {
                 widgetInstance.on(
                     Object.keys(XBuyButtonWidget.eventTypes)
