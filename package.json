@@ -35,7 +35,7 @@
     "node": ">=10.16.3"
   },
   "dependencies": {
-    "create-react-class": "15.6.3"
+    "create-react-class": "15.7.0"
   },
   "repository": {
     "type": "git",
