@@ -14,6 +14,7 @@ module.exports = (function () {
     const DEFAULT_ITEM_TYPE = 'digital_content';
     const DEFAULT_HOST = 'store.xsolla.com';
     const DEFAULT_API_HOST = 'store.xsolla.com/api';
+    const DEFAULT_PAGES_HOST = 'purchase.xsolla.com';
     const DEFAULT_PAYSTATION_RESIZE_TIMEOUT = 2000;
 
     const DEFAULT_CONFIG = {
@@ -31,6 +32,9 @@ module.exports = (function () {
         api_settings: {
             host: DEFAULT_HOST,
             api_host: DEFAULT_API_HOST,
+        },
+        pages_api_settings: {
+            host: DEFAULT_PAGES_HOST
         },
         widget_ui: {
             theme: {
@@ -189,9 +193,8 @@ module.exports = (function () {
         };
         Helpers.filterObject(buyParams);
 
-        const buyUrlWithoutQueryParams = 'https://' + this.config.api_settings.host + '/pages/buy.php?';
+        const buyUrlWithoutQueryParams = 'https://' + this.config.pages_api_settings.host + '/pages/buy?';
         const buyUrl = buyUrlWithoutQueryParams + Helpers.buildQueryString(buyParams);
-
         PaystationEmbedApp.init({
             payment_url: buyUrl,
             embed_type: 'widget',
@@ -437,7 +440,8 @@ module.exports = (function () {
                     value: data.item.amount,
                     value_without_discount: data.item.amount_without_discount,
                     currency: data.item.currency,
-                    hasDifferent: data.item.has_different_prices
+                    hasDifferent: data.item.has_different_prices,
+                    isFree: data.item.is_free
                 },
                 name: data.item.name,
                 logoUrl: data.item.image_url,

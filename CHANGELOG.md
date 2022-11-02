@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.8 - 2022-10-28
+- [feat] Added work with free items
+
 ## 3.1.7 - 2022-07-12
 - [feat] Added close function
 

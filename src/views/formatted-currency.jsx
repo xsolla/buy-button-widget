@@ -108,7 +108,7 @@ function getFormattedCurrency(amount, currency, locale) {
 
 var FormattedCurrencyView = CreateReactClass({
     render: function () {
-        if (!this.props.amount) {
+        if (!Number.isFinite(this.props.amount) || !this.props.currency) {
             return null;
         }
 
