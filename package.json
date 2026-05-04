@@ -4,7 +4,7 @@
     "Buy Button Team <buy_button@xsolla.com>"
   ],
   "license": "MIT",
-  "version": "3.1.8",
+  "version": "3.1.9",
   "description": "Buy Button Widget",
   "main": "dist/widget.min.js",
   "devDependencies": {
@@ -13,6 +13,7 @@
     "@babel/preset-react": "7.0.0",
     "babelify": "10.0.0",
     "bower": "1.8.8",
+    "bowser": "1.9.4",
     "browser-sync": "2.26.12",
     "browserify": "12.0.1",
     "currency-format": "1.0.11",
