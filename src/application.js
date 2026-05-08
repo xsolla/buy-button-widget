@@ -15,6 +15,8 @@ module.exports = (function () {
     const DEFAULT_HOST = 'store.xsolla.com';
     const DEFAULT_API_HOST = 'store.xsolla.com/api';
     const DEFAULT_PAGES_HOST = 'purchase.xsolla.com';
+    const DEFAULT_PAYSTATION_HOST = 'https://secure.xsolla.com';
+    const DEFAULT_PAYSTATION_SANDBOX_HOST = 'https://sandbox-secure.xsolla.com';
     const DEFAULT_PAYSTATION_RESIZE_TIMEOUT = 2000;
 
     const DEFAULT_CONFIG = {
@@ -34,7 +36,7 @@ module.exports = (function () {
             api_host: DEFAULT_API_HOST,
         },
         pages_api_settings: {
-            host: DEFAULT_PAGES_HOST
+            host: DEFAULT_PAGES_HOST,
         },
         widget_ui: {
             theme: {
@@ -152,6 +154,7 @@ module.exports = (function () {
 
         this.config.payment_widget_ui.lightbox = {
             resizeTimeout: DEFAULT_PAYSTATION_RESIZE_TIMEOUT,
+            allow: `payment 'src' ${DEFAULT_PAYSTATION_HOST} ${DEFAULT_PAYSTATION_SANDBOX_HOST}`,
             ...this.config.payment_widget_ui.lightbox
         };
     };
