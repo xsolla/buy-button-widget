@@ -1,3 +1,23 @@
+> [!CAUTION]
+> ## ⚠️ This repository is deprecated — use Xsolla SDK 3 instead
+>
+> **This is a legacy Xsolla Buy Button widget that uses deprecated API v1/v2 endpoints and is no longer actively maintained or updated.**
+> If you arrived here from a web search, do not use this repository for new integrations.
+>
+> **The current recommended version is [Xsolla SDK 3](https://developers.xsolla.com/sdk/)**, which provides:
+> - ✅ Up-to-date authentication and payment integrations across modern platforms
+> - ✅ Active development with ongoing bug fixes, new features, and security updates
+> - ✅ 1000+ payment methods across 200+ countries and territories
+> - ✅ Native Buy Button and modern payment UI components
+>
+> **Get started with SDK 3:**
+> | Resource | Link |
+> |---|---|
+> | 📖 SDK 3 Documentation | https://developers.xsolla.com/sdk/ |
+> | 🔭 SDK Explorer (try before you code) | https://developers.xsolla.com/sdk/demo/ |
+>
+> _Do not start new integrations on this repository._
+
 # Xsolla Buy Button Widget
 
 ![License](https://img.shields.io/github/license/xsolla/buy-button-widget)
